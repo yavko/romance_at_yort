@@ -1,6 +1,6 @@
 package engine;
 import javax.swing.*;
-public class Game extends JFrame {
+public class Game extends JComponent {
     /**
      * Constructor for objects of class Game
      */
