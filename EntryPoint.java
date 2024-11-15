@@ -71,7 +71,7 @@ public class EntryPoint extends JFrame {
 
         JButton playBtn = new ImgButton(
             ImageIO.read(
-                EntryPoint.class.getResource("assets/play_btn_lodpi.png")
+                EntryPoint.class.getResource("assets/start_button.png")
             )
         );
         //playBtn.setPreferredSize(new Dimension(351, 170));
