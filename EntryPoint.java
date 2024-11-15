@@ -64,7 +64,7 @@ public class EntryPoint extends JFrame {
 
     private void loadOpeningScreen() throws java.io.IOException {
         // Background
-        URL bgImgUrl = EntryPoint.class.getResource("assets/placeholder_screen.png");
+        URL bgImgUrl = EntryPoint.class.getResource("assets/opening_scene.png");
         BufferedImage bgImg = ImageIO.read(bgImgUrl);
 
         // Play btn
