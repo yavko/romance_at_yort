@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import org.checkerframework.checker.nullness.qual.*;
 
 public class BgPanel extends JPanel {
-    private @NonNull Image img;
+    private Image img;
     public BgPanel(LayoutManager layout, Image i) {
         super(layout);
         this.img = i;

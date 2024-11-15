@@ -1,14 +1,13 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.net.URL;
-import org.checkerframework.checker.nullness.qual.*;
 import java.util.Objects;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
 public class EntryPoint extends JFrame {
-    private @Nullable JPanel content;
+    private JPanel content;
     public EntryPoint() {
         // window title
         super("main window");

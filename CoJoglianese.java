@@ -1,8 +1,8 @@
-public class Oswaldo extends engine.Character {
-    public static final String name = "Oswaldo";
+public class CoJoglianese extends engine.Character {
+    public static final String name = "Co Joglianese";
     public static final String backgroundInfo = "to be written";
     public static int age = 18;
-    public Oswaldo() {}
+    public CoJoglianese() {}
     public void displayEmotion(engine.Game game, engine.Emotion emote) {}
     public int getAge() { return age; }
     public void setAge(int newAge) { age = newAge; }
