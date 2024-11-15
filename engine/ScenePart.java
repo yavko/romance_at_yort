@@ -2,21 +2,21 @@ package engine;
 
 import javax.swing.*;
 
-public abstract class GameScenePart {
-    public void execute() {
+public abstract class ScenePart {
+    public void execute(Game game) {
         Runnable doUI = new Runnable() {
             public void run() {
-                changeUI();   
+                changeUI(game);   
             }
         };
         Runnable doDisplay = new Runnable() {
             public void run() {
-                changeDisplay(); 
+                changeDisplay(game); 
             }
         };
         SwingUtilities.invokeLater(doUI);
         SwingUtilities.invokeLater(doDisplay);
     };
-    public abstract void changeUI();
-    public abstract void changeDisplay();
+    public abstract void changeUI(Game game);
+    public abstract void changeDisplay(Game game);
 }

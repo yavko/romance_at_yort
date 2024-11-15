@@ -1,46 +1,90 @@
 import javax.swing.*;
-import java.awt.Dimension;
 import java.awt.event.*;
-import com.github.weisj.jsvg.*;
-import com.github.weisj.jsvg.parser.*;
 import java.net.URL;
+import org.checkerframework.checker.nullness.qual.*;
+import java.util.Objects;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 public class EntryPoint extends JFrame {
+    private @Nullable JPanel content;
     public EntryPoint() {
         // window title
         super("main window");
-        
+
         // sets window resizing/size behaviour
         setMinimumSize(new Dimension(400, 300));
         // !!TODO!! : Add actual resizing logic, cuz it DOES not exist ;(
-        
+
         // creates close event
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                int choice = JOptionPane.showConfirmDialog(
-                    EntryPoint.this,
-                    "Do you want to close the game?",
-                    "Confirm Exit",
-                    JOptionPane.YES_NO_OPTION
-                );
-                if (choice == JOptionPane.YES_OPTION) {
-                    // !!TODO!! : add logic when closing here
-                    EntryPoint.this.dispose();
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    int choice = JOptionPane.showConfirmDialog(
+                            EntryPoint.this,
+                            "Do you want to close the game?",
+                            "Confirm Exit",
+                            JOptionPane.YES_NO_OPTION
+                        );
+                    if (choice == JOptionPane.YES_OPTION) {
+                        // !!TODO!! : add logic when closing here
+                        EntryPoint.this.dispose();
+                    }
                 }
-            }
         });
         
-        SVGLoader loader = new SVGLoader();
-        URL svgUrl = EntryPoint.class.getResource("placeholder_screen.svg");
-        SVGDocument svgDocument = loader.load(svgUrl);
-        add(new SVGComponent(svgDocument));
-        
+        try {
+            // Set System L&F
+            UIManager.setLookAndFeel(
+                UIManager.getSystemLookAndFeelClassName()
+            );
+        } catch (UnsupportedLookAndFeelException e) {
+            // handle exception
+        } catch (ClassNotFoundException e) {
+            // handle exception
+        } catch (InstantiationException e) {
+            // handle exception
+        } catch (IllegalAccessException e) {
+            // handle exception
+        }
+
+        try {
+            loadOpeningScreen();
+        } catch (java.io.IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+        add(content);
+
         // window show & size
         pack();
         setVisible(true);
     }
+
+    private void loadOpeningScreen() throws java.io.IOException {
+        // Background
+        URL bgImgUrl = EntryPoint.class.getResource("assets/placeholder_screen.png");
+        BufferedImage bgImg = ImageIO.read(bgImgUrl);
+
+        // Play btn
+
+        JButton playBtn = new ImgButton(
+            ImageIO.read(
+                EntryPoint.class.getResource("assets/play_btn_lodpi.png")
+            )
+        );
+        //playBtn.setPreferredSize(new Dimension(351, 170));
+
+        // Panel w/ bg
+        JPanel openingScreen = new BgPanel(new BorderLayout(), bgImg);
+
+        openingScreen.add(playBtn, BorderLayout.PAGE_END);
+
+        content = openingScreen;
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(EntryPoint::new);
     }
