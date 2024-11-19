@@ -5,15 +5,23 @@ import java.util.Objects;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.io.IOException;
 
 public class EntryPoint extends JFrame {
     private JPanel content;
+    public void swapContent(JPanel newContent) {
+        remove(content);
+        this.content = newContent;
+        add(content);
+        revalidate();
+        repaint(); // not sure if needed
+    }
     public EntryPoint() {
         // window title
         super("main window");
 
         // sets window resizing/size behaviour
-        setMinimumSize(new Dimension(400, 300));
+        setMinimumSize(new Dimension(854, 480));
         // !!TODO!! : Add actual resizing logic, cuz it DOES not exist ;(
 
         // creates close event
@@ -64,20 +72,31 @@ public class EntryPoint extends JFrame {
 
     private void loadOpeningScreen() throws java.io.IOException {
         // Background
-        URL bgImgUrl = EntryPoint.class.getResource("assets/opening_scene.png");
-        BufferedImage bgImg = ImageIO.read(bgImgUrl);
+        // URL bgImgUrl = EntryPoint.class.getResource("assets/opening_scene.png");
+        // BufferedImage bgImg = ImageIO.read(bgImgUrl);
 
         // Play btn
 
-        JButton playBtn = new ImgButton(
+        JButton playBtn = new utils.ImgButton(
             ImageIO.read(
                 EntryPoint.class.getResource("assets/start_button.png")
-            )
+            ),
+            0.2
         );
+        // Main bg
+        
+        
+        playBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("starting game");
+                swapContent(new engine.Game(MiscAssets.backgrounds.get("base")));
+            }
+        });
         //playBtn.setPreferredSize(new Dimension(351, 170));
 
         // Panel w/ bg
-        JPanel openingScreen = new BgPanel(new BorderLayout(), bgImg);
+        JPanel openingScreen = new BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("main"));
 
         openingScreen.add(playBtn, BorderLayout.PAGE_END);
 
