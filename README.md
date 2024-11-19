@@ -1,9 +1,13 @@
-# apcsa_game
-A video game created for an AP CS A project. Name TBD
+# Romance at Yort
+A romance visual novel created for an AP CS A project.
+
+## Architechture
+- written in java
+- `javax.swing` for ui
+- awt `Graphics` for rendering the actual content
 
 ## Building
-Dependencies needed:
-- `jsvg` -  <https://repo1.maven.org/maven2/com/github/weisj/jsvg/1.6.1/jsvg-1.6.1.jar>
+Dependencies needed: none
 
 Build with BlueJ :)
 
