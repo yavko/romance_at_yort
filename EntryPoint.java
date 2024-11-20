@@ -90,7 +90,12 @@ public class EntryPoint extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("starting game");
-                swapContent(new engine.Game(MiscAssets.backgrounds.get("base"),new YortStory()));
+                swapContent(
+                    new engine.Game(
+                        MiscAssets.backgrounds.get("base"),
+                        new YortStory(Difficulty.Easy)
+                    )
+                );
             }
         });
         //playBtn.setPreferredSize(new Dimension(351, 170));
