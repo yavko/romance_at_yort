@@ -12,6 +12,6 @@ public class YortStory extends engine.Story {
      */
     public YortStory() {
         super();
-        // story logic
+        // scene1:  
     }
 }
