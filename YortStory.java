@@ -12,7 +12,7 @@ public class YortStory extends engine.Story {
      * Constructor for objects of class YortStory
      */
     public Difficulty difficulty;
-    public YortStory(Difficulty difficulty) {
+    public YortStory(Difficulty difficulty, String name) {
         super();
 
         // story logic
@@ -43,7 +43,11 @@ public class YortStory extends engine.Story {
             public void doAfter(Game game) {
                 if (!choice1Picked) // this comes from a property in Choice
                     System.out.println("'Tis skibidi, that is not being a sigma.");
-            }
+                
+                }
         }); 
+    }
+    private YortStats stats(Game game) {
+        return (YortStats)(game.getStats());
     }
 }

@@ -3,6 +3,8 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 
 public class MiscAssets {
@@ -24,6 +26,49 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/bedroom.png", "bedroom");
         
+    }
+    public String generateBackgroundInfo(String name){
+        try {
+            return Files.readString(
+            Paths.get("assets/backgroundInfo.txt")
+        ).replace("[name]", name);
+        } catch (IOException ioe)
+        {
+            System.out.println("failed to load bg info txt file");
+            return "bruh";
+        }
+    }
+    public String generateBackgroundInfo2(String name){
+        try {
+            return Files.readString(
+                Paths.get("assets/backgroundInfo2.txt")
+            ).replace("[name]", name);
+        } catch (IOException ioe)
+        {
+            System.out.println("failed to load bg info 2 txt file");
+            return "bruh";
+        }
+    }
+    public String generateDirections(){
+        try {
+            return Files.readString(
+                Paths.get("assets/directions.txt"));
+        } catch (IOException ioe)
+        {
+            System.out.println("failed to load directions txt file");
+            return "bruh";
+        }
+    }
+    public String generateWelcomeText(String name){
+        try {
+            return Files.readString(
+                Paths.get("assets/welcome.txt")
+            ).replace("[name]", name);
+        } catch (IOException ioe)
+        {
+            System.out.println("failed to load welcome txt file");
+            return "bruh";
+        }
     }
     /**
      * Constructor for objects of class MiscAssets

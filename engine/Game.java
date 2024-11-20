@@ -16,6 +16,9 @@ public class Game extends JPanel {
         add(canvas);
         add(new JButton("hello world"));
     }
+    public Stats getStats(){
+        return stats;
+    }
     // @Override
     // public void paintComponent(Graphics g) {
     // }
