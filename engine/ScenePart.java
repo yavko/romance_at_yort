@@ -16,7 +16,9 @@ public abstract class ScenePart {
         };
         SwingUtilities.invokeLater(doUI);
         SwingUtilities.invokeLater(doDisplay);
+        doAfter(game);
     };
+    public abstract void doAfter(Game game);
     public abstract void changeUI(Game game);
     public abstract void changeDisplay(Game game);
 }

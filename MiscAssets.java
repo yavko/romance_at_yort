@@ -14,7 +14,7 @@ public class MiscAssets {
             BufferedImage img = ImageIO.read(imgUrl);
             map.put(name, img);
         } catch (IOException _ex) {
-            System.out.println("failed to load asset");   
+            System.out.println("failed to load asset " + name + " which should be located at: " + fileName);   
         }
     }
     static {
