@@ -23,7 +23,7 @@ public class YortStory extends engine.Story {
         addScene(new Scene(MiscAssets.backgrounds.get("bedroom")));
         
         // example of how to do difficulty specific stuff
-        if (difficulty == Difficulty.Insane) {
+        if (difficulty == Difficulty.Impossible) {
             addPart(new Dialogue(
                 "Fun fact: A monad of X is a monoid in the category of endofunctors of category X",
                 Oswaldo.class

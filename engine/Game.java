@@ -8,8 +8,10 @@ public class Game extends JPanel {
      */
     private GameCanvas canvas;
     private Story story;
-    public Game(Image initImg, Story story) {
+    private Stats stats;
+    public Game(Image initImg, Story story, Stats stats) {
         this.story = story;
+        this.stats = stats;
         this.canvas = new GameCanvas(initImg, new Character[]{});
         add(canvas);
         add(new JButton("hello world"));

@@ -5,5 +5,5 @@
  * @version 0.1
  */
 public enum Difficulty {
-    Insane, Normal, Easy
+    Impossible, Normal, Easy
 }
