@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class MiscAssets {
     
     public static HashMap<String, BufferedImage> backgrounds = new HashMap<>();
-    private static void addBgImage(HashMap<String, BufferedImage> map, String fileName, String name) {
+    private static void addImage(HashMap<String, BufferedImage> map, String fileName, String name) {
         URL imgUrl = MiscAssets.class.getResource(fileName);
         try {
             BufferedImage img = ImageIO.read(imgUrl);
@@ -18,11 +18,11 @@ public class MiscAssets {
         }
     }
     static {
-        addBgImage(backgrounds, "assets/opening_scene.png", "main");
+        addImage(backgrounds, "assets/opening_scene.png", "main");
         
-        addBgImage(backgrounds, "assets/bg.png", "base");
+        addImage(backgrounds, "assets/bg.png", "base");
         
-        addBgImage(backgrounds, "assets/bedroom.png", "bedroom");
+        addImage(backgrounds, "assets/bedroom.png", "bedroom");
         
     }
     /**
