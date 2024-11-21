@@ -11,7 +11,7 @@ public abstract class ScenePart {
         };
         Runnable doDisplay = new Runnable() {
             public void run() {
-                changeDisplay(game); 
+                changeDisplay(game);
             }
         };
         SwingUtilities.invokeLater(doUI);
@@ -19,6 +19,10 @@ public abstract class ScenePart {
         doAfter(game);
     };
     public abstract void doAfter(Game game);
+    public void call(Game game) {
+        doAfter(game);
+        game.next();
+    }
     public abstract void changeUI(Game game);
     public abstract void changeDisplay(Game game);
 }

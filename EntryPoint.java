@@ -91,9 +91,10 @@ public class EntryPoint extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("starting game");
                 swapContent(
-                    new engine.Game(
+                    new engine.Game<YortData>(
                         MiscAssets.backgrounds.get("base"),
-                        new YortStory(Difficulty.Easy)
+                        new YortStory(Difficulty.Easy),
+                        new YortData(0)
                     )
                 );
             }
@@ -101,7 +102,7 @@ public class EntryPoint extends JFrame {
         //playBtn.setPreferredSize(new Dimension(351, 170));
 
         // Panel w/ bg
-        JPanel openingScreen = new BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("main"));
+        JPanel openingScreen = new utils.BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("main"));
 
         openingScreen.add(playBtn, BorderLayout.PAGE_END);
 

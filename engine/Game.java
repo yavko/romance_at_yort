@@ -1,23 +1,31 @@
 package engine;
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
-public class Game extends JPanel {
+public class Game<T> extends utils.BgPanel {
     /**
      * Constructor for objects of class Game
      */
     private GameCanvas canvas;
-    private Story story;
-    private Stats stats;
-    public Game(Image initImg, Story story, Stats stats) {
+    private final Story story;
+    private T dataStore;
+    public Game(Image gameBg, Story story, T dataStore) {
+        super(new BorderLayout(10, 10), gameBg);
         this.story = story;
-        this.stats = stats;
-        this.canvas = new GameCanvas(initImg, new Character[]{});
-        add(canvas);
-        add(new JButton("hello world"));
+        this.dataStore = dataStore;
+        this.canvas = new GameCanvas(gameBg, new Character[0]);
+        add(canvas, BorderLayout.CENTER);
+        add(new JButton("hello world"), BorderLayout.PAGE_END);
     }
-    public Stats getStats(){
-        return stats;
+    public void next() {
+        LinkedList<Scene> list = story.getScenes();
+        if (list.peek() != null && list.peek().getParts().peek() == null) {
+            list.poll()
+        }
+    }
+    public T getData(){
+        return dataStore;
     }
     // @Override
     // public void paintComponent(Graphics g) {

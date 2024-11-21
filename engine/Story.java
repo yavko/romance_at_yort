@@ -1,5 +1,5 @@
 package engine;
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Abstract class representing the game's story
@@ -12,15 +12,15 @@ public abstract class Story {
      * Constructor for objects of class Story
      */
     public Story() {
-        this.scenes = new ArrayList<>();
+        this.scenes = new LinkedList<>();
     }
-    private ArrayList<Scene> scenes;
+    private LinkedList<Scene> scenes;
     /**
      * Method getScenes returns all of the Scenes in Story
      *
      * @return returns an ArrayList holding every Scene
      */
-    public ArrayList<Scene> getScenes() {
+    public LinkedList<Scene> getScenes() {
         return scenes;
     }
     /**
@@ -29,7 +29,7 @@ public abstract class Story {
      * @param scene The scene to add
      */
     public void addScene(Scene scene) {
-        scenes.add(scene);
+        scenes.addLast(scene);
     }
     /**
      * Method addPart adds a ScenePart to the last added Scene
@@ -37,6 +37,6 @@ public abstract class Story {
      * @param part The ScenePart to be added
      */
     public void addPart(ScenePart part) {
-        scenes.get(scenes.size()-1).getParts().add(part);
+        scenes.getLast().getParts().add(part);
     }
 }

@@ -12,7 +12,7 @@ public class YortStory extends engine.Story {
      * Constructor for objects of class YortStory
      */
     public Difficulty difficulty;
-    public YortStory(Difficulty difficulty, String name) {
+    public YortStory(Difficulty difficulty) {
         super();
 
         // story logic
@@ -47,7 +47,9 @@ public class YortStory extends engine.Story {
                 }
         }); 
     }
-    private YortStats stats(Game game) {
-        return (YortStats)(game.getStats());
+    // only needed cuz of type erasure, so i
+    // cant override generics in the way i want to
+    private YortData data(Game game) {
+        return (YortData)game.getData();
     }
 }

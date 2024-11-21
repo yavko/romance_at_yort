@@ -11,6 +11,10 @@ public class GameCanvas extends JPanel {
         this.characters = new HashSet<>(Arrays.asList(characters));
         this.currentBgImg = bgImg;
     }
+    public GameCanvas(Image bgImg) {
+        this.characters = new HashSet<>();
+        this.currentBgImg = bgImg;
+    }
     private Image currentBgImg;
     private HashSet<Character> characters;
     

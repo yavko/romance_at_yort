@@ -1,13 +1,11 @@
-
 /**
  * Write a description of class Stats here.
  *
  * @author Ashlyn Yi
  * @version 0.1
  */
-public class YortStats extends engine.Stats {
-    private int  favorability;
-    private String name;
+public class YortData {
+    private int favorability;
     public int getFavorability(){
         return favorability;
     }
@@ -17,10 +15,7 @@ public class YortStats extends engine.Stats {
     public void changeFavorability(int delta){
         favorability += delta;
     }
-    public void setName(String nameInput){
-        name = nameInput;
-    }
-    public YortStats(int initFav) {
+    public YortData(int initFav) {
         this.favorability = initFav;
     }
 }

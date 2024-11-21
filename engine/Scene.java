@@ -4,17 +4,17 @@ import java.util.*;
 import java.awt.Image;
 
 public class Scene {
-    private ArrayList<ScenePart> parts;
+    private LinkedList<ScenePart> parts;
     private final Image bgImg;
     public Scene(ScenePart[] parts, Image bgImg) {
-        this.parts = new ArrayList<>(Arrays.asList(parts));
+        this.parts = new LinkedList<>(Arrays.asList(parts));
         this.bgImg = bgImg;
     }
     public Scene(Image bgImg) {
-        this.parts = new ArrayList<>();
+        this.parts = new LinkedList<>();
         this.bgImg = bgImg;
     }
-    public ArrayList<ScenePart> getParts() {
+    public LinkedList<ScenePart> getParts() {
         return parts;
     }
 

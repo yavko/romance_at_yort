@@ -65,7 +65,5 @@ public class MiscAssets {
     /**
      * Constructor for objects of class MiscAssets
      */
-    public MiscAssets() {
-        
-    }
+    public MiscAssets() {}
 }
