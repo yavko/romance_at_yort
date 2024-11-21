@@ -21,7 +21,7 @@ public abstract class ScenePart {
     public abstract void doAfter(Game game);
     public void call(Game game) {
         doAfter(game);
-        game.next();
+        game.nextPart();
     }
     public abstract void changeUI(Game game);
     public abstract void changeDisplay(Game game);

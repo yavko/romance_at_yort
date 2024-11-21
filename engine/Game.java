@@ -18,10 +18,21 @@ public class Game<T> extends utils.BgPanel {
         add(canvas, BorderLayout.CENTER);
         add(new JButton("hello world"), BorderLayout.PAGE_END);
     }
-    public void next() {
+    private Scene currentScene;
+    private ScenePart currentScenePart; // needs to be rendered
+    public void nextScene() {
         LinkedList<Scene> list = story.getScenes();
-        if (list.peek() != null && list.peek().getParts().peek() == null) {
-            list.poll()
+        //if (list.peek() != null && list.peek().getParts().peek() == null) {
+        currentScene = list.poll();
+        //}
+    }
+    public void nextPart() {        
+        ScenePart part = currentScene.getParts().poll();
+        if (part != null)
+            currentScenePart = part;
+        else {
+            nextScene();
+            nextPart();
         }
     }
     public T getData(){
