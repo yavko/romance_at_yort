@@ -27,7 +27,7 @@ public class MiscAssets {
         addImage(backgrounds, "assets/bedroom.png", "bedroom");
         
     }
-    public String generateBackgroundInfo(String name){
+    public static String generateBackgroundInfo(String name){
         try {
             return Files.readString(
             Paths.get("assets/backgroundInfo.txt")
@@ -38,7 +38,7 @@ public class MiscAssets {
             return "bruh";
         }
     }
-    public String generateBackgroundInfo2(String name){
+    public static String generateBackgroundInfo2(String name){
         try {
             return Files.readString(
                 Paths.get("assets/backgroundInfo2.txt")
@@ -49,7 +49,7 @@ public class MiscAssets {
             return "bruh";
         }
     }
-    public String generateDirections(){
+    public static String generateDirections(){
         try {
             return Files.readString(
                 Paths.get("assets/directions.txt"));
@@ -59,16 +59,8 @@ public class MiscAssets {
             return "bruh";
         }
     }
-    public String generateWelcomeText(String name){
-        try {
-            return Files.readString(
-                Paths.get("assets/welcome.txt")
-            ).replace("[name]", name);
-        } catch (IOException ioe)
-        {
-            System.out.println("failed to load welcome txt file");
-            return "bruh";
-        }
+    public static String generateWelcomeText(String name){
+        return "Welcome " + name + " to Romance at Yort! We hope you enjoy!";
     }
     /**
      * Constructor for objects of class MiscAssets
