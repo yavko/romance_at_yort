@@ -10,11 +10,11 @@ public class Game<T> extends utils.BgPanel {
     private GameCanvas canvas;
     private final Story story;
     private T dataStore;
-    public Game(Image gameBg, Story story, T dataStore) {
+    public Game(Image gameBg, Story story, T dataStore, Character[] tmp) {
         super(new BorderLayout(10, 10), gameBg);
         this.story = story;
         this.dataStore = dataStore;
-        this.canvas = new GameCanvas(gameBg, new Character[0]);
+        this.canvas = new GameCanvas(gameBg, tmp);
         add(canvas, BorderLayout.CENTER);
         add(new JButton("hello world"), BorderLayout.PAGE_END);
     }

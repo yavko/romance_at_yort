@@ -15,12 +15,12 @@ public class BoJiden extends engine.Character {
     public String getName() { return name; }
     public String getBackgroundInfo() { return backgroundInfo; }
     public Image getCurrentImg() {
-        URL imgUrl = MiscAssets.class.getResource("assets/Oswaldo.png");
+        URL imgUrl = MiscAssets.class.getResource("assets/BoJiden.png");
         try {
             BufferedImage img = ImageIO.read(imgUrl);
             return img;
         } catch (IOException _ex) {
-            System.out.println("failed to load oswaldo asset");
+            System.out.println("failed to load BoJiden asset");
             return null;
         }
     }
