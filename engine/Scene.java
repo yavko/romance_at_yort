@@ -17,6 +17,10 @@ public class Scene {
         this.bgImg = bgImg;
         this.characters = new HashSet<>(Arrays.asList(chars));
     }
+    public Scene(Image bgImg){
+        this.parts = new LinkedList<>();
+        this.bgImg = bgImg;
+    }
     public void setCharacters(final HashSet<Character> characters) {
         this.characters = characters;
     }

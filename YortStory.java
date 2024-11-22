@@ -14,9 +14,24 @@ public class YortStory extends engine.Story {
     public Difficulty difficulty;
     public YortStory(Difficulty difficulty) {
         super();
-
-        // story logic
         
+        // story logic
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("base")));
+        MiscAssets.generateBackgroundInfo("your name");
+        
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("bgPt2")));
+        
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("directions")));
+            
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("welcome")));
+            
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("introDiff")));
+            
         // example scene for y'all to see how to do
         
         // adds scene with bg of "bedroom"

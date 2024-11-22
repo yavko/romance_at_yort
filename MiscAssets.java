@@ -22,16 +22,26 @@ public class MiscAssets {
     static {
         addImage(backgrounds, "assets/opening_scene.png", "main");
         
-        addImage(backgrounds, "assets/bg.png", "base");
+        addImage(backgrounds, "assets/bgPt1.png", "base");
         
         addImage(backgrounds, "assets/bedroom.png", "bedroom");
+        
+        addImage(backgrounds, "assets/ChooseDifficulty.png", "introDiff");
+        
+        addImage(backgrounds, "assets/directions.png", "directions");
+        
+        addImage(backgrounds, "assets/bgPt2.png", "bgPt2");
+        
+        addImage(backgrounds, "assets/welcome.png", "welcome");
+        
+        addImage(backgrounds, "assets/specialScene1", "ss1");
         
     }
     public static String generateBackgroundInfo(String name){
         try {
             return Files.readString(
             Paths.get("assets/backgroundInfo.txt")
-        ).replace("[name]", name);
+            ).replace("[name]", name);
         } catch (IOException ioe)
         {
             System.out.println("failed to load bg info txt file");
@@ -62,6 +72,7 @@ public class MiscAssets {
     public static String generateWelcomeText(String name){
         return "Welcome " + name + " to Romance at Yort! We hope you enjoy!";
     }
+
     /**
      * Constructor for objects of class MiscAssets
      */
