@@ -10,36 +10,60 @@ public class Game<T> extends utils.BgPanel {
     private GameCanvas canvas;
     private final Story story;
     private T dataStore;
-    public Game(Image gameBg, Story story, T dataStore, Character[] tmp) {
+    private JPanel panel;
+    public Game(Image gameBg, Story story, T dataStore) {
         super(new BorderLayout(10, 10), gameBg);
         this.story = story;
         this.dataStore = dataStore;
-        this.canvas = new GameCanvas(gameBg, tmp);
+        this.canvas = new GameCanvas();
+        nextScene();
+        nextPart();
         add(canvas, BorderLayout.CENTER);
-        add(new JButton("hello world"), BorderLayout.PAGE_END);
+    }
+    public void setPanel(JPanel newPanel) {
+        if (panel != null) { 
+            remove(panel);
+            this.panel = newPanel;
+            add(newPanel, BorderLayout.PAGE_END);
+            revalidate();
+            repaint(); // not sure if needed
+        } else {
+            this.panel = newPanel;
+            add(newPanel, BorderLayout.PAGE_END);
+        }
     }
     private Scene currentScene;
     private ScenePart currentScenePart; // needs to be rendered
+    //private boolean finished = false;
     public void nextScene() {
-        LinkedList<Scene> list = story.getScenes();
-        //if (list.peek() != null && list.peek().getParts().peek() == null) {
-        currentScene = list.poll();
-        //}
+        Scene nextScene = story.getScenes().poll();
+        if (nextScene != null ) {
+            currentScene = nextScene;
+            canvas.setBgImg(currentScene.getBgImg());
+            canvas.setCharacters(currentScene.getCharacters());
+        } else {
+            System.out.println("game has been completed");
+            //finished = true;
+            currentScene = null;
+        }
     }
     public void nextPart() {        
-        ScenePart part = currentScene.getParts().poll();
-        if (part != null)
-            currentScenePart = part;
-        else {
-            nextScene();
-            nextPart();
+        if (currentScene != null) {
+            ScenePart part = currentScene.getParts().poll();
+            if (part != null) {
+                currentScenePart = part;
+                part.changeUI(this);
+            } else {
+                nextScene();
+                nextPart();
+            }
         }
+    }
+    public GameCanvas getCanvas() {
+        return canvas;
     }
     public T getData(){
         return dataStore;
     }
-    // @Override
-    // public void paintComponent(Graphics g) {
-    // }
-
+    public JPanel getPanel() { return panel; }
 }

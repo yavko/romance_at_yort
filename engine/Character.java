@@ -8,6 +8,7 @@ public abstract class Character {
     public abstract void setAge(int newAge);
     private int xPos;
     private int yPos;
+    // actually percentage
     public int getXPos() { return xPos; }
     public int getYPos() { return yPos; }
     protected Character(int x, int y) {

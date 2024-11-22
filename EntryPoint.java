@@ -94,8 +94,7 @@ public class EntryPoint extends JFrame {
                     new engine.Game<YortData>(
                         MiscAssets.backgrounds.get("base"),
                         new YortStory(Difficulty.Easy),
-                        new YortData(0),
-                        new engine.Character[] { new Oswaldo(0,0) }
+                        new YortData(0)
                     )
                 );
             }

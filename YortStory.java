@@ -20,7 +20,13 @@ public class YortStory extends engine.Story {
         // example scene for y'all to see how to do
         
         // adds scene with bg of "bedroom"
-        addScene(new Scene(MiscAssets.backgrounds.get("bedroom")));
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("bedroom"),
+            new engine.Character[] {
+                new Oswaldo(0,0),
+                new BoJiden(50, 50)
+            }
+        ));
         
         // example of how to do difficulty specific stuff
         if (difficulty == Difficulty.Impossible) {
@@ -43,9 +49,8 @@ public class YortStory extends engine.Story {
             public void doAfter(Game game) {
                 if (!choice1Picked) // this comes from a property in Choice
                     System.out.println("'Tis skibidi, that is not being a sigma.");
-                
                 }
-        }); 
+        });
     }
     // only needed cuz of type erasure, so i
     // cant override generics in the way i want to
