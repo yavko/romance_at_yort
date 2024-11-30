@@ -94,6 +94,38 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/nowedding.png", "rejectProposal");
         
+        addImage(backgrounds, "assets/brrrwayc1.png", "brrrwayc1");
+        
+        addImage(backgrounds, "assets/brrrwayc2.png", "brrrwayc2");
+        
+        addImage(backgrounds, "assets/brrrwayc3.png", "brrrwayc3");
+        
+        addImage(backgrounds, "assets/tttc1.png", "tttc1");
+        
+        addImage(backgrounds, "assets/tttc2.png", "tttc2");
+        
+        addImage(backgrounds, "assets/dancec1.png", "yes");
+        
+        addImage(backgrounds, "assets/dancec2.png", "dancec2");
+        
+        addImage(backgrounds, "assets/dancec3.png", "no");
+        
+        addImage(backgrounds, "assets/dressc1.png", "dressc1");
+        
+        addImage(backgrounds, "assets/dressc2.png", "dressc2");
+        
+        addImage(backgrounds, "assets/hangoutc1.png", "hangoutc1");
+        
+        addImage(backgrounds, "assets/hangoutc2.png", "hangoutc2");
+        
+        addImage(backgrounds, "assets/proposalc1.png", "proposalc1");
+        
+        addImage(backgrounds, "assets/proposalc2.png", "proposalc2");
+        
+        addImage(backgrounds, "assets/secondchancec1.png", "scc1");
+        
+        addImage(backgrounds, "assets/secondchancec2.png", "scc2");
+        
     }
     public static String generateBackgroundInfo(String name){
         try {
