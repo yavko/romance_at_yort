@@ -64,7 +64,35 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/choicebg.png", "choicebg");
         
+        addImage(backgrounds, "assets/brrrwaygood.png", "brrrwayGood");
         
+        addImage(backgrounds, "assets/brrrwayrude.png", "brrrwayRude");
+        
+        addImage(backgrounds, "assets/brrrwayhair.png", "brrrwayMysterious");
+        
+        addImage(backgrounds, "assets/desYORtTaura.png", "winttt");
+        
+        addImage(backgrounds, "assets/tttloss.png", "losettt");
+        
+        addImage(backgrounds, "assets/hwstudy.png", "hwStudy");
+        
+        addImage(backgrounds, "assets/nottt.png", "rejectTTT");
+        
+        addImage(backgrounds, "assets/yesdance.png", "yesDance");
+        
+        addImage(backgrounds, "assets/buffetsnacking.png", "buffetSnacking");
+        
+        addImage(backgrounds, "assets/ditchedoswaldo.png", "ditchOswaldo");
+        
+        addImage(backgrounds, "assets/rejecthangout.png", "rejectHangout");
+        
+        addImage(backgrounds, "assets/gradfriendzone.png", "gradFriendZone");
+        
+        addImage(backgrounds, "assets/nogradbye.png", "noGradBye");
+        
+        addImage(backgrounds, "assets/happyending.png", "HappyEnding");
+        
+        addImage(backgrounds, "assets/nowedding.png", "rejectProposal");
         
     }
     public static String generateBackgroundInfo(String name){
