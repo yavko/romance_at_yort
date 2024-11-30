@@ -70,7 +70,7 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/brrrwayhair.png", "brrrwayMysterious");
         
-        addImage(backgrounds, "assets/desYORtTaura.png", "winttt");
+        addImage(backgrounds, "assets/desYORTaura.png", "winttt");
         
         addImage(backgrounds, "assets/tttloss.png", "losettt");
         
