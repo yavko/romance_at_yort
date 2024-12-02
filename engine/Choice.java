@@ -15,9 +15,15 @@ public abstract class Choice extends ScenePart {
         this.choice2 = c2;
         // other init logic
     }
+    public Choice(String pmpt, String c1, String c2) {
+        super(null);
+        this.prompt = pmpt;
+        this.choice1 = c1;
+        this.choice2 = c2;    }
     public void changeUI(Game game) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
-        panel.add(new JLabel(getCharacterName(game)+":"));
+        if (getCharacterName(game) != null)
+            panel.add(new JLabel(getCharacterName(game)+":"));
         panel.add(new JLabel(prompt));
         JButton choice1Btn = new JButton(choice1);
         choice1Btn.addActionListener(new ActionListener() {

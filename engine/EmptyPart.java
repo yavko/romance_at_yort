@@ -2,25 +2,17 @@ package engine;
 import javax.swing.*;
 import java.awt.FlowLayout;
 import java.awt.event.*;
+import java.awt.Image;
 
-public class Dialogue extends ScenePart {
-    private final String dialogue;
-    public Dialogue(String dialogue, Class chrClass) {
-        super(chrClass);
-        this.dialogue = dialogue;
-        // other init logic
-    }
-    public Dialogue(String dialogue) {
+public class EmptyPart extends ScenePart {
+    public EmptyPart() {
         super(null);
-        this.dialogue = dialogue;
     }
+ 
     public void doAfter(Game game) {}
     
     public void changeUI(Game game) {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
-        if (getCharacterName(game) != null)
-            panel.add(new JLabel(getCharacterName(game) + ":"));
-        panel.add(new JLabel(dialogue));
         panel.addMouseListener(new MouseListener() {
             public void mousePressed(MouseEvent e) {}
             public void mouseReleased(MouseEvent e) {

@@ -20,6 +20,7 @@ public class Scene {
     public Scene(Image bgImg){
         this.parts = new LinkedList<>();
         this.bgImg = bgImg;
+        this.characters = new HashSet<>();
     }
     public void setCharacters(final HashSet<Character> characters) {
         this.characters = characters;

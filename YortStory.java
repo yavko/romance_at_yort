@@ -15,16 +15,34 @@ public class YortStory extends engine.Story {
     public YortStory(Difficulty difficulty) {
         super();
         
+        // PLACEGHOLDER PLZ FIX LATER YES
+        MainCharacter.name = "placeholder";
+        
         // story logic
         addScene(new Scene(
             MiscAssets.backgrounds.get("base")));
-        MiscAssets.generateBackgroundInfo("your name");
+            
+        addPart(
+            new FullScreenMessage(
+                MiscAssets.generateBackgroundInfo(MainCharacter.name)
+            )
+        );
         
         addScene(new Scene(
             MiscAssets.backgrounds.get("bgPt2")));
+            
+        addPart(
+            new FullScreenMessage(
+                MiscAssets.generateBackgroundInfo2(MainCharacter.name)
+            )
+        );
         
         addScene(new Scene(
             MiscAssets.backgrounds.get("directions")));
+            
+        addPart(
+            new EmptyPart()
+        );
             
         addScene(new Scene(
             MiscAssets.backgrounds.get("welcome")));
@@ -50,7 +68,7 @@ public class YortStory extends engine.Story {
                 Oswaldo.class
             ));
         } else {
-            addPart(new Dialogue("Fun fact: Monads are cool", Oswaldo.class));
+            addPart(new Dialogue("Fun fact: Monads are cool"));
         }
         
         addPart(new Dialogue("Skibidi dom dom what?", MainCharacter.class) {

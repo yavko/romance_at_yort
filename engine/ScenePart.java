@@ -8,7 +8,12 @@ public abstract class ScenePart {
         this.chrClass = chrClass;
     }
     public String getCharacterName(Game game) {
-        return game.getCanvas().getCharacter(chrClass).getName();
+        if (chrClass != null) {
+            Character possibleChar = game.getCanvas().getCharacter(chrClass);
+            if (possibleChar != null)
+                return possibleChar.getName();
+            }
+        return null;
     }
     public abstract void doAfter(Game game);
     public void call(Game game) {

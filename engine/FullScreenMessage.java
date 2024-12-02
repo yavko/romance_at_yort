@@ -2,15 +2,17 @@ package engine;
 import javax.swing.*;
 import java.awt.FlowLayout;
 import java.awt.event.*;
+import java.awt.Image;
 
-public class Dialogue extends ScenePart {
+public class FullScreenMessage extends ScenePart {
     private final String dialogue;
-    public Dialogue(String dialogue, Class chrClass) {
+    public FullScreenMessage(String dialogue, Class chrClass) {
         super(chrClass);
         this.dialogue = dialogue;
+
         // other init logic
     }
-    public Dialogue(String dialogue) {
+    public FullScreenMessage(String dialogue) {
         super(null);
         this.dialogue = dialogue;
     }

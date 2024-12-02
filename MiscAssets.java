@@ -58,7 +58,7 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/tictactoe.png", "ticTacToe");
         
-        addImage(backgrounds, "assets/brrrwaysituation/png", "brrrwaySit");
+        addImage(backgrounds, "assets/brrrwaysituation.png", "brrrwaySit");
         
         addImage(backgrounds, "assets/brrrwaymeeting.png", "brrrwayMeeting");
         
