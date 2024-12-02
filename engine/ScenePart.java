@@ -7,6 +7,9 @@ public abstract class ScenePart {
     protected ScenePart(Class chrClass) {
         this.chrClass = chrClass;
     }
+    protected ScenePart() {
+        this.chrClass = null;
+    }
     public String getCharacterName(Game game) {
         if (chrClass != null) {
             Character possibleChar = game.getCanvas().getCharacter(chrClass);
