@@ -41,25 +41,66 @@ public class YortStory extends engine.Story {
             MiscAssets.backgrounds.get("directions")));
             
         addPart(
-            new EmptyPart()
+            new FullScreenMessage(
+                MiscAssets.generateWelcomeText(MainCharacter.name)
+            )
         );
             
         addScene(new Scene(
             MiscAssets.backgrounds.get("welcome")));
             
+        addPart(
+            new EmptyPart()
+        );
+            
         addScene(new Scene(
             MiscAssets.backgrounds.get("introDiff")));
+            
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("brrrwayMeeting")));
+            
+        addPart(
+            new EmptyPart()
+        );
+            
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("brrrwaySit")));
+            
+        addPart(
+            new EmptyPart()
+        );
+        
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("choicebg")));
+        
+         addPart(new Choice("Art thou sigma?", "yes", "no", "maybe") {
+            @Override
+            public void doAfter(Game game) {
+                if (!choice1Picked) // this comes from a property in Choice
+                    System.out.println("'Tis skibidi, that is not being a sigma.");
+                }
+        });
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("brrrwayGood")));
+
+        addPart(
+            new EmptyPart()
+        );
+        
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("brrrwayrude")));
+
             
         // example scene for y'all to see how to do
         
         // adds scene with bg of "bedroom"
-        addScene(new Scene(
-            MiscAssets.backgrounds.get("bedroom"),
-            new engine.Character[] {
-                new Oswaldo(0,0),
-                new BoJiden(50, 50)
-            }
-        ));
+        // addScene(new Scene(
+            // MiscAssets.backgrounds.get("bedroom"),
+            // new engine.Character[] {
+                // new Oswaldo(0,0),
+                // new BoJiden(50, 50)
+            // }
+        // ));
         
         // example of how to do difficulty specific stuff
         if (difficulty == Difficulty.Impossible) {
