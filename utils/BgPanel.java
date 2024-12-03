@@ -9,6 +9,10 @@ public class BgPanel extends JPanel {
         super(layout);
         this.img = i;
     }
+    public BgPanel(Image i) {
+        super();
+        this.img = i;
+    }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

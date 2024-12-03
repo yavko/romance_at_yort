@@ -31,12 +31,17 @@ public class YortStory extends engine.Story {
         // story logic
         addScene(new Scene(
             MiscAssets.backgrounds.get("base")));
-            
+        
         addPart(
             new FullScreenMessage(
                 MiscAssets.generateBackgroundInfo(MainCharacter.name)
             )
         );
+        addPart(new TicTacToe(engine.MinigameDifficulty.Random) {
+            @Override
+            public void doAfter(Game game) {
+            }
+        });
         
         addScene(new Scene(
             MiscAssets.backgrounds.get("bgPt2")));

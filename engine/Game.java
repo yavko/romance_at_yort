@@ -13,9 +13,12 @@ public class Game<T> extends utils.BgPanel {
     private JPanel panel;
     public Game(Image gameBg, Story story, T dataStore) {
         super(new BorderLayout(10, 10), gameBg);
+        //super(gameBg);
+        //super.setLayout(new OverlayLayout(this));
         this.story = story;
         this.dataStore = dataStore;
         this.canvas = new GameCanvas();
+        this.canvas.setMaximumSize(new Dimension(1920, 1080));
         nextScene();
         nextPart();
         add(canvas, BorderLayout.CENTER);
