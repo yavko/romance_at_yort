@@ -1,8 +1,9 @@
-import javax.swing.*;
+
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
 
 import java.awt.event.*;
+import javax.swing.*;
 
 public abstract class TicTacToe extends engine.MiniGame {
     /**
@@ -43,7 +44,7 @@ public abstract class TicTacToe extends engine.MiniGame {
     }
     public void update() {
     }
-    public void changeUI(Game game) {
+    public void changeUI(engine.Game game) {
         JPanel panel = new JPanel(new BorderLayout());
         JPanel gridPanel = new JPanel(new GridLayout(3, 3));
         panel.add(gridPanel, BorderLayout.CENTER);
