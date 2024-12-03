@@ -157,7 +157,7 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/freedombg.png", "freedombg");
         
-        addImage(backgrounds, "assets/ripbg.png", "ripbg");
+        
     }
     
     public static String generateBackgroundInfo(String name){
