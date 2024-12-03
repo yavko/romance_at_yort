@@ -98,6 +98,13 @@ public class YortStory extends engine.Story {
                     condPart(
                         new EmptyPart()
                     );
+                    
+                    addPart(new Dialogue("", MainCharacter.class) {
+                    @Override
+                    public void doAfter(Game game) {
+                    // could change emotion of characters or something
+                    }
+                    });
                 }
                 else if(choice2Picked){
                     condScene(new Scene(
