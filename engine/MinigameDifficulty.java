@@ -1,6 +1,5 @@
 package engine;
 
-
 /**
  * Enumeration class MinigameDifficulty - difficulty of minigames
  *

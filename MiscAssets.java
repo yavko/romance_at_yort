@@ -1,25 +1,28 @@
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
+import java.util.*;
+import java.io.File;
 
 public class MiscAssets {
-    
     public static HashMap<String, BufferedImage> backgrounds = new HashMap<>();
+    private static ImageReader reader = ImageIO.getImageReadersByFormatName("png").next();
     private static void addImage(HashMap<String, BufferedImage> map, String fileName, String name) {
         URL imgUrl = MiscAssets.class.getResource(fileName);
         try {
-            BufferedImage img = ImageIO.read(imgUrl);
+            reader.setInput(ImageIO.createImageInputStream(new File(fileName)), true);
+            BufferedImage img = reader.read(0, reader.getDefaultReadParam());
             map.put(name, img);
         } catch (IOException _ex) {
             System.out.println("failed to load asset " + name + " which should be located at: " + fileName);   
         }
     }
-    static {
+     static {
+         ImageIO.setUseCache(false);
         addImage(backgrounds, "assets/opening_scene.png", "main");
         
         addImage(backgrounds, "assets/bgPt1.png", "base");
@@ -68,7 +71,7 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/brrrwayrude.png", "brrrwayRude");
         
-        addImage(backgrounds, "assets/brrrwayhair.png", "brrrwayMysterious");
+        addImage(backgrounds, "assets/brrrwayhair.png", "brrrwaymysterious");
         
         addImage(backgrounds, "assets/desYORTaura.png", "winttt");
         
@@ -86,9 +89,17 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/rejecthangout.png", "rejectHangout");
         
+        addImage(backgrounds, "assets/graduation.png", "graduation");
+        
+        addImage(backgrounds, "assets/gradsituation.png", "gradSit");
+        
         addImage(backgrounds, "assets/gradfriendzone.png", "gradFriendZone");
         
         addImage(backgrounds, "assets/nogradbye.png", "noGradBye");
+        
+        addImage(backgrounds, "assets/endscene.png", "endScene");
+        
+        addImage(backgrounds, "assets/marriagesituation.png", "marriageSit");
         
         addImage(backgrounds, "assets/happyending.png", "HappyEnding");
         
@@ -127,6 +138,7 @@ public class MiscAssets {
         addImage(backgrounds, "assets/secondchancec2.png", "scc2");
         
     }
+    
     public static String generateBackgroundInfo(String name){
         try {
             return Files.readString(
