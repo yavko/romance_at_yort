@@ -9,6 +9,8 @@ public abstract class Choice extends ScenePart {
     private final String choice2;
     private final String choice3;
     protected boolean choice1Picked;
+    protected boolean choice2Picked;
+    protected boolean choice3Picked;
     public Choice(String pmpt, String c1, String c2, Class chrClass) {
         super(chrClass);
         this.prompt = pmpt;
@@ -49,7 +51,17 @@ public abstract class Choice extends ScenePart {
         choice2Btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                choice1Picked = false;
+                choice2Picked = true;
+                call(game);
+            }
+        });
+        panel.add(choice2Btn);
+        
+        JButton choice3Btn = new JButton(choice3);
+        choice2Btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                choice3Picked = true;
                 call(game);
             }
         });
