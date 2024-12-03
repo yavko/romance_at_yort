@@ -137,6 +137,27 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/secondchancec2.png", "scc2");
         
+        addImage(backgrounds, "assets/brrrwaybg.png", "brrrwaybg");
+        
+        addImage(backgrounds, "assets/tttbg.png", "tttbg");
+        
+        addImage(backgrounds, "assets/greendressbg.png", "greendressbg");
+        
+        addImage(backgrounds, "assets/suit.png", "suitbg");
+        
+        addImage(backgrounds, "assets/schooluniformbg.png", "schooluniformbg");
+        
+        addImage(backgrounds, "assets/balcony.png", "balconybg");
+        
+        addImage(backgrounds, "assets/dancebg.png", "dancebg");
+        
+        addImage(backgrounds, "assets/graduationbg.png", "graduationbg");
+        
+        addImage(backgrounds, "assets/churchbg.png", "churchbg");
+        
+        addImage(backgrounds, "assets/freedombg.png", "freedombg");
+        
+        addImage(backgrounds, "assets/ripbg.png", "ripbg");
     }
     
     public static String generateBackgroundInfo(String name){
