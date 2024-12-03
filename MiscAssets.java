@@ -71,7 +71,7 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/brrrwayrude.png", "brrrwayRude");
         
-        addImage(backgrounds, "assets/brrrwayhair.png", "brrrwayMysterious");
+        addImage(backgrounds, "assets/brrrwayhair.png", "brrrwaymysterious");
         
         addImage(backgrounds, "assets/desYORTaura.png", "winttt");
         
@@ -89,9 +89,17 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/rejecthangout.png", "rejectHangout");
         
+        addImage(backgrounds, "assets/graduation.png", "graduation");
+        
+        addImage(backgrounds, "assets/gradsituation.png", "gradSit");
+        
         addImage(backgrounds, "assets/gradfriendzone.png", "gradFriendZone");
         
         addImage(backgrounds, "assets/nogradbye.png", "noGradBye");
+        
+        addImage(backgrounds, "assets/endscene.png", "endScene");
+        
+        addImage(backgrounds, "assets/marriagesituation.png", "marriageSit");
         
         addImage(backgrounds, "assets/happyending.png", "HappyEnding");
         
