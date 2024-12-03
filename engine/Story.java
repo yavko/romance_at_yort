@@ -32,11 +32,27 @@ public abstract class Story {
         scenes.addLast(scene);
     }
     /**
+     * Method addScene adds a scene to the story
+     *
+     * @param scene The scene to add
+     */
+    public void condScene(Scene scene) {
+        scenes.addFirst(scene);
+    }
+    /**
+     * Method addPart adds a ScenePart to the last added Scene
+     *
+     * @param part The ScenePart to be added
+     */
+    public void condPart(ScenePart part) {
+        scenes.getFirst().getParts().addFirst(part);
+    }
+    /**
      * Method addPart adds a ScenePart to the last added Scene
      *
      * @param part The ScenePart to be added
      */
     public void addPart(ScenePart part) {
-        scenes.getLast().getParts().add(part);
+        scenes.getLast().getParts().addLast(part);
     }
 }

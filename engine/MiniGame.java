@@ -13,6 +13,6 @@ public abstract class MiniGame extends ScenePart {
         this.difficulty = difficulty;
     }
     public void finish(Class winner) {
-        this.winner = winner; 
+        this.winner = winner;
     }
 }
