@@ -87,25 +87,25 @@ public class YortStory extends engine.Story {
             @Override
             public void doAfter(Game game) {
                 if (choice1Picked){ // this comes from a property in Choice
-                    addScene(new Scene(
+                    condScene(new Scene(
                         MiscAssets.backgrounds.get("brrrwayGood")));
     
-                    addPart(
+                    condPart(
                         new EmptyPart()
                     );
                 }
                 else if(choice2Picked){
-                    addScene(new Scene(
+                    condScene(new Scene(
                         MiscAssets.backgrounds.get("brrrwayrude")));
             
-                    addPart(
+                    condPart(
                         new EmptyPart());
                 }
                 else{
-                    addScene(new Scene(
+                    condScene(new Scene(
                         MiscAssets.backgrounds.get("brrrwaymysterious")));
             
-                    addPart(
+                    condPart(
                         new EmptyPart());
                 }
                 }
@@ -130,26 +130,26 @@ public class YortStory extends engine.Story {
             public void doAfter(Game game) {
                 if (!choice1Picked){ // this comes from a property in Choice
                     if (difficulty == Difficulty.Impossible){ // this comes from a property in Choice
-                        addScene(new Scene(
+                        condScene(new Scene(
                             MiscAssets.backgrounds.get("rejectTTT")));
             
                         addPart(
                             new EmptyPart());
                     }
                     else if(difficulty == Difficulty.Normal){
-                        addScene(new Scene(
+                        condScene(new Scene(
                             MiscAssets.backgrounds.get("hwStudy")));
             
-                        addPart(
+                        condPart(
                             new EmptyPart());
                     }
                     
                     }
                 else{
-                    addScene(new Scene(
+                    condScene(new Scene(
                         MiscAssets.backgrounds.get("winOrLose")));
             
-                    addPart(new Choice("Play to win?", "yes", "no") {
+                    condPart(new Choice("Play to win?", "yes", "no") {
                     @Override
                     public void doAfter(Game game) {
                         if (difficulty == Difficulty.Easy) // this comes from a property in Choice
@@ -239,18 +239,18 @@ public class YortStory extends engine.Story {
             @Override
             public void doAfter(Game game) {
                 if(choice1Picked){
-                    addScene(new Scene(
+                    condScene(new Scene(
                         MiscAssets.backgrounds.get("gradFriendZone")));
             
-                    addPart(
+                    condPart(
                         new EmptyPart()
                     );
                 }
                 else if(choice3Picked){
-                    addScene(new Scene(
+                    condScene(new Scene(
                         MiscAssets.backgrounds.get("noGradBye")));
             
-                    addPart(
+                    condPart(
                         new EmptyPart()
                     );
                 }
@@ -281,19 +281,19 @@ public class YortStory extends engine.Story {
             @Override
             public void doAfter(Game game) {
                 if(choice1Picked){
-                    addScene(new Scene(
+                    condScene(new Scene(
                         MiscAssets.backgrounds.get("happyEnding")));
             
-                    addPart(
+                    condPart(
                         new EmptyPart()
                     );
         
                 }
                 else{
-                    addScene(new Scene(
+                    condScene(new Scene(
                         MiscAssets.backgrounds.get("rejectProposal")));
             
-                    addPart(
+                    condPart(
                         new EmptyPart()
                     );
         
