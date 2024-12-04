@@ -56,16 +56,17 @@ public abstract class Choice extends ScenePart {
             }
         });
         panel.add(choice2Btn);
-        
+        if (choice3 != null) {
         JButton choice3Btn = new JButton(choice3);
-        choice2Btn.addActionListener(new ActionListener() {
+        choice3Btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 choice3Picked = true;
                 call(game);
             }
         });
-        panel.add(choice2Btn);
+        panel.add(choice3Btn);
+    }
 
         game.setPanel(panel);
     }
