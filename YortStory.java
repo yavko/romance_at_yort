@@ -37,11 +37,6 @@ public class YortStory extends engine.Story {
                 MiscAssets.generateBackgroundInfo(MainCharacter.name)
             )
         );
-        addPart(new TicTacToe(engine.MinigameDifficulty.Random) {
-            @Override
-            public void doAfter(Game game) {
-            }
-        });
         
         addScene(new Scene(
             MiscAssets.backgrounds.get("bgPt2")));
@@ -56,16 +51,15 @@ public class YortStory extends engine.Story {
             MiscAssets.backgrounds.get("directions")));
             
         addPart(
-            new FullScreenMessage(
-                MiscAssets.generateWelcomeText(MainCharacter.name)
-            )
-        );
+            new EmptyPart());
             
         addScene(new Scene(
             MiscAssets.backgrounds.get("welcome")));
-            
+        
         addPart(
-            new EmptyPart()
+            new FullScreenMessage(
+                MiscAssets.generateWelcomeText(MainCharacter.name)
+            )
         );
             
         addScene(new Scene(
@@ -88,37 +82,39 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
             MiscAssets.backgrounds.get("choicebg")));
         
-         addPart(new Choice("what do you do?", "yes", "no", "maybe") {
+         addPart(new Choice("what do you do?", "say sorry", "be rude", "whip those luscious locks!!") {
             @Override
             public void doAfter(Game game) {
-                if (choice1Picked){ // this comes from a property in Choice
-                    condScene(new Scene(
+                condScene(new Scene(
                         MiscAssets.backgrounds.get("brrrwayGood")));
     
                     condPart(
                         new EmptyPart()
                     );
                     
-                    addPart(new Dialogue("", MainCharacter.class) {
-                    @Override
-                    public void doAfter(Game game) {
-                    // could change emotion of characters or something
-                    }
+                if (choice1Picked){ // this comes from a property in Choice
+                    addPart(new Dialogue(" “Hey, no worries at all! It was an accident. I’m sure you didn’t mean to. My name is Oswaldo and I hope to see you around often!” You thank him again and run over to your next class, leaving him with a good impression of you.", Oswaldo.class) {
+                        @Override
+                        public void doAfter(Game game) {
+                            // could change emotion of characters or something
+                        }
                     });
                 }
                 else if(choice2Picked){
-                    condScene(new Scene(
-                        MiscAssets.backgrounds.get("brrrwayrude")));
-            
-                    condPart(
-                        new EmptyPart());
+                    addPart(new Dialogue("Oswaldo, the guy you bumped into, looks at you confused, but as he is polite, he doesn’t want to cause a big scene. “Hey, no need to be rude. It was an accident.”", Oswaldo.class) {
+                        @Override
+                        public void doAfter(Game game) {
+                            // could change emotion of characters or something
+                        }
+                    });
                 }
                 else{
-                    condScene(new Scene(
-                        MiscAssets.backgrounds.get("brrrwaymysterious")));
-            
-                    condPart(
-                        new EmptyPart());
+                        addPart(new Dialogue("The guy you bumped into was Oswaldo. He looks at you as if waiting for you to say something, but you don’t. He now has an interest of neither dislike nor like of you.", Oswaldo.class) {
+                        @Override
+                        public void doAfter(Game game) {
+                            // could change emotion of characters or something
+                        }
+                    });
                 }
                 }
         });
@@ -158,22 +154,28 @@ public class YortStory extends engine.Story {
                     
                     }
                 else{
-                    condScene(new Scene(
-                        MiscAssets.backgrounds.get("winOrLose")));
+                    addPart(new TicTacToe(engine.MinigameDifficulty.Random) {
+                        @Override
+                            public void doAfter(Game game) {
+                            }
+                        });
+                    if(true)
+                    {
+                        condScene(new Scene(
+                            MiscAssets.backgrounds.get("winttt")));
             
-                    condPart(new Choice("Play to win?", "yes", "no") {
-                    @Override
-                    public void doAfter(Game game) {
-                        if (difficulty == Difficulty.Easy) // this comes from a property in Choice
-                            System.out.println("'Tis skibidi, that is not being a sigma.");
-                        else if(difficulty == Difficulty.Normal){
-                            
+                        addPart(
+                            new EmptyPart());
+                    }
+                    else{
+                        if(difficulty == Difficulty.Easy){
+                            condScene(new Scene(
+                            MiscAssets.backgrounds.get("losettt")));
+                        
+                            addPart(
+                            new EmptyPart());
                         }
-                        else{
-                            
-                        }
-                        }
-                    });
+                    }
                 }
                 }
         });
@@ -193,21 +195,52 @@ public class YortStory extends engine.Story {
         );
         
         addScene(new Scene(
-            MiscAssets.backgrounds.get("outfitSit")));
-
-        addPart(new Choice("what will you wear?", "green dress", "girluniform", "guyuniform") {
+            MiscAssets.backgrounds.get("choice bg")));
+        
+        addPart(new Choice("Go to the dance with Oswaldo or study for finals?", "go to the dance!", "study") {
             @Override
             public void doAfter(Game game) {
                 if(choice1Picked){
-                }
-                else if(choice2Picked){
+                    condScene(new Scene(
+                        MiscAssets.backgrounds.get("choice bg")));
+        
+                    addPart(new Choice("what will you wear?", "green dress", "guy suit", "school uniform") {
+                    @Override
+                    public void doAfter(Game game) {
+                        if(choice1Picked){
+                            condScene(new Scene(
+                                MiscAssets.backgrounds.get("greendressbg")));
+            
+                            condPart(
+                                new EmptyPart());
+                        }   
+                        else if(choice2Picked){
+                            condScene(new Scene(
+                                MiscAssets.backgrounds.get("suitbg")));
+            
+                            condPart(
+                                new EmptyPart());
+                        }
+                        else{
+                            condScene(new Scene(
+                                MiscAssets.backgrounds.get("schooluniformbg")));
                     
+                            condPart(
+                                new EmptyPart());
+                        }  
+                    }
+                });
                 }
                 else{
                     
                 }  
             }
         });
+        
+        
+        addScene(new Scene(
+            MiscAssets.backgrounds.get("outfitSit")));
+
         
         addScene(new Scene(
             MiscAssets.backgrounds.get("dancePartner")));

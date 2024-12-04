@@ -22,7 +22,8 @@ public class MiscAssets {
         }
     }
      static {
-         ImageIO.setUseCache(false);
+        ImageIO.setUseCache(false);
+         
         addImage(backgrounds, "assets/opening_scene.png", "main");
         
         addImage(backgrounds, "assets/bgPt1.png", "base");
@@ -67,11 +68,8 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/choicebg.png", "choicebg");
         
-        addImage(backgrounds, "assets/brrrwaygood.png", "brrrwayGood");
-        
-        addImage(backgrounds, "assets/brrrwayrude.png", "brrrwayRude");
-        
-        addImage(backgrounds, "assets/brrrwayhair.png", "brrrwaymysterious");
+        addImage(backgrounds, "assets/hallway.png", "hallwaybg");
+    
         
         addImage(backgrounds, "assets/desYORTaura.png", "winttt");
         
@@ -143,11 +141,11 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/greendressbg.png", "greendressbg");
         
-        addImage(backgrounds, "assets/suit.png", "suitbg");
+        addImage(backgrounds, "assets/suitbg.png", "suitbg");
         
         addImage(backgrounds, "assets/schooluniformbg.png", "schooluniformbg");
         
-        addImage(backgrounds, "assets/balcony.png", "balconybg");
+        addImage(backgrounds, "assets/balconybg.png", "balconybg");
         
         addImage(backgrounds, "assets/dancebg.png", "dancebg");
         

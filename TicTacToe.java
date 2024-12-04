@@ -11,7 +11,7 @@ public abstract class TicTacToe extends engine.MiniGame {
      */
     private engine.MinigameDifficulty difficulty;
     protected Class winner;
-    private boolean isPlayer;
+    public boolean isPlayer;
     public TicTacToe(engine.MinigameDifficulty difficulty) {
         super(difficulty);
     }
