@@ -133,7 +133,7 @@ public class YortStory extends engine.Story {
             @Override
             public void doAfter(Game game) {
                 if (choice1Picked){ // this comes from a property in Choice
-                    addPart(new TicTacToe(engine.MinigameDifficulty.Random) {
+                    condPart(new TicTacToe(engine.MinigameDifficulty.Random) {
                         @Override
                             public void doAfter(Game game) {
                             }
