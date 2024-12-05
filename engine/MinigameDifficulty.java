@@ -7,5 +7,5 @@ package engine;
  * @version 0.1
  */
 public enum MinigameDifficulty {
-    Random, Medium, Impossible
+    Basic, Medium, Hard
 }
