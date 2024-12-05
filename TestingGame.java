@@ -51,9 +51,8 @@ public class TestingGame extends JFrame implements KeyListener {
         timer = new Timer(seconds, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("timer: " + currentKey + ": " + moves[currentKey]);
                     if (currentKey == moves.length-1){
-                        System.out.println("game finished. You have: " + points + " points");
+                        label.setText("game finished. You have: " + points + " points");
                         timer.stop();
                     } else {
                         setKey();
@@ -82,7 +81,6 @@ public class TestingGame extends JFrame implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        System.out.println("keypress: " + currentKey + ": " + moves[currentKey]);
 
         if(!wasPressed) {
             switch(keyCode) {
