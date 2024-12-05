@@ -50,7 +50,7 @@ public class Game<T> extends utils.BgPanel {
             currentScene = null;
         }
     }
-    public void nextPart() {        
+    public void nextPart() {
         if (currentScene != null) {
             ScenePart part = currentScene.getParts().poll();
             if (part != null) {

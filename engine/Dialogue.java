@@ -17,10 +17,13 @@ public class Dialogue extends ScenePart {
     public void doAfter(Game game) {}
     
     public void changeUI(Game game) {
+        System.out.println(dialogue);
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
+        String buf = "";
         if (getCharacterName(game) != null)
-            panel.add(new JLabel(getCharacterName(game) + ":"));
-        panel.add(new JLabel(dialogue));
+            buf += getCharacterName(game) + ": ";
+        buf += dialogue;
+        panel.add(new JLabel(buf));
         panel.addMouseListener(new MouseListener() {
             public void mousePressed(MouseEvent e) {}
             public void mouseReleased(MouseEvent e) {

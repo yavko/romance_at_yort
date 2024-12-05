@@ -87,7 +87,7 @@ public class EntryPoint extends JFrame {
                 swapContent(
                     new engine.Game<YortData>(
                         MiscAssets.backgrounds.get("base"),
-                        new YortStory(Difficulty.Impossible),
+                        new YortStory(Difficulty.Easy),
                         new YortData(0)
                     )
                 );

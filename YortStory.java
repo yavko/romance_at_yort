@@ -76,52 +76,26 @@ public class YortStory extends engine.Story {
         addPart(new Choice("what do you do?", "say sorry", "be rude", "whip those luscious locks!!") {
                 @Override
                 public void doAfter(Game game) {
-
+                    condScene(new Scene(
+                            MiscAssets.backgrounds.get("hallwaybg"),
+                            new engine.Character[] {
+                                new Oswaldo(0,0)
+                            }
+                        ));
+                    System.out.println("logic in question");
                     if (choice1Picked){ // this comes from a property in Choice
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("hallwaybg"),
-                                new engine.Character[] {
-                                    new Oswaldo(0,0)
-                                }
-                            ));
 
-                        condPart(new Dialogue("“Hey, no worries at all! It was an accident. I’m sure you didn’t mean to. My name is Oswaldo and I hope to see you around often!” You thank him again and run over to your next class, leaving him with a good impression of you.", Oswaldo.class) {
-                                @Override
-                                public void doAfter(Game game) {
-                                    // could change emotion of characters or something
-                                }
-                            });
+                        condPart(new Dialogue("“Hey, no worries at all! It was an accident. I’m sure you didn’t mean to. My name is Oswaldo and I hope to see you around often!” You thank him again and run over to your next class, leaving him with a good impression of you.", Oswaldo.class));
                         if(difficulty == Difficulty.Easy){
                             affectionMeter += 15;
                         }
                         else if(difficulty == Difficulty.Normal){
                             affectionMeter += 10;
                         }
-                    }
-                    else if(choice2Picked){
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("hallwaybg"),
-                                new engine.Character[] {
-                                    new Oswaldo(0,0)
-                                }
-                            ));
+                    } else if(choice2Picked){
 
-                        condPart(new Dialogue("Oswaldo, the guy you bumped into, looks at you confused, but as he is polite, he doesn’t want to cause a big scene. “Hey, no need to be rude. It was an accident.”", Oswaldo.class) {
-                                @Override
-                                public void doAfter(Game game) {
-                                    // could change emotion of characters or something
-                                }
-                            });
-
-                    }
-                    else{
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("hallwaybg"),
-                                new engine.Character[] {
-                                    new Oswaldo(0,0)
-                                }
-                            ));
-
+                        condPart(new Dialogue("Oswaldo, the guy you bumped into, looks at you confused, but as he is polite, he doesn’t want to cause a big scene. “Hey, no need to be rude. It was an accident.”", Oswaldo.class));
+                    } else{
                         condPart(new Dialogue("The guy you bumped into was Oswaldo. He looks at you as if waiting for you to say something, but you don’t. He now has an interest of neither dislike nor like of you.", Oswaldo.class) {
                                 @Override
                                 public void doAfter(Game game) {
@@ -571,7 +545,6 @@ public class YortStory extends engine.Story {
                                 }
                             });
 
-                        
                     }
                 }
             });
