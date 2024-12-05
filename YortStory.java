@@ -112,7 +112,7 @@ public class YortStory extends engine.Story {
                                     // could change emotion of characters or something
                                 }
                             });
-                        
+
                     }
                     else{
                         condScene(new Scene(
@@ -281,58 +281,9 @@ public class YortStory extends engine.Story {
                 public void doAfter(Game game) {
                     if(choice1Picked){
                         condScene(new Scene(
-                                MiscAssets.backgrounds.get("outfitSit")));
-
-                        condPart(
-                            new EmptyPart()
-                        );
-
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("choicebg")));
-
-                        condPart(new Choice("what will you wear?", "green dress", "guy suit", "school uniform") {
-                                @Override
-                                public void doAfter(Game game) {
-                                    if(choice1Picked){
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("greendressbg")));
-
-                                        condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him.", MainCharacter.class) {
-                                                @Override
-                                                public void doAfter(Game game) {
-                                                    // could change emotion of characters or something
-                                                }
-                                            });
-                                    }   
-                                    else if(choice2Picked){
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("suitbg")));
-
-                                        condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him.", MainCharacter.class) {
-                                                @Override
-                                                public void doAfter(Game game) {
-                                                    // could change emotion of characters or something
-                                                }
-                                            });
-                                    }
-                                    else{
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("schooluniformbg")));
-
-                                        condPart(new Dialogue("Oswaldo feels slightly awkward and embarassed about taking you out to the dance.", MainCharacter.class) {
-                                                @Override
-                                                public void doAfter(Game game) {
-                                                    // could change emotion of characters or something
-                                                }
-                                            });
-                                    }  
-                                }
-                            });
-
-                        addScene(new Scene(
                                 MiscAssets.backgrounds.get("dancePartner")));
 
-                        addPart(new Choice("dance with oswaldo?", "yes", "no") {
+                        condPart(new Choice("dance with oswaldo?", "yes", "no") {
                                 @Override
                                 public void doAfter(Game game) {
                                     if(choice1Picked){
@@ -393,32 +344,82 @@ public class YortStory extends engine.Story {
                                     }
                                 }
                             });
+
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("choicebg")));
+
+                        condPart(new Choice("what will you wear?", "green dress", "guy suit", "school uniform") {
+                                @Override
+                                public void doAfter(Game game) {
+                                    if(choice1Picked){
+                                        condScene(new Scene(
+                                                MiscAssets.backgrounds.get("greendressbg")));
+
+                                        condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him.", MainCharacter.class) {
+                                                @Override
+                                                public void doAfter(Game game) {
+                                                    // could change emotion of characters or something
+                                                }
+                                            });
+                                    }   
+                                    else if(choice2Picked){
+                                        condScene(new Scene(
+                                                MiscAssets.backgrounds.get("suitbg")));
+
+                                        condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him.", MainCharacter.class) {
+                                                @Override
+                                                public void doAfter(Game game) {
+                                                    // could change emotion of characters or something
+                                                }
+                                            });
+                                    }
+                                    else{
+                                        condScene(new Scene(
+                                                MiscAssets.backgrounds.get("schooluniformbg")));
+
+                                        condPart(new Dialogue("Oswaldo feels slightly awkward and embarassed about taking you out to the dance.", MainCharacter.class) {
+                                                @Override
+                                                public void doAfter(Game game) {
+                                                    // could change emotion of characters or something
+                                                }
+                                            });
+                                    }  
+                                }
+                            });
+
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("outfitSit")));
+
+                        condPart(
+                            new EmptyPart()
+                        );
+
                     }
                     else if (choice2Picked){
                         condScene(new Scene(
-                            MiscAssets.backgrounds.get("hallwaybg"),
+                                MiscAssets.backgrounds.get("hallwaybg"),
                                 new engine.Character[] {
-                                new Oswaldo(0,0)
-                            }
-                        ));
-                        
+                                    new Oswaldo(0,0)
+                                }
+                            ));
+
                         condPart(new Dialogue("Oswaldo's heart tore a little at the rejection and he slowly turned away once the classroom door shut closed.", Oswaldo.class) {
-                            @Override
-                            public void doAfter(Game game) {
+                                @Override
+                                public void doAfter(Game game) {
                                     // could change emotion of characters or something
-                            }
-                        });
-                        
+                                }
+                            });
+
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("coJogClass")));
-                                
+
                         condPart(new Dialogue("Although it pained you to reject Oswaldo, you left him to watch your figure gradually disappear back into Professor CoJoglianese's classroom to study the night.", MainCharacter.class) {
-                            @Override
-                            public void doAfter(Game game) {
+                                @Override
+                                public void doAfter(Game game) {
                                     // could change emotion of characters or something
-                            }
-                        });
-                        
+                                }
+                            });
+
                     }  
                 }
             });
@@ -440,11 +441,11 @@ public class YortStory extends engine.Story {
                     if(choice1Picked){
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("graduationbg"),
-                                 new engine.Character[] {
-                                 new Oswaldo(0,0)
-                                 }
-                             ));
-                        
+                                new engine.Character[] {
+                                    new Oswaldo(0,0)
+                                }
+                            ));
+
                         condPart(new Dialogue("No problem, I’m always here to help! Thank you for all your hard work as well.” Oswaldo replies to your formal congratulation. He has a feeling that you have friendzoned him, hurting his pride, but having to hold up his reputation as the Duke of Yort, Oswaldo shows no emotion that would indicate that he was hurt by your words. ", MainCharacter.class) {
                                 @Override
                                 public void doAfter(Game game) {
@@ -454,12 +455,12 @@ public class YortStory extends engine.Story {
                     }
                     else if(choice3Picked){
                         condScene(new Scene(
-                            MiscAssets.backgrounds.get("graduationbg"),
-                             new engine.Character[] {
-                             new Oswaldo(0,0)
-                             }
-                        ));
-                             
+                                MiscAssets.backgrounds.get("graduationbg"),
+                                new engine.Character[] {
+                                    new Oswaldo(0,0)
+                                }
+                            ));
+
                         condPart(new Dialogue("Oswaldo glances at you, but doesn’t take the initiative to talk to you. He feels a barrier between him and you, not having enough interest to cross the distance towards you.", MainCharacter.class) {
                                 @Override
                                 public void doAfter(Game game) {
@@ -469,12 +470,12 @@ public class YortStory extends engine.Story {
                     }
                     else{
                         condScene(new Scene(
-                            MiscAssets.backgrounds.get("graduationbg"),
-                             new engine.Character[] {
-                             new Oswaldo(0,0)
-                             }
+                                MiscAssets.backgrounds.get("graduationbg"),
+                                new engine.Character[] {
+                                    new Oswaldo(0,0)
+                                }
                             ));
-                    
+
                         condPart(
                             new FullScreenMessage(
                                 MiscAssets.generateConfession(MainCharacter.name)
@@ -507,10 +508,10 @@ public class YortStory extends engine.Story {
                     if(choice1Picked){
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("churchbg"),
-                                 new engine.Character[] {
-                                 new Oswaldo(0,0)
-                                 }
-                             ));
+                                new engine.Character[] {
+                                    new Oswaldo(0,0)
+                                }
+                            ));
 
                         condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class) {
                                 @Override
@@ -522,20 +523,6 @@ public class YortStory extends engine.Story {
                     }
                     else{
                         condScene(new Scene(
-                                MiscAssets.backgrounds.get("bedroom"),
-                                 new engine.Character[] {
-                                 new Oswaldo(0,0)
-                                 }
-                             ));
-
-                        condPart(new Dialogue("He puts the ring back in his pocket and gets up from the floor dejectedly. Oswaldo, not looking at you at all, turns away heartbroken. Before he leaves the door, you have final decision to make...", Oswaldo.class){
-                                @Override
-                                public void doAfter(Game game){
-
-                                }
-                            });
-
-                        condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
 
                         condPart(new Choice("change your mind?", "yes", "no") {
@@ -543,11 +530,11 @@ public class YortStory extends engine.Story {
                                 public void doAfter(Game game) {
                                     if(choice1Picked){
                                         condScene(new Scene(
-                                MiscAssets.backgrounds.get("churchbg"),
-                                 new engine.Character[] {
-                                 new Oswaldo(0,0)
-                                 }
-                             ));
+                                                MiscAssets.backgrounds.get("churchbg"),
+                                                new engine.Character[] {
+                                                    new Oswaldo(0,0)
+                                                }
+                                            ));
 
                                         condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class) {
                                                 @Override
@@ -570,6 +557,21 @@ public class YortStory extends engine.Story {
                                 }
                             });   
 
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("bedroom"),
+                                new engine.Character[] {
+                                    new Oswaldo(0,0)
+                                }
+                            ));
+
+                        condPart(new Dialogue("He puts the ring back in his pocket and gets up from the floor dejectedly. Oswaldo, not looking at you at all, turns away heartbroken. Before he leaves the door, you have final decision to make...", Oswaldo.class){
+                                @Override
+                                public void doAfter(Game game){
+
+                                }
+                            });
+
+                        
                     }
                 }
             });
