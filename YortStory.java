@@ -228,7 +228,7 @@ public class YortStory extends engine.Story {
         );
 
         addScene(new Scene(
-                MiscAssets.backgrounds.get("choice bg")));
+                MiscAssets.backgrounds.get("choicebg")));
 
         addPart(new Choice("Go to the dance with Oswaldo or study for finals?", "go to the dance!", "study") {
                 @Override

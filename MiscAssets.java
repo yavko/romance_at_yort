@@ -74,8 +74,6 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/marriagesituation.png", "marriageSit");
         
-        addImage(backgrounds, "assets/happyending.png", "HappyEnding");
-        
         addImage(backgrounds, "assets/brrrwayc1.png", "brrrwayc1");
         
         addImage(backgrounds, "assets/brrrwayc2.png", "brrrwayc2");
