@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.event.*;
 import java.util.Random;
+import java.util.Arrays;
 
 public class TestingGame extends JFrame implements KeyListener {
     final static String[] keys = new String[] {
@@ -10,28 +11,23 @@ public class TestingGame extends JFrame implements KeyListener {
             "left",
             "right"
         };
-
-    private static String[] generateKeys(int numMoves){
-        String[] moves = new String[numMoves];
-
+    private String[] moves;
+    private String[] generateKeys(int numMoves){
+        moves = new String[numMoves];
         Random rand = new Random();
-        int randNum;
-
-        for(int i = 0; i < numMoves; i++){
-            randNum = rand.nextInt(3);
-            moves[i] = keys[randNum];
-        } 
+        for(int i = 0; i < numMoves; i++)
+            moves[i] = keys[rand.nextInt(keys.length)];
 
         return moves;
     }
     boolean wasPressed = false;
+    boolean firstRun = true;
     int currentKey = 0;
     int points = 0;
     JLabel label = new JLabel("");
     Timer timer = null;
     private void setKey() {
-        if (currentKey != keys.length)
-            label.setText(keys[currentKey]);
+        label.setText(moves[currentKey]);
     }
 
     public TestingGame() {
@@ -39,36 +35,34 @@ public class TestingGame extends JFrame implements KeyListener {
         setMinimumSize(new Dimension(854, 480));
         //
         int seconds;
-        int numKeys;
-        String difficulty = "Easy";
-        if(difficulty == "Easy"){
-            seconds = 4000;
+        Difficulty difficulty = Difficulty.Impossible;
+        if(difficulty == Difficulty.Easy){
+            seconds = 2000;
             generateKeys(10);
-            numKeys = 10;
-        }
-        else if(difficulty == "Normal"){
-            seconds = 6000;
+        } else if (difficulty == Difficulty.Normal){
+            seconds = 1500;
             generateKeys(15);
-            numKeys = 15;
-        }
-        else{
-            seconds = 9000;
+        } else {
+            seconds = 1000;
             generateKeys(25);
-            numKeys = 25;
         }
-
+        System.out.println(Arrays.asList(moves));
+        
         timer = new Timer(seconds, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    setKey();
-                    if (currentKey == generateKeys(numKeys).length){
+                    System.out.println("timer: " + currentKey + ": " + moves[currentKey]);
+                    if (currentKey == moves.length-1){
                         System.out.println("game finished. You have: " + points + " points");
                         timer.stop();
                     } else {
-                        currentKey++;
-                        wasPressed = false;
+                        setKey();
+                        if (!firstRun) {
+                            currentKey++;
+                            wasPressed = false;
+                        }
+                        firstRun = false;
                     }
-
                 }
             });
         timer.start();
@@ -88,35 +82,38 @@ public class TestingGame extends JFrame implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-        System.out.println(currentKey);
-        if(!wasPressed)
+        System.out.println("keypress: " + currentKey + ": " + moves[currentKey]);
+
+        if(!wasPressed) {
             switch(keyCode) {
 
                 case KeyEvent.VK_UP:
                     // handle up
-                    if(keys[currentKey-1] == "up"){
+                    if(moves[currentKey-1] == "up"){
                         points += 100;
                     }
                     break;
                 case KeyEvent.VK_DOWN:
                     // handle down
-                    if(keys[currentKey-1] == "down"){
+                    if(moves[currentKey-1] == "down"){
                         points += 100;
                     }
                     break;
                 case KeyEvent.VK_LEFT:
                     // handle left
-                    if(keys[currentKey-1] == "left"){
+                    if(moves[currentKey-1] == "left"){
                         points += 100;
                     }
                     break;
                 case KeyEvent.VK_RIGHT:
                     // handle right
-                    if(keys[currentKey-1] == "right"){
+                    if(moves[currentKey-1] == "right"){
                         points += 100;
                     }
                     break;
             }
+            label.setText("-");
+        }
     }
 
     public void keyReleased(KeyEvent e) {
