@@ -3,7 +3,7 @@ package utils;
 import javax.swing.*;
 import java.awt.*;
 
-public class BgPanel extends JPanel {
+public class BgPanel extends TransparentPanel {
     private Image img;
     public BgPanel(LayoutManager layout, Image i) {
         super(layout);
