@@ -40,13 +40,7 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/specialScene1.png", "ss1");
         
-        addImage(backgrounds, "assets/hangout.png", "hangout");
-        
-        addImage(backgrounds, "assets/schooluniform.png", "schoolUniform");
-        
         addImage(backgrounds, "assets/dancepartner.png", "dancePartner");
-        
-        addImage(backgrounds, "assets/greendress.png", "greenDress");
         
         addImage(backgrounds, "assets/outfitsituation.png", "outfitSit");
         
@@ -69,38 +63,18 @@ public class MiscAssets {
         addImage(backgrounds, "assets/choicebg.png", "choicebg");
         
         addImage(backgrounds, "assets/hallway.png", "hallwaybg");
-    
-        addImage(backgrounds, "assets/desYORTaura.png", "winttt");
-        
-        addImage(backgrounds, "assets/tttloss.png", "losettt");
-        
-        addImage(backgrounds, "assets/hwstudy.png", "hwStudy");
         
         addImage(backgrounds, "assets/nottt.png", "rejectTTT");
-        
-        addImage(backgrounds, "assets/yesdance.png", "yesDance");
-        
-        addImage(backgrounds, "assets/buffetsnacking.png", "buffetSnacking");
-        
-        addImage(backgrounds, "assets/ditchedoswaldo.png", "ditchOswaldo");
-        
-        addImage(backgrounds, "assets/rejecthangout.png", "rejectHangout");
         
         addImage(backgrounds, "assets/graduation.png", "graduation");
         
         addImage(backgrounds, "assets/gradsituation.png", "gradSit");
-        
-        addImage(backgrounds, "assets/gradfriendzone.png", "gradFriendZone");
-        
-        addImage(backgrounds, "assets/nogradbye.png", "noGradBye");
         
         addImage(backgrounds, "assets/endscene.png", "endScene");
         
         addImage(backgrounds, "assets/marriagesituation.png", "marriageSit");
         
         addImage(backgrounds, "assets/happyending.png", "HappyEnding");
-        
-        addImage(backgrounds, "assets/nowedding.png", "rejectProposal");
         
         addImage(backgrounds, "assets/brrrwayc1.png", "brrrwayc1");
         
@@ -155,6 +129,8 @@ public class MiscAssets {
         addImage(backgrounds, "assets/freedombg.png", "freedombg");
         
         addImage(backgrounds, "assets/ripbg.png", "ripbg");
+        
+        addImage(backgrounds, "assets/theend.png", "endbg");
     }
     
     public static String generateBackgroundInfo(String name){
@@ -189,6 +165,19 @@ public class MiscAssets {
             return "bruh";
         }
     }
+    
+    public static String generateConfession(String name){
+        try {
+            return Files.readString(
+            Paths.get("assets/confession.txt")
+            ).replace("[name]", name);
+        } catch (IOException ioe)
+        {
+            System.out.println("failed to load directions txt file");
+            return "bruh";
+        }
+    }
+    
     public static String generateWelcomeText(String name){
         return "Welcome " + name + " to Romance at Yort! We hope you enjoy!";
     }
