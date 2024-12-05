@@ -1,17 +1,28 @@
 import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.event.*;
+import java.util.Random;
 
 public class TestingGame extends JFrame implements KeyListener {
-    final String[] keys = new String[] {
+    final static String[] keys = new String[] {
             "up",
             "down",
             "left",
             "right"
         };
+
     private static String[] generateKeys(int numMoves){
         String[] moves = new String[numMoves];
-        for(int i
+
+        Random rand = new Random();
+        int randNum;
+
+        for(int i = 0; i < numMoves; i++){
+            randNum = rand.nextInt(3);
+            moves[i] = keys[randNum];
+        } 
+
+        return moves;
     }
     boolean wasPressed = false;
     int currentKey = 0;
@@ -27,12 +38,30 @@ public class TestingGame extends JFrame implements KeyListener {
         super("testing game window");
         setMinimumSize(new Dimension(854, 480));
         //
+        int seconds;
+        int numKeys;
+        String difficulty = "Easy";
+        if(difficulty == "Easy"){
+            seconds = 4000;
+            generateKeys(10);
+            numKeys = 10;
+        }
+        else if(difficulty == "Normal"){
+            seconds = 6000;
+            generateKeys(15);
+            numKeys = 15;
+        }
+        else{
+            seconds = 9000;
+            generateKeys(25);
+            numKeys = 25;
+        }
 
-        timer = new Timer(2000, new ActionListener() {
+        timer = new Timer(seconds, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setKey();
-                    if (currentKey == keys.length){
+                    if (currentKey == generateKeys(numKeys).length){
                         System.out.println("game finished. You have: " + points + " points");
                         timer.stop();
                     } else {
@@ -62,7 +91,7 @@ public class TestingGame extends JFrame implements KeyListener {
         System.out.println(currentKey);
         if(!wasPressed)
             switch(keyCode) {
-                
+
                 case KeyEvent.VK_UP:
                     // handle up
                     if(keys[currentKey-1] == "up"){

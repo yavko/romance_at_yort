@@ -12,19 +12,10 @@ public class YortStory extends engine.Story {
      * Constructor for objects of class YortStory
      */
     public Difficulty difficulty;
-    public int affectionMeter;
+    public int affectionMeter = 50;
     public boolean rightChoice = true;
     public YortStory(Difficulty difficulty) {
         super();
-        if(difficulty == Difficulty.Easy){
-            affectionMeter = 75;
-        }
-        else if(difficulty == Difficulty.Normal){
-            affectionMeter = 50;
-        }
-        else{
-            affectionMeter = 25;
-        }
         // PLACEGHOLDER PLZ FIX LATER YES
         MainCharacter.name = "placeholder";
         
@@ -95,6 +86,12 @@ public class YortStory extends engine.Story {
                             // could change emotion of characters or something
                         }
                     });
+                    if(difficulty == Difficulty.Easy){
+                        affectionMeter += 15;
+                    }
+                    else if(difficulty == Difficulty.Normal){
+                        affectionMeter += 10;
+                    }
                 }
                 else if(choice2Picked){
                     condPart(new Dialogue("Oswaldo, the guy you bumped into, looks at you confused, but as he is polite, he doesn’t want to cause a big scene. “Hey, no need to be rude. It was an accident.”", Oswaldo.class) {
@@ -103,6 +100,9 @@ public class YortStory extends engine.Story {
                             // could change emotion of characters or something
                         }
                     });
+                    if(difficulty == Difficulty.Impossible){
+                        //automatically go to bad ending saying that Oswaldo will execute mc for insulting nobility
+                    }
                 }
                 else{
                     condPart(new Dialogue("The guy you bumped into was Oswaldo. He looks at you as if waiting for you to say something, but you don’t. He now has an interest of neither dislike nor like of you.", Oswaldo.class) {
