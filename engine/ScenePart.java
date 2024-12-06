@@ -19,6 +19,7 @@ public abstract class ScenePart {
         return null;
     }
     public abstract void doAfter(Game game);
+    public void onLoad(Game game) {}
     public void call(Game game) {
         doAfter(game);
         game.nextPart();

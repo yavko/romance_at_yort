@@ -81,6 +81,7 @@ public class Game<T> extends utils.BgPanel {
             if (part != null) {
                 currentScenePart = part;
                 part.changeUI(this);
+                part.onLoad(this);
             } else {
                 nextScene();
                 nextPart();

@@ -1,23 +1,29 @@
 package engine;
 import java.io.File;
-//https://docs.oracle.com/javafx/2/api/javafx/scene/media/MediaPlayer.html#MediaPlayer(javafx.scene.media.Media)
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
- * Write a description of class Audio here.
+ * Audio files for the game.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author (Ashlyn Y)
+ * @version (0.1)
  */
-public final class MediaPlayer
-extends java.lang.Object{
-    // instance variables - replace the example below with your own
-    
+public final class MediaPlayer { 
+    public static Clip createClip(String path, boolean repeat) {
+        Clip clip = null;
+        try {
+            AudioInputStream audio = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
 
-    /**
-     * Constructor for objects of class Audio
-     */
-    public MediaPlayer(Media media)
-    {
-        
+            clip = AudioSystem.getClip();
+            clip.open(audio);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("failed to load audio");
+        }
+        if (repeat)
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        return clip;
     }
 }

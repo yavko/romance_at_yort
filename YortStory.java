@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import engine.*;
+import javax.sound.sampled.Clip;
+
 
 /**
  * class representing the game's story
@@ -17,16 +19,28 @@ public class YortStory extends engine.Story {
     public YortStory(Difficulty difficulty) {
         super();
         // PLACEGHOLDER PLZ FIX LATER YES
+        
         MainCharacter.name = "placeholder";
 
         // story logic
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
-
+        Clip clip = engine.MediaPlayer.createClip("./audio/buttonClick.wav", true);
         addPart(
             new FullScreenMessage(
                 MiscAssets.generateBackgroundInfo(MainCharacter.name)
-            )
+            ) {
+                @Override
+                public void onLoad(Game game) {
+                // play audio
+                clip.start();
+                }
+                @Override
+                public void doAfter(Game game) {
+                // stop audio
+                clip.stop();
+                }
+                }
         );
 
         addScene(new Scene(
@@ -249,24 +263,24 @@ public class YortStory extends engine.Story {
             || difficulty == difficulty.Normal) && affectionMeter >= 70 
         || (difficulty == Difficulty.Impossible && rightChoice)){
 
-            addScene(new Scene(
+            condScene(new Scene(
                     MiscAssets.backgrounds.get("dance")));
 
-            addPart(
+            condPart(
                 new EmptyPart()
             );
 
-            addScene(new Scene(
+            condScene(new Scene(
                     MiscAssets.backgrounds.get("danceSit")));
 
-            addPart(
+            condPart(
                 new EmptyPart()
             );
 
-            addScene(new Scene(
+            condScene(new Scene(
                     MiscAssets.backgrounds.get("choicebg")));
 
-            addPart(new Choice("Go to the dance with Oswaldo or study for finals?", "go to the dance!", "study") {
+            condPart(new Choice("Go to the dance with Oswaldo or study for finals?", "go to the dance!", "study") {
                     @Override
                     public void doAfter(Game game) {
                         if(choice1Picked){
@@ -469,97 +483,101 @@ public class YortStory extends engine.Story {
                 MiscAssets.backgrounds.get("endScene")));
 
         addPart(
-            new EmptyPart()
-        );
-        if(affectionMeter >= 100 || (difficulty == Difficulty.Impossible && rightChoice == true)){
-            addScene(new Scene(
-                    MiscAssets.backgrounds.get("marriageSit")));
+            new EmptyPart() {
+                @Override
+                public void doAfter(Game game) {
+                    if(affectionMeter >= 100 || (difficulty == Difficulty.Impossible && rightChoice == true)){
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("marriageSit")));
 
-            addPart(
-                new EmptyPart()
-            );
+                        condPart(
+                            new EmptyPart()
+                        );
 
-            addScene(new Scene(
-                    MiscAssets.backgrounds.get("choicebg")));
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("choicebg")));
 
-            addPart(new Choice("say yes?", "yes", "no") {
-                    @Override
-                    public void doAfter(Game game) {
-                        if(choice1Picked){
-                            condScene(new Scene(
-                                    MiscAssets.backgrounds.get("churchbg"),
-                                    new engine.Character[] {
-                                        new Oswaldo(0,0)
+                        condPart(new Choice("say yes?", "yes", "no") {
+                                @Override
+                                public void doAfter(Game game) {
+                                    if(choice1Picked){
+                                        condScene(new Scene(
+                                                MiscAssets.backgrounds.get("churchbg"),
+                                                new engine.Character[] {
+                                                    new Oswaldo(0,0)
+                                                }
+                                            ));
+
+                                        condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class));
+
                                     }
-                                ));
+                                    else{
+                                        if(Difficulty.Normal == difficulty || difficulty == Difficulty.Easy){
+                                            condScene(new Scene(
+                                                    MiscAssets.backgrounds.get("choicebg")));
 
-                            condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class));
+                                            condPart(new Choice("change your mind?", "yes", "no") {
+                                                    @Override
+                                                    public void doAfter(Game game) {
+                                                        if(choice1Picked){
+                                                            condScene(new Scene(
+                                                                    MiscAssets.backgrounds.get("churchbg"),
+                                                                    new engine.Character[] {
+                                                                        new Oswaldo(0,0)
+                                                                    }
+                                                                ));
 
-                        }
-                        else{
-                            if(Difficulty.Normal == difficulty || difficulty == Difficulty.Easy){
-                                condScene(new Scene(
-                                        MiscAssets.backgrounds.get("choicebg")));
-
-                                condPart(new Choice("change your mind?", "yes", "no") {
-                                        @Override
-                                        public void doAfter(Game game) {
-                                            if(choice1Picked){
-                                                condScene(new Scene(
-                                                        MiscAssets.backgrounds.get("churchbg"),
-                                                        new engine.Character[] {
-                                                            new Oswaldo(0,0)
+                                                            condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class)); 
                                                         }
-                                                    ));
+                                                        else{
+                                                            condScene(new Scene(
+                                                                    MiscAssets.backgrounds.get("freedombg")));
 
-                                                condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class)); 
-                                            }
-                                            else{
-                                                condScene(new Scene(
-                                                        MiscAssets.backgrounds.get("freedombg")));
+                                                            condPart(new Dialogue("You chose to be free and live solo", MainCharacter.class));
+                                                        }
+                                                    }
+                                                });   
 
-                                                condPart(new Dialogue("You chose to be free and live solo", MainCharacter.class));
-                                            }
+                                            condScene(new Scene(
+                                                    MiscAssets.backgrounds.get("bedroom"),
+                                                    new engine.Character[] {
+                                                        new Oswaldo(0,0)
+                                                    }
+                                                ));
+
+                                            condPart(new Dialogue("He puts the ring back in his pocket and gets up from the floor dejectedly. Oswaldo, not looking at you at all, turns away heartbroken. Before he leaves the door, you have final decision to make...", Oswaldo.class));
+                                        }else{
+                                            condScene(new Scene(
+                                                    MiscAssets.backgrounds.get("ripbg")));
+
+                                            condPart(
+                                                new FullScreenMessage(
+                                                    MiscAssets.generateBackgroundInfo(MainCharacter.name)
+                                                )
+                                            );
                                         }
-                                    });   
 
-                                condScene(new Scene(
-                                        MiscAssets.backgrounds.get("bedroom"),
-                                        new engine.Character[] {
-                                            new Oswaldo(0,0)
-                                        }
-                                    ));
+                                    }
+                                }
+                            });
+                    }else if(rightChoice == false){
+                        addScene(new Scene(
+                                MiscAssets.backgrounds.get("ripbg")));
 
-                                condPart(new Dialogue("He puts the ring back in his pocket and gets up from the floor dejectedly. Oswaldo, not looking at you at all, turns away heartbroken. Before he leaves the door, you have final decision to make...", Oswaldo.class));
-                            }else{
-                                condScene(new Scene(
-                                        MiscAssets.backgrounds.get("ripbg")));
+                        condPart(
+                            new FullScreenMessage(
+                                MiscAssets.generateBackgroundInfo(MainCharacter.name)
+                            )
+                        );
+                    }else{
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("freedombg")));
 
-                                condPart(
-                                    new FullScreenMessage(
-                                        MiscAssets.generateBackgroundInfo(MainCharacter.name)
-                                    )
-                                );
-                            }
-
-                        }
+                        condPart(new Dialogue("You chose to be free and live solo", MainCharacter.class));
                     }
-                });
-        }else if(rightChoice == false){
-            condScene(new Scene(
-                    MiscAssets.backgrounds.get("ripbg")));
-
-            condPart(
-                new FullScreenMessage(
-                    MiscAssets.generateBackgroundInfo(MainCharacter.name)
-                )
-            );
-        }else{
-            condScene(new Scene(
-                    MiscAssets.backgrounds.get("freedombg")));
-
-            condPart(new Dialogue("You chose to be free and live solo", MainCharacter.class));
-        }
+                }
+            }
+        );
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("endbg")));

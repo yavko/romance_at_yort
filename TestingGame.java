@@ -81,7 +81,7 @@ public class TestingGame extends JFrame implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
-
+        engine.MediaPlayer.createClip("./audio/buttonClick.wav", false).start();
         if(!wasPressed) {
             switch(keyCode) {
 

@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import javax.sound.sampled.Clip;
 
 public class EntryPoint extends JFrame {
     private JPanel content;
@@ -70,7 +71,8 @@ public class EntryPoint extends JFrame {
         // BufferedImage bgImg = ImageIO.read(bgImgUrl);
 
         // Play btn
-
+        Clip clip = engine.MediaPlayer.createClip("./audio/breezeway.wav", true);
+        clip.start();
         JButton playBtn = new utils.ImgButton(
             ImageIO.read(
                 EntryPoint.class.getResource("assets/start_button.png")
@@ -84,6 +86,7 @@ public class EntryPoint extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("starting game");
+                clip.stop();
                 swapContent(
                     new engine.Game<YortData>(
                         MiscAssets.backgrounds.get("base"),
