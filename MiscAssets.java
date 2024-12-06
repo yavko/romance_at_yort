@@ -180,6 +180,18 @@ public class MiscAssets {
         }
     }
     
+    public static String generateRIPText(String name){
+        try {
+            return Files.readString(
+            Paths.get("assets/rip.txt")
+            ).replace("[name]", name);
+        } catch (IOException ioe)
+        {
+            System.out.println("failed to load directions txt file");
+            return "bruh";
+        }
+    }
+    
     public static String generateWelcomeText(String name){
         return "Welcome " + name + " to Romance at Yort! We hope you enjoy!";
     }

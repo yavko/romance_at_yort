@@ -88,20 +88,28 @@ public class YortStory extends engine.Story {
                         condPart(new Dialogue("“Hey, no worries at all! It was an accident. I’m sure you didn’t mean to. My name is Oswaldo and I hope to see you around often!” You thank him again and run over to your next class, leaving him with a good impression of you.", Oswaldo.class));
                         if(difficulty == Difficulty.Easy){
                             affectionMeter += 15;
-                        }
-                        else if(difficulty == Difficulty.Normal){
+                        } else if(difficulty == Difficulty.Normal){
                             affectionMeter += 10;
                         }
+                        else{
+                            affectionMeter +=5;
+                        }
                     } else if(choice2Picked){
-
+                        rightChoice = false;
+                        if(difficulty == Difficulty.Normal){
+                            affectionMeter -= 5;
+                        }else if(difficulty == Difficulty.Impossible){
+                            affectionMeter -= 20;
+                        }
                         condPart(new Dialogue("Oswaldo, the guy you bumped into, looks at you confused, but as he is polite, he doesn’t want to cause a big scene. “Hey, no need to be rude. It was an accident.”", Oswaldo.class));
                     } else{
-                        condPart(new Dialogue("The guy you bumped into was Oswaldo. He looks at you as if waiting for you to say something, but you don’t. He now has an interest of neither dislike nor like of you.", Oswaldo.class) {
-                                @Override
-                                public void doAfter(Game game) {
-                                    // could change emotion of characters or something
-                                }
-                            });
+                        if(difficulty == Difficulty.Normal){
+                            condPart(new Dialogue("He now has an interest of neither dislike nor like of you.", CoJoglianese.class));
+                        }else if(difficulty == Difficulty.Impossible){
+                            affectionMeter -= 10;
+                        }
+
+                        condPart(new Dialogue("The guy you bumped into was Oswaldo. He looks at you as if waiting for you to say something, but you don’t.", Oswaldo.class));
                     }
                 }
             });
@@ -129,56 +137,43 @@ public class YortStory extends engine.Story {
                         public void doAfter(Game game) {
                         }
                         });*/
+
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("coJogClass")));
+
                         if(true)
                         {
-                            condScene(new Scene(
-                                    MiscAssets.backgrounds.get("coJogClass")));
+                            if(difficulty == Difficulty.Easy){
+                                affectionMeter += 15;
+                            } else if(difficulty == Difficulty.Normal){
+                                affectionMeter += 10;
+                            }else{
+                                affectionMeter +=1;
+                            }
 
-                            condPart(new Dialogue("You beat him in tic-tac-toe, revealing your captivating smile and laughter when you keep desYORTing him. Oswaldo gets to know you more as a fun person.", Oswaldo.class) {
-                                    @Override
-                                    public void doAfter(Game game) {
-                                        // could change emotion of characters or something
-                                    }
-                                });
+                            condPart(new Dialogue("You beat him in tic-tac-toe, revealing your captivating smile and laughter when you keep desYORTing him. Oswaldo gets to know you more as a fun person.", Oswaldo.class) );
                         }
                         else{
                             if(difficulty == Difficulty.Easy){
-                                condScene(new Scene(
-                                        MiscAssets.backgrounds.get("coJogClass")));
-
-                                condPart(new Dialogue("Oswaldo wins the game and loved playing with you. He takes great pride in his win against you, implementing this happy memory with you forever.", Oswaldo.class) {
-                                        @Override
-                                        public void doAfter(Game game) {
-                                            // could change emotion of characters or something
-                                        }
-                                    });
+                                affectionMeter += 10;
+                                condPart(new Dialogue("Oswaldo wins the game and loved playing with you. He takes great pride in his win against you, implementing this happy memory with you forever.", Oswaldo.class));
                             }
                             else if (difficulty == Difficulty.Normal){
-                                condScene(new Scene(
-                                        MiscAssets.backgrounds.get("coJogClass")));
-
-                                condPart(new Dialogue("Oswaldo wins the game, but a little too easily. He has a feeling that you intentionally lost, but wonders why you would do this. You've piqued his interest more.", Oswaldo.class) {
-                                        @Override
-                                        public void doAfter(Game game) {
-                                            // could change emotion of characters or something
-                                        }
-                                    });
+                                affectionMeter+= 5;
+                                condPart(new Dialogue("Oswaldo wins the game, but a little too easily. He has a feeling that you intentionally lost, but wonders why you would do this. You've piqued his interest more.", Oswaldo.class) );
                             }
                             else{
-                                condScene(new Scene(
-                                        MiscAssets.backgrounds.get("coJogClass")));
-
-                                condPart(new Dialogue("Oswaldo wins the game, desYorting you completely. He doesn't like people who lose to him, having his interest in you depleted.", Oswaldo.class) {
-                                        @Override
-                                        public void doAfter(Game game) {
-                                            // could change emotion of characters or something
-                                        }
-                                    });
+                                affectionMeter -= 5;
+                                condPart(new Dialogue("Oswaldo wins the game, desYorting you completely. He doesn't like people who lose to him, having his interest in you depleted.", Oswaldo.class));
                             }
                         }
                     }
                     else{
                         if (difficulty == Difficulty.Impossible){ // this comes from a property in Choice
+                            rightChoice = false;
+
+                            affectionMeter -= 15;
+
                             condScene(new Scene(
                                     MiscAssets.backgrounds.get("coJogClass"),
                                     new engine.Character[] {
@@ -186,14 +181,14 @@ public class YortStory extends engine.Story {
                                     }
                                 ));
 
-                            condPart(new Dialogue("Oswaldo feels offended and a little insulted for you declining to play his favorite game. Not feeling up to talking to you, he leaves the room annoyed.", Oswaldo.class) {
-                                    @Override
-                                    public void doAfter(Game game) {
-                                        // could change emotion of characters or something
-                                    }
-                                });
+                            condPart(new Dialogue("\"What lack of sincerity,\" he murmurs under his breath. He frowns in displeasure and walks away.", CoJoglianese.class));
+
+                            condPart(new Dialogue("Not feeling up to talking to you, he leaves the room annoyed.", CoJoglianese.class));
+
+                            condPart(new Dialogue("Oswaldo feels offended and a little insulted for you declining to play his favorite game.", Oswaldo.class));
                         }
                         else {
+
                             condScene(new Scene(
                                     MiscAssets.backgrounds.get("coJogClass"),
                                     new engine.Character[] {
@@ -201,203 +196,214 @@ public class YortStory extends engine.Story {
                                     }
                                 ));
 
-                            condPart(new Dialogue("He offers to help with your homework and you gladly take up his offer.", Oswaldo.class) {
-                                    @Override
-                                    public void doAfter(Game game) {
-                                        // could change emotion of characters or something
-                                    }
-                                });
+                            if(difficulty == Difficulty.Easy){
+                                affectionMeter += 15;
 
-                            condPart(new Dialogue("You and Oswaldo ends up studying together Co Jog's classroom until night. He understands that you prioritize your school life over him, and lessens his interst to pursue you.", Oswaldo.class) {
-                                    @Override
-                                    public void doAfter(Game game) {
-                                        // could change emotion of characters or something
-                                    }
-                                });
+                                condScene(new Scene(
+                                        MiscAssets.backgrounds.get("hallwaybg"),
+                                        new engine.Character[] {
+                                            new Oswaldo(0,0)
+                                        }
+                                    ));
 
-                            condScene(new Scene(
-                                    MiscAssets.backgrounds.get("coJogClass"),
-                                    new engine.Character[] {
-                                        new CoJoglianese(0,0)
-                                    }
-                                ));
+                                condPart(new Dialogue("As the two exit the door, they look at each other and burst into a fit of giggles.", Oswaldo.class));
 
-                            condPart(new Dialogue("What are you two doing here so late? Go back home and sleep!", CoJoglianese.class) {
-                                    @Override
-                                    public void doAfter(Game game) {
-                                        // could change emotion of characters or something
-                                    }
-                                });
+                                condScene(new Scene(
+                                        MiscAssets.backgrounds.get("coJogClass"),
+                                        new engine.Character[] {
+                                            new Oswaldo(0,0)
+                                        }
+                                    ));
+
+                                condPart(new Dialogue("\"Sorry, Professor Jog!\" the two yelp. They scramble for their things and scurry out of the class.", Oswaldo.class));
+
+                                condPart(new Dialogue("What are you two doing here so late? Go back home and sleep!", CoJoglianese.class));
+
+                                condPart(new Dialogue("Suddenly the door burst open."));
+
+                                condPart(new Dialogue("He glances at you working very studiously, and a smile arises on his lips. \n He quickly catches himself and turns back to his own work, scribbling furiously.", Oswaldo.class));
+                            } else {
+                                affectionMeter += 10;
+
+                                condPart(new Dialogue("\"I'm glad to help.\"", Oswaldo.class));
+
+                                condPart(new Dialogue("Once you finished all your work, you thank Oswaldo for his help."));
+
+                                condPart(new Dialogue("Oswaldo nods at your dedication, and continues his own studying.", Oswaldo.class));
+                            }
+
+                            condPart(new Dialogue("\"I get it!\" you exclaim happily. Now motivated, you work vigorously on the homework problems.", MainCharacter.class));
+
+                            condPart(new Dialogue("\"Do you know how to solve this problem now?\" he asks after explaining some algebra.", Oswaldo.class));
+
+                            condPart(new Dialogue("Before you know it, the two of you end up studying together Professor Co Jog's classroom."));
+
+                            condPart(new Dialogue("He offers to help with your homework and you gladly take up his offer.", Oswaldo.class));
+
                         }
                     }
                 }
             });
 
-        addScene(new Scene(
-                MiscAssets.backgrounds.get("dance")));
+        if((difficulty == Difficulty.Easy 
+            || difficulty == difficulty.Normal) && affectionMeter >= 70 
+        || (difficulty == Difficulty.Impossible && rightChoice)){
 
-        addPart(
-            new EmptyPart()
-        );
+            addScene(new Scene(
+                    MiscAssets.backgrounds.get("dance")));
 
-        addScene(new Scene(
-                MiscAssets.backgrounds.get("danceSit")));
+            addPart(
+                new EmptyPart()
+            );
 
-        addPart(
-            new EmptyPart()
-        );
+            addScene(new Scene(
+                    MiscAssets.backgrounds.get("danceSit")));
 
-        addScene(new Scene(
-                MiscAssets.backgrounds.get("choicebg")));
+            addPart(
+                new EmptyPart()
+            );
 
-        addPart(new Choice("Go to the dance with Oswaldo or study for finals?", "go to the dance!", "study") {
-                @Override
-                public void doAfter(Game game) {
-                    if(choice1Picked){
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("dancePartner")));
+            addScene(new Scene(
+                    MiscAssets.backgrounds.get("choicebg")));
 
-                        condPart(new Choice("dance with oswaldo?", "yes", "no") {
-                                @Override
-                                public void doAfter(Game game) {
-                                    if(choice1Picked){
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("balconybg")));
+            addPart(new Choice("Go to the dance with Oswaldo or study for finals?", "go to the dance!", "study") {
+                    @Override
+                    public void doAfter(Game game) {
+                        if(choice1Picked){
+                            if(difficulty == Difficulty.Easy){
+                                affectionMeter += 15;
+                            } else if(difficulty == Difficulty.Normal){
+                                affectionMeter += 10;
+                            }else{
+                                affectionMeter +=5;
+                            }
+                            condScene(new Scene(
+                                    MiscAssets.backgrounds.get("dancePartner")));
 
-                                        condPart(new Dialogue("You and Oswaldo dance outside on the balcony all night, watching the sun rise the next morning while holding on to each other. It was a magical moment that you and he will never forget.", Oswaldo.class) {
-                                                @Override
-                                                public void doAfter(Game game) {
-                                                    // could change emotion of characters or something
-                                                }
-                                            });
-                                    }
-                                    else{
-                                        if(difficulty==Difficulty.Easy)
-                                        {
+                            condPart(new Choice("dance with oswaldo?", "yes", "no") {
+                                    @Override
+                                    public void doAfter(Game game) {
+                                        if(choice1Picked){
                                             condScene(new Scene(
-                                                    MiscAssets.backgrounds.get("dancebg"),
-                                                    new engine.Character[] {
-                                                        new Oswaldo(0,0)
-                                                    }
-                                                ));
+                                                    MiscAssets.backgrounds.get("balconybg")));
 
-                                            condPart(new Dialogue("Oswaldo and you eat snacks at the buffet, laughing through conversations. However, you guys are one of the few who aren’t dancing, raising public interest in the relationship you have with Oswaldo.", Oswaldo.class) {
-                                                    @Override
-                                                    public void doAfter(Game game) {
-                                                        // could change emotion of characters or something
-                                                    }
-                                                });
-                                        }
-                                        else if(difficulty==Difficulty.Normal)
-                                        {
-                                            condScene(new Scene(
-                                                    MiscAssets.backgrounds.get("dancebg")));
+                                            condPart(new Dialogue("It was a magical moment that you and he will never forget."));
 
-                                            condPart(new Dialogue("Feeling bored, you decide to leave him and hang out with your other friends. Hurt by your indirect lack of acknowledgement of his presence Oswaldo sits alone on a table in a corner of the room with his head down.", MainCharacter.class) {
-                                                    @Override
-                                                    public void doAfter(Game game) {
-                                                        // could change emotion of characters or something
-                                                    }
-                                                });
+                                            condPart(new Dialogue("You and Oswaldo dance outside on the balcony all night, watching the sun rise the next morning while holding on to each other.", Oswaldo.class));
                                         }
                                         else{
-                                            condScene(new Scene(
-                                                    MiscAssets.backgrounds.get("dancebg"),
-                                                    new engine.Character[] {
-                                                        new Oswaldo(0,0)
-                                                    }
-                                                ));
+                                            if(difficulty==Difficulty.Easy)
+                                            {
+                                                condScene(new Scene(
+                                                        MiscAssets.backgrounds.get("dancebg"),
+                                                        new engine.Character[] {
+                                                            new Oswaldo(0,0)
+                                                        }
+                                                    ));
 
-                                            condPart(new Dialogue("Oswaldo is hurt by your rejection, feeling it is necessary to dance at such a party. He is ashamed and embarrassed asking you to dance in front of the crowd, leaving the dance with his head low.", MainCharacter.class) {
-                                                    @Override
-                                                    public void doAfter(Game game) {
-                                                        // could change emotion of characters or something
-                                                    }
-                                                });
+                                                condPart(new Dialogue("Oswaldo and you eat snacks at the buffet, laughing through conversations. However, you guys are one of the few who aren’t dancing, raising public interest in the relationship you have with Oswaldo.", Oswaldo.class));
+                                            }
+                                            else if(difficulty==Difficulty.Normal)
+                                            {
+                                                condScene(new Scene(
+                                                        MiscAssets.backgrounds.get("dancebg")));
+
+                                                condPart(new Dialogue("Feeling bored, you decide to leave him and hang out with your other friends. Hurt by your indirect lack of acknowledgement of his presence Oswaldo sits alone on a table in a corner of the room with his head down.", MainCharacter.class));
+                                            }
+                                            else{
+                                                condScene(new Scene(
+                                                        MiscAssets.backgrounds.get("dancebg"),
+                                                        new engine.Character[] {
+                                                            new Oswaldo(0,0)
+                                                        }
+                                                    ));
+
+                                                condPart(new Dialogue("Oswaldo is hurt by your rejection, feeling it is necessary to dance at such a party. He is ashamed and embarrassed asking you to dance in front of the crowd, leaving the dance with his head low.", MainCharacter.class));
+                                            }
                                         }
                                     }
-                                }
-                            });
+                                });
 
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("choicebg")));
+                            condScene(new Scene(
+                                    MiscAssets.backgrounds.get("choicebg")));
 
-                        condPart(new Choice("what will you wear?", "green dress", "guy suit", "school uniform") {
-                                @Override
-                                public void doAfter(Game game) {
-                                    if(choice1Picked){
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("greendressbg")));
+                            condPart(new Choice("what will you wear?", "green dress", "guy suit", "school uniform") {
+                                    @Override
+                                    public void doAfter(Game game) {
+                                        if(choice1Picked){
+                                            if(difficulty == Difficulty.Easy){
+                                                affectionMeter += 15;
+                                            } else if(difficulty == Difficulty.Normal){
+                                                affectionMeter += 10;
+                                            }else{
+                                                affectionMeter +=5;
+                                            }
+                                            condScene(new Scene(
+                                                    MiscAssets.backgrounds.get("greendressbg")));
 
-                                        condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him.", MainCharacter.class) {
-                                                @Override
-                                                public void doAfter(Game game) {
-                                                    // could change emotion of characters or something
-                                                }
-                                            });
-                                    }   
-                                    else if(choice2Picked){
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("suitbg")));
+                                            condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him.", MainCharacter.class));
+                                        }   
+                                        else if(choice2Picked){
+                                            if(difficulty == Difficulty.Easy){
+                                                affectionMeter += 15;
+                                            } else if(difficulty == Difficulty.Normal){
+                                                affectionMeter += 10;
+                                            }else{
+                                                affectionMeter +=5;
+                                            }
+                                            condScene(new Scene(
+                                                    MiscAssets.backgrounds.get("suitbg")));
 
-                                        condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him.", MainCharacter.class) {
-                                                @Override
-                                                public void doAfter(Game game) {
-                                                    // could change emotion of characters or something
-                                                }
-                                            });
+                                            condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him.", MainCharacter.class));
+                                        }
+                                        else{
+                                            if(difficulty == Difficulty.Normal){
+                                                affectionMeter -= 10;
+                                            }else{
+                                                affectionMeter -=20;
+                                                rightChoice = false;
+                                            }
+
+                                            condScene(new Scene(
+                                                    MiscAssets.backgrounds.get("schooluniformbg")));
+
+                                            condPart(new Dialogue("Oswaldo feels slightly awkward and embarassed about taking you out to the dance.", MainCharacter.class));
+                                        }  
                                     }
-                                    else{
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("schooluniformbg")));
+                                });
 
-                                        condPart(new Dialogue("Oswaldo feels slightly awkward and embarassed about taking you out to the dance.", MainCharacter.class) {
-                                                @Override
-                                                public void doAfter(Game game) {
-                                                    // could change emotion of characters or something
-                                                }
-                                            });
-                                    }  
-                                }
-                            });
+                            condScene(new Scene(
+                                    MiscAssets.backgrounds.get("outfitSit")));
 
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("outfitSit")));
+                            condPart(
+                                new EmptyPart()
+                            );
 
-                        condPart(
-                            new EmptyPart()
-                        );
+                        }
+                        else if (choice2Picked){
+                            if(difficulty == Difficulty.Impossible){
+                                affectionMeter -= 20;
+                                rightChoice = false;
+                            } else if(difficulty == Difficulty.Normal){
+                                affectionMeter -= 10;
+                            }
+                            condScene(new Scene(
+                                    MiscAssets.backgrounds.get("hallwaybg"),
+                                    new engine.Character[] {
+                                        new Oswaldo(0,0)
+                                    }
+                                ));
 
+                            condPart(new Dialogue("Oswaldo's heart tore a little at the rejection and he slowly turned away once the classroom door shut closed.", Oswaldo.class) );
+                            condScene(new Scene(
+                                    MiscAssets.backgrounds.get("coJogClass")));
+
+                            condPart(new Dialogue("Although it pained you to reject Oswaldo, you left him to watch your figure gradually disappear back into Professor CoJoglianese's classroom to study the night.", MainCharacter.class));
+
+                        }  
                     }
-                    else if (choice2Picked){
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("hallwaybg"),
-                                new engine.Character[] {
-                                    new Oswaldo(0,0)
-                                }
-                            ));
-
-                        condPart(new Dialogue("Oswaldo's heart tore a little at the rejection and he slowly turned away once the classroom door shut closed.", Oswaldo.class) {
-                                @Override
-                                public void doAfter(Game game) {
-                                    // could change emotion of characters or something
-                                }
-                            });
-
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("coJogClass")));
-
-                        condPart(new Dialogue("Although it pained you to reject Oswaldo, you left him to watch your figure gradually disappear back into Professor CoJoglianese's classroom to study the night.", MainCharacter.class) {
-                                @Override
-                                public void doAfter(Game game) {
-                                    // could change emotion of characters or something
-                                }
-                            });
-
-                    }  
-                }
-            });
-
+                });
+        }
         addScene(new Scene(
                 MiscAssets.backgrounds.get("graduation")));
 
@@ -465,89 +471,95 @@ public class YortStory extends engine.Story {
         addPart(
             new EmptyPart()
         );
+        if(affectionMeter >= 100 || (difficulty == Difficulty.Impossible && rightChoice == true)){
+            addScene(new Scene(
+                    MiscAssets.backgrounds.get("marriageSit")));
 
-        addScene(new Scene(
-                MiscAssets.backgrounds.get("marriageSit")));
+            addPart(
+                new EmptyPart()
+            );
 
-        addPart(
-            new EmptyPart()
-        );
+            addScene(new Scene(
+                    MiscAssets.backgrounds.get("choicebg")));
 
-        addScene(new Scene(
-                MiscAssets.backgrounds.get("choicebg")));
-
-        addPart(new Choice("say yes?", "yes", "no") {
-                @Override
-                public void doAfter(Game game) {
-                    if(choice1Picked){
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("churchbg"),
-                                new engine.Character[] {
-                                    new Oswaldo(0,0)
-                                }
-                            ));
-
-                        condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class) {
-                                @Override
-                                public void doAfter(Game game) {
-                                    // could change emotion of characters or something
-                                }
-                            });
-
-                    }
-                    else{
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("choicebg")));
-
-                        condPart(new Choice("change your mind?", "yes", "no") {
-                                @Override
-                                public void doAfter(Game game) {
-                                    if(choice1Picked){
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("churchbg"),
-                                                new engine.Character[] {
-                                                    new Oswaldo(0,0)
-                                                }
-                                            ));
-
-                                        condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class) {
-                                                @Override
-                                                public void doAfter(Game game) {
-                                                    // could change emotion of characters or something
-                                                }
-                                            }); 
+            addPart(new Choice("say yes?", "yes", "no") {
+                    @Override
+                    public void doAfter(Game game) {
+                        if(choice1Picked){
+                            condScene(new Scene(
+                                    MiscAssets.backgrounds.get("churchbg"),
+                                    new engine.Character[] {
+                                        new Oswaldo(0,0)
                                     }
-                                    else{
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("freedombg")));
+                                ));
 
-                                        condPart(new Dialogue("You chose to be free and live solo", MainCharacter.class){
-                                                @Override
-                                                public void doAfter(Game game){
+                            condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class));
 
-                                                }
-                                            });
-                                    }
-                                }
-                            });   
+                        }
+                        else{
+                            if(Difficulty.Normal == difficulty || difficulty == Difficulty.Easy){
+                                condScene(new Scene(
+                                        MiscAssets.backgrounds.get("choicebg")));
 
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("bedroom"),
-                                new engine.Character[] {
-                                    new Oswaldo(0,0)
-                                }
-                            ));
+                                condPart(new Choice("change your mind?", "yes", "no") {
+                                        @Override
+                                        public void doAfter(Game game) {
+                                            if(choice1Picked){
+                                                condScene(new Scene(
+                                                        MiscAssets.backgrounds.get("churchbg"),
+                                                        new engine.Character[] {
+                                                            new Oswaldo(0,0)
+                                                        }
+                                                    ));
 
-                        condPart(new Dialogue("He puts the ring back in his pocket and gets up from the floor dejectedly. Oswaldo, not looking at you at all, turns away heartbroken. Before he leaves the door, you have final decision to make...", Oswaldo.class){
-                                @Override
-                                public void doAfter(Game game){
+                                                condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class)); 
+                                            }
+                                            else{
+                                                condScene(new Scene(
+                                                        MiscAssets.backgrounds.get("freedombg")));
 
-                                }
-                            });
+                                                condPart(new Dialogue("You chose to be free and live solo", MainCharacter.class));
+                                            }
+                                        }
+                                    });   
 
+                                condScene(new Scene(
+                                        MiscAssets.backgrounds.get("bedroom"),
+                                        new engine.Character[] {
+                                            new Oswaldo(0,0)
+                                        }
+                                    ));
+
+                                condPart(new Dialogue("He puts the ring back in his pocket and gets up from the floor dejectedly. Oswaldo, not looking at you at all, turns away heartbroken. Before he leaves the door, you have final decision to make...", Oswaldo.class));
+                            }else{
+                                condScene(new Scene(
+                                        MiscAssets.backgrounds.get("ripbg")));
+
+                                condPart(
+                                    new FullScreenMessage(
+                                        MiscAssets.generateBackgroundInfo(MainCharacter.name)
+                                    )
+                                );
+                            }
+
+                        }
                     }
-                }
-            });
+                });
+        }else if(rightChoice == false){
+            condScene(new Scene(
+                    MiscAssets.backgrounds.get("ripbg")));
+
+            condPart(
+                new FullScreenMessage(
+                    MiscAssets.generateBackgroundInfo(MainCharacter.name)
+                )
+            );
+        }else{
+            condScene(new Scene(
+                    MiscAssets.backgrounds.get("freedombg")));
+
+            condPart(new Dialogue("You chose to be free and live solo", MainCharacter.class));
+        }
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("endbg")));
