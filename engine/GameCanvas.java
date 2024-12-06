@@ -11,7 +11,8 @@ public class GameCanvas extends JPanel {
         this.characters = new HashSet<>(Arrays.asList(characters));
         this.currentBgImg = bgImg;
     }*/
-    public GameCanvas() {
+    public GameCanvas(LayoutManager layout) {
+        super(layout);
         this.characters = new HashSet<>();
     }
     private Image currentBgImg;

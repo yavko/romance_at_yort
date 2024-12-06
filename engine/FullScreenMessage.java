@@ -19,7 +19,7 @@ public class FullScreenMessage extends ScenePart {
     public void doAfter(Game game) {}
     
     public void changeUI(Game game) {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
+        JPanel panel = new utils.TransparentPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
         if (getCharacterName(game) != null)
             panel.add(new JLabel(getCharacterName(game) + ":"));
         panel.add(new JLabel(dialogue));
@@ -34,6 +34,6 @@ public class FullScreenMessage extends ScenePart {
         });
         
 
-        game.setPanel(panel);
+        game.setCenterPanel(panel);
     }
 }

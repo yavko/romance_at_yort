@@ -18,7 +18,7 @@ public class Dialogue extends ScenePart {
     
     public void changeUI(Game game) {
         System.out.println(dialogue);
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
+        JPanel panel = new utils.TransparentPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
         String buf = "";
         if (getCharacterName(game) != null)
             buf += getCharacterName(game) + ": ";
@@ -35,6 +35,6 @@ public class Dialogue extends ScenePart {
         });
         
 
-        game.setPanel(panel);
+        game.setBottomPanel(panel);
     }
 }

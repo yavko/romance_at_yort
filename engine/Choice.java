@@ -33,7 +33,7 @@ public abstract class Choice extends ScenePart {
         this.choice3 = c3;
     }
     public void changeUI(Game game) {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
+        JPanel panel = new utils.TransparentPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
         if (getCharacterName(game) != null)
             panel.add(new JLabel(getCharacterName(game)+":"));
         panel.add(new JLabel(prompt));
@@ -68,6 +68,6 @@ public abstract class Choice extends ScenePart {
         panel.add(choice3Btn);
     }
 
-        game.setPanel(panel);
+        game.setBottomPanel(panel);
     }
 }
