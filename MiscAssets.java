@@ -133,6 +133,8 @@ public class MiscAssets {
         addImage(backgrounds, "assets/credits.png", "credits");
         
         addImage(backgrounds, "assets/textboxbg.png", "textboxbg");
+        
+        addImage(backgrounds, "assets/cafe.png", "cafebg");
     }
     
     public static String generateBackgroundInfo(String name){

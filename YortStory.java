@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import engine.*;
 import javax.sound.sampled.Clip;
 
-
 /**
  * class representing the game's story
  *
@@ -18,29 +17,29 @@ public class YortStory extends engine.Story {
     public boolean rightChoice = true;
     public YortStory(Difficulty difficulty) {
         super();
+
         // PLACEGHOLDER PLZ FIX LATER YES
-        
+
         MainCharacter.name = "placeholder";
 
         // story logic
+
+        Clip clip = engine.MediaPlayer.createClip("./audio/breezeway.wav", true);
+
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
-        Clip clip = engine.MediaPlayer.createClip("./audio/buttonClick.wav", true);
+
         addPart(
             new FullScreenMessage(
                 MiscAssets.generateBackgroundInfo(MainCharacter.name)
             ) {
+
                 @Override
                 public void onLoad(Game game) {
-                // play audio
-                clip.start();
+                    // play audio
+                    clip.start();
                 }
-                @Override
-                public void doAfter(Game game) {
-                // stop audio
-                clip.stop();
-                }
-                }
+            }
         );
 
         addScene(new Scene(
@@ -68,7 +67,11 @@ public class YortStory extends engine.Story {
         );
 
         addScene(new Scene(
-                MiscAssets.backgrounds.get("introDiff")));
+                MiscAssets.backgrounds.get("introDiff"))
+        );
+
+        addPart(
+            new EmptyPart());
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("brrrwayMeeting")));
@@ -87,19 +90,58 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("choicebg")));
 
-        addPart(new Choice("what do you do?", "say sorry", "be rude", "whip those luscious locks!!") {
+        addPart(new Choice("what do you do?", "Be nice and introduce yourself \"Oh, I’m so sorry! I didn’t see you there.\"", "be rude and lash out: \"Hey watch where you're going! Some of us are trying to go to class.", "be mysterious and whip those luscious locks!!") {
                 @Override
-                public void doAfter(Game game) {
-                    condScene(new Scene(
-                            MiscAssets.backgrounds.get("hallwaybg"),
-                            new engine.Character[] {
-                                new Oswaldo(0,0)
-                            }
-                        ));
-                    System.out.println("logic in question");
-                    if (choice1Picked){ // this comes from a property in Choice
+                public void doAfter(Game game){
 
-                        condPart(new Dialogue("“Hey, no worries at all! It was an accident. I’m sure you didn’t mean to. My name is Oswaldo and I hope to see you around often!” You thank him again and run over to your next class, leaving him with a good impression of you.", Oswaldo.class));
+                    if (choice1Picked){ // this comes from a property in Choice
+                        Clip audioClip= engine.MediaPlayer.createClip("./audio/buttonClick.wav", true);
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("choicebg"),
+                                new engine.Character[] {
+                                    new Oswaldo(0,0)
+                                }
+                            ));
+
+                        condPart(new Choice("How do you start the conversation?", "\"So, what do you like to do for fun? I’m really into photography. I love capturing moments.\"", "\"I’ve been wanting to check out the new art exhibit. Want to come with me this weekend?\"", "\"Do you believe in love at first sight, or should I walk by again?\"") {
+                                @Override
+                                public void doAfter(Game game) {
+                                    condScene(new Scene(
+                                            MiscAssets.backgrounds.get("cafebg"),
+                                            new engine.Character[] {
+                                                new Oswaldo(0,0)
+                                            }
+                                        ));
+                                    if(choice1Picked){
+                                        condPart(new Dialogue("He lights up and shares that he enjoys playing guitar. As you talk, he mentions he’s performing at the school talent show next week. You decide to support him and plan to attend the show together. Oswaldo feels appreciated and has a good impression of you.", MainCharacter.class));
+
+                                    }
+                                    else if(choice2Picked){
+                                        condPart(new Dialogue("Oswaldo hasn’t had a good laugh in a while and has a good impression of you.", Oswaldo.class));
+
+                                        condPart(new Dialogue("He notices and says,\"Seems like we’ve caught some attention. Want to give them something to talk about?\" You both laugh and decide to take a fun selfie together.", Oswaldo.class));  
+
+                                        condPart(new Dialogue("As you chat, you notice a few classmates whispering and pointing."));
+
+                                        condPart(new Dialogue("\"That sounds amazing! I’ve heard great things about it. Let’s make it a plan!\"", Oswaldo.class));
+                                    }else{
+                                        condPart(new Dialogue("You both head back to school, where you sit together in the cafeteria. The playful banter continues, and you challenge each other to a game of “Two Truths and a Lie,” revealing surprising truths about yourselves. You leave a humorous and fun impression on Oswaldo."));
+
+                                        condPart(new Dialogue("He laughs, clearly amused. \"Well, you’ve definitely caught my attention. Let’s see if you can keep it.\"", Oswaldo.class));
+                                    }
+                                }
+                            });
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("hallwaybg"),
+                                new engine.Character[] {
+                                    new Oswaldo(0,0)
+                                }
+                            ));
+                        condPart(new Dialogue("After school, you both head to the nearby cafe. As you sit down, you notice a group of your classmates walk in and glance over.", MainCharacter.class));
+
+                        condPart(new Dialogue("The two stood in silence, but you hope he didn't hear your thumping heart. After a few seconds, he suggests grabbing coffee.", Oswaldo.class));
+
+                        condPart(new Dialogue("\"Hey, no worries at all! It was an accident. I’m sure you didn’t mean to. My name is Oswaldo,\" he smiles warmly.", Oswaldo.class));
                         if(difficulty == Difficulty.Easy){
                             affectionMeter += 15;
                         } else if(difficulty == Difficulty.Normal){
@@ -110,39 +152,117 @@ public class YortStory extends engine.Story {
                         }
                     } else if(choice2Picked){
                         rightChoice = false;
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("choicebg"),
+                                new engine.Character[] {
+                                    new Oswaldo(0,0)
+                                }
+                            ));
+                        condPart(new Choice("How do you start the conversation?", "\"Wait, I didn’t mean it like that. Can we start over?\"", "\"Whatever, it’s not like I care. I have places to be.\"", "\"Whatever, it’s not like I care. I have places to be.\"") {
+                                @Override
+                                public void doAfter(Game game){
+                                    condScene(new Scene(
+                                            MiscAssets.backgrounds.get("hallwaybg"),
+                                            new engine.Character[] {
+                                                new Oswaldo(0,0)
+                                            }
+                                        ));
+                                    if(choice1Picked){
+                                        condPart( new Dialogue("You both head to class together, and during a group project, you find yourselves paired up. As you work, you realize he’s actually pretty cool, and you start to enjoy his company. However, you notice that he is still cautious of you."));
+
+                                        condPart(new Dialogue("He turns back, a cautious smile on his face. \"Sure, I’m Oswaldo. Let’s pretend I didn’t just get insulted.\""));
+
+                                    }
+                                    else if(choice2Picked){
+                                        condPart(new Dialogue("He raises an eyebrow, clearly unimpressed. \"Alright then. Good luck with your busy schedule.\""));
+                                        condPart(new Dialogue("He walks away, and as you sit in class, you can’t help but feel a bit guilty. Later, during lunch, you overhear him talking to friends about how he prefers people who are genuine."));
+                                        condPart(new Dialogue("You left a bad impression on him."));                              
+                                    }else{
+                                        condPart(new Dialogue("He smirks. \"Well, if that was a test, I’d say I passed. What’s your real story?\""));
+                                        condPart(new Dialogue("Intrigued by your boldness, Oswaldo stays to chat. You both end up sitting together at lunch, where he challenges you to a debate about school rules, and surprisingly, you find you have similar views. However, he is still suspicious of your behavior."));
+
+                                    }
+                                }
+                            });
                         if(difficulty == Difficulty.Normal){
                             affectionMeter -= 5;
                         }else if(difficulty == Difficulty.Impossible){
                             affectionMeter -= 20;
                         }
+
                         condPart(new Dialogue("Oswaldo, the guy you bumped into, looks at you confused, but as he is polite, he doesn’t want to cause a big scene. “Hey, no need to be rude. It was an accident.”", Oswaldo.class));
                     } else{
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("choicebg"),
+                                new engine.Character[] {
+                                    new Oswaldo(0,0)
+                                }
+                            ));
+                        condPart(new Choice("How do you start the conversation?", "Whip your luscious locks once again and walk past him with flair.", "You flash a smile and stay coy while also saying nothing once again.") {
+                                @Override
+                                public void doAfter(Game game){
+                                    condScene(new Scene(
+                                            MiscAssets.backgrounds.get("hallwaybg"),
+                                            new engine.Character[] {
+                                                new Oswaldo(0,0)
+                                            }
+                                        ));
+                                    if(choice1Picked){
+                                        condPart(new Dialogue("As you toss your hair back dramatically, you feel the eyes of the hallway on you. The movement is fluid, confident, and you can’t help but feel a rush of empowerment. You stride away, but you can’t shake the feeling that he’s still watching you."));
+                                        condPart(new Dialogue("\"Wow,\" he says softly, almost to himself, as you walk past. You glance back just in time to see him shake his head. You’ve piqued his intrest, but Oswaldo is a bit hurt with you not apologizing.", Oswaldo.class));
+
+                                    }
+                                    else{
+                                        condPart(new Dialogue("Intrigued by your boldness, Oswaldo stays to chat. You both end up sitting together at lunch, where he challenges you to a debate about school rules, and surprisingly, you find you have similar views. However, he is still suspicious of your behavior."));
+
+                                        condPart(new Dialogue("He smirks. \"Well, if that was a test, I’d say I passed. What’s your real story?\""));
+
+                                    }
+                                }
+                            });
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("hallwaybg"),
+                                new engine.Character[] {
+                                    new Oswaldo(0,0)
+                                }
+                            ));
+                        condPart(new 
+
+                            Dialogue("The guy you bumped into was Oswaldo. He looks at you as if waiting for you to say something, but you don’t.", Oswaldo.class));
                         if(difficulty == Difficulty.Normal){
                             condPart(new Dialogue("He now has an interest of neither dislike nor like of you.", CoJoglianese.class));
                         }else if(difficulty == Difficulty.Impossible){
                             affectionMeter -= 10;
                         }
-
-                        condPart(new Dialogue("The guy you bumped into was Oswaldo. He looks at you as if waiting for you to say something, but you don’t.", Oswaldo.class));
                     }
                 }
             });
 
-        addScene(new Scene(
+        addScene(new 
+
+            Scene(
                 MiscAssets.backgrounds.get("ticTacToe")));
 
         addPart(
-            new EmptyPart()
+            new 
+
+            EmptyPart()
         );
 
-        addScene(new Scene(
+        addScene(new 
+
+            Scene(
                 MiscAssets.backgrounds.get("tttSit")));
 
         addPart(
-            new EmptyPart()
+            new 
+
+            EmptyPart()
         );
 
-        addPart(new Choice("Will you play Tic Tac Toe", "yes", "no") {
+        addPart(new 
+
+            Choice("Will you play Tic Tac Toe", "yes", "no") {
                 @Override
                 public void doAfter(Game game) {
                     if (choice1Picked){ // this comes from a property in Choice
