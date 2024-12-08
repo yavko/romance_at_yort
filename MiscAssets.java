@@ -141,6 +141,24 @@ public class MiscAssets {
         addImage(backgrounds, "assets/awkwardSit.png", "awkwardSit");
 
         addImage(backgrounds, "assets/outsideschoolbg.png", "schoolbg");
+        
+        addImage(backgrounds, "assets/5thgradecrush.png", "crush");
+        
+        addImage(backgrounds, "assets/5thgradecrushSit.png", "crushSit");
+        
+        addImage(backgrounds, "assets/BADover.png", "BADover");
+        
+        addImage(backgrounds, "assets/sadover.png", "badOver");
+        
+        addImage(backgrounds, "assets/desk.png", "desk");
+        
+        addImage(backgrounds, "assets/left.png", "left");
+        
+        addImage(backgrounds, "assets/right.png", "right");
+        
+        addImage(backgrounds, "assets/up.png", "up");
+        
+        addImage(backgrounds, "assets/down.png", "down");
 
     }
 
