@@ -21,126 +21,133 @@ public class MiscAssets {
             System.out.println("failed to load asset " + name + " which should be located at: " + fileName);   
         }
     }
-     static {
+    static {
         ImageIO.setUseCache(false);
-         
+
         addImage(backgrounds, "assets/opening_scene.png", "main");
-        
+
         addImage(backgrounds, "assets/bgPt1.png", "base");
-        
+
         addImage(backgrounds, "assets/bedroom.png", "bedroom");
-        
+
         addImage(backgrounds, "assets/ChooseDifficulty.png", "introDiff");
-        
+
         addImage(backgrounds, "assets/directions.png", "directions");
-        
+
         addImage(backgrounds, "assets/bgPt2.png", "bgPt2");
-        
+
         addImage(backgrounds, "assets/welcome.png", "welcome");
-        
+
         addImage(backgrounds, "assets/specialScene1.png", "ss1");
-        
+
         addImage(backgrounds, "assets/dancepartner.png", "dancePartner");
-        
+
         addImage(backgrounds, "assets/outfitsituation.png", "outfitSit");
-        
+
         addImage(backgrounds, "assets/dancesituation.png", "danceSit");
-        
+
         addImage(backgrounds, "assets/dance.png", "dance");
-        
+
         addImage(backgrounds, "assets/cojogclassroom.png", "coJogClass");
-        
+
         addImage(backgrounds, "assets/tttwinorlose.png", "winOrLose");
-        
+
         addImage(backgrounds, "assets/tttsituation.png", "tttSit");
-        
+
         addImage(backgrounds, "assets/tictactoe.png", "ticTacToe");
-        
+
         addImage(backgrounds, "assets/brrrwaysituation.png", "brrrwaySit");
-        
+
         addImage(backgrounds, "assets/brrrwaymeeting.png", "brrrwayMeeting");
-        
+
         addImage(backgrounds, "assets/choicebg.png", "choicebg");
-        
+
         addImage(backgrounds, "assets/hallway.png", "hallwaybg");
-        
+
         addImage(backgrounds, "assets/nottt.png", "rejectTTT");
-        
+
         addImage(backgrounds, "assets/graduation.png", "graduation");
-        
+
         addImage(backgrounds, "assets/gradsituation.png", "gradSit");
-        
+
         addImage(backgrounds, "assets/endscene.png", "endScene");
-        
+
         addImage(backgrounds, "assets/marriagesituation.png", "marriageSit");
-        
+
         addImage(backgrounds, "assets/brrrwayc1.png", "brrrwayc1");
-        
+
         addImage(backgrounds, "assets/brrrwayc2.png", "brrrwayc2");
-        
+
         addImage(backgrounds, "assets/brrrwayc3.png", "brrrwayc3");
-        
+
         addImage(backgrounds, "assets/tttc1.png", "tttc1");
-        
+
         addImage(backgrounds, "assets/tttc2.png", "tttc2");
-        
+
         addImage(backgrounds, "assets/dancec1.png", "yes");
-        
+
         addImage(backgrounds, "assets/dancec2.png", "dancec2");
-        
+
         addImage(backgrounds, "assets/dancec3.png", "no");
-        
+
         addImage(backgrounds, "assets/dressc1.png", "dressc1");
-        
+
         addImage(backgrounds, "assets/dressc2.png", "dressc2");
-        
+
         addImage(backgrounds, "assets/hangoutc1.png", "hangoutc1");
-        
+
         addImage(backgrounds, "assets/hangoutc2.png", "hangoutc2");
-        
+
         addImage(backgrounds, "assets/proposalc1.png", "proposalc1");
-        
+
         addImage(backgrounds, "assets/proposalc2.png", "proposalc2");
-        
+
         addImage(backgrounds, "assets/secondchancec1.png", "scc1");
-        
+
         addImage(backgrounds, "assets/secondchancec2.png", "scc2");
-        
+
         addImage(backgrounds, "assets/brrrwaybg.png", "brrrwaybg");
-        
+
         addImage(backgrounds, "assets/tttbg.png", "tttbg");
-        
+
         addImage(backgrounds, "assets/greendressbg.png", "greendressbg");
-        
+
         addImage(backgrounds, "assets/suitbg.png", "suitbg");
-        
+
         addImage(backgrounds, "assets/schooluniformbg.png", "schooluniformbg");
-        
+
         addImage(backgrounds, "assets/balconybg.png", "balconybg");
-        
+
         addImage(backgrounds, "assets/dancebg.png", "dancebg");
-        
+
         addImage(backgrounds, "assets/graduationbg.png", "graduationbg");
-        
+
         addImage(backgrounds, "assets/churchbg.png", "churchbg");
-        
+
         addImage(backgrounds, "assets/freedombg.png", "freedombg");
-        
+
         addImage(backgrounds, "assets/ripbg.png", "ripbg");
-        
+
         addImage(backgrounds, "assets/theend.png", "endbg");
-        
+
         addImage(backgrounds, "assets/credits.png", "credits");
-        
+
         addImage(backgrounds, "assets/textboxbg.png", "textboxbg");
-        
+
         addImage(backgrounds, "assets/cafe.png", "cafebg");
+
+        addImage(backgrounds, "assets/awkward.png", "awkward");
+
+        addImage(backgrounds, "assets/awkwardSit.png", "awkwardSit");
+
+        addImage(backgrounds, "assets/outsideschoolbg.png", "schoolbg");
+
     }
-    
+
     public static String generateBackgroundInfo(String name){
         try {
             return Files.readString(
-            Paths.get("assets/backgroundInfo.txt")
+                Paths.get("assets/backgroundInfo.txt")
             ).replace("[name]", name);
         } catch (IOException ioe)
         {
@@ -148,6 +155,7 @@ public class MiscAssets {
             return "bruh";
         }
     }
+
     public static String generateBackgroundInfo2(String name){
         try {
             return Files.readString(
@@ -159,6 +167,7 @@ public class MiscAssets {
             return "bruh";
         }
     }
+
     public static String generateDirections(){
         try {
             return Files.readString(
@@ -169,11 +178,11 @@ public class MiscAssets {
             return "bruh";
         }
     }
-    
+
     public static String generateConfession(String name){
         try {
             return Files.readString(
-            Paths.get("assets/confession.txt")
+                Paths.get("assets/confession.txt")
             ).replace("[name]", name);
         } catch (IOException ioe)
         {
@@ -181,11 +190,11 @@ public class MiscAssets {
             return "bruh";
         }
     }
-    
+
     public static String generateRIPText(String name){
         try {
             return Files.readString(
-            Paths.get("assets/rip.txt")
+                Paths.get("assets/rip.txt")
             ).replace("[name]", name);
         } catch (IOException ioe)
         {
@@ -193,7 +202,7 @@ public class MiscAssets {
             return "bruh";
         }
     }
-    
+
     public static String generateWelcomeText(String name){
         return "Welcome " + name + " to Romance at Yort! We hope you enjoy!";
     }
