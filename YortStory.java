@@ -15,6 +15,7 @@ public class YortStory extends engine.Story {
     public Difficulty difficulty;
     public int affectionMeter = 50;
     public boolean rightChoice = true;
+    public boolean dating = false;
     public YortStory(Difficulty difficulty) {
         super();
 
@@ -834,7 +835,7 @@ public class YortStory extends engine.Story {
                                                 }
                                             ));
 
-                                        condPart(new Dialogue("No problem, I’m always here to help! Thank you for all your hard work as well.” Oswaldo replies to your formal congratulation. He has a feeling that you have friendzoned him, hurting his pride, but having to hold up his reputation as the Duke of Yort, Oswaldo shows no emotion that would indicate that he was hurt by your words. ", MainCharacter.class));
+                                        condPart(new Dialogue("No problem, I’m always here to help! Thank you for all your hard work as well.” Oswaldo replies to your formal congratulation. He has a feeling that you have friendzoned him, hurting his pride, but having to hold up his reputation as the Duke of Yort, Oswaldo shows no emotion that would indicate that he was hurt by your words. "));
                                     }
                                     else if(choice3Picked){
                                         condScene(new Scene(
@@ -847,6 +848,7 @@ public class YortStory extends engine.Story {
                                         condPart(new Dialogue("Oswaldo glances at you, but doesn’t take the initiative to talk to you. He feels a barrier between him and you, not having enough interest to cross the distance towards you.", MainCharacter.class));
                                     }
                                     else{
+                                        dating = true;
                                         condScene(new Scene(
                                                 MiscAssets.backgrounds.get("graduationbg"),
                                                 new engine.Character[] {
@@ -907,7 +909,7 @@ public class YortStory extends engine.Story {
             EmptyPart() {
                 @Override
                 public void doAfter(Game game) {
-                    if(affectionMeter >= 100 || (difficulty == Difficulty.Impossible && rightChoice == true)){
+                    if(dating == true && (affectionMeter >= 100 || (difficulty == Difficulty.Impossible && rightChoice == true))){
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
@@ -1021,7 +1023,13 @@ public class YortStory extends engine.Story {
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("freedombg")));
 
-                        condPart(new Dialogue("You chose to be free and live solo", MainCharacter.class));
+                        condPart(new Dialogue("You chose to live solo."));
+
+                        condPart(new Dialogue("After you split, Oswaldo married a young noble lady whom he cherishes deeply, and inherited his title as Duke. \n As for you. . ."));
+
+                        condPart(new Dialogue("Oswaldo still thinks of you every now and then, but it was best that you never got together."));
+
+                        condPart(new Dialogue("After you graduated, you returned to your home and began managing the estate on the countryside. Once in a while, Oswaldo pops up in your mind as you do paperwork or do maintenance checks."));
 
                     }
                 }

@@ -48,7 +48,7 @@ public class MiscAssets {
 
         addImage(backgrounds, "assets/dance.png", "dance");
 
-        addImage(backgrounds, "assets/cojogclassroom.png", "coJogClass");
+        addImage(backgrounds, "assets/classroom.png", "coJogClass");
 
         addImage(backgrounds, "assets/tttwinorlose.png", "winOrLose");
 
@@ -62,9 +62,7 @@ public class MiscAssets {
 
         addImage(backgrounds, "assets/choicebg.png", "choicebg");
 
-        addImage(backgrounds, "assets/hallway.png", "hallwaybg");
-
-        addImage(backgrounds, "assets/nottt.png", "rejectTTT");
+        addImage(backgrounds, "assets/hallwaybg.png", "hallwaybg");
 
         addImage(backgrounds, "assets/graduation.png", "graduation");
 
@@ -105,8 +103,6 @@ public class MiscAssets {
         addImage(backgrounds, "assets/secondchancec1.png", "scc1");
 
         addImage(backgrounds, "assets/secondchancec2.png", "scc2");
-
-        addImage(backgrounds, "assets/brrrwaybg.png", "brrrwaybg");
 
         addImage(backgrounds, "assets/tttbg.png", "tttbg");
 
