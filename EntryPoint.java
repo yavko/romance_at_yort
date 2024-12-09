@@ -71,7 +71,7 @@ public class EntryPoint extends JFrame {
         // BufferedImage bgImg = ImageIO.read(bgImgUrl);
 
         // Play btn
-        Clip clip = engine.MediaPlayer.createClip("./audio/breezeway.wav", true);
+        Clip clip = engine.MediaPlayer.createClip("./audio/Main theme.wav", true);
         clip.start();
         JButton playBtn = new utils.ImgButton(
             ImageIO.read(

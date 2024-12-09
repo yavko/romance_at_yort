@@ -25,7 +25,7 @@ public class YortStory extends engine.Story {
 
         // story logic
 
-        Clip clip = engine.MediaPlayer.createClip("./audio/breezeway.wav", true);
+        Clip mainTheme = engine.MediaPlayer.createClip("./audio/Main theme.wav", true);
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
@@ -36,7 +36,7 @@ public class YortStory extends engine.Story {
             ){
                 @Override
                 public void onLoad(Game game){
-                    clip.start();
+                    mainTheme.start();
                 }
             }
         );
@@ -72,7 +72,7 @@ public class YortStory extends engine.Story {
         addPart(
             new EmptyPart());
 
-        //Clip audioClip= engine.MediaPlayer.createClip("./audio/buttonClick.wav", true);
+        Clip breezeway= engine.MediaPlayer.createClip("./audio/breezeway.wav", true);
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("brrrwayMeeting")));
@@ -81,9 +81,9 @@ public class YortStory extends engine.Story {
             new EmptyPart(){
                 @Override
                 public void doAfter(Game game){
-                    clip.stop();
+                    mainTheme.stop();
+                    breezeway.start();
                 }
-
             }
         );
 
@@ -101,7 +101,7 @@ public class YortStory extends engine.Story {
                 @Override
                 public void doAfter(Game game) {
                     if (choice1Picked){ // this comes from a property in Choice
-                        //Clip audioClip= engine.MediaPlayer.createClip("./audio/buttonClick.wav", true);
+                        Clip goodResponse1 = engine.MediaPlayer.createClip("./audio/GooderResponse1.wav", true);
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg"),
                                 new engine.Character[] {
@@ -112,6 +112,8 @@ public class YortStory extends engine.Story {
                         condPart(new Choice("How do you start the conversation?", "\"So, what do you like to do for fun? I’m really into photography. I love capturing moments.\"", "\"I’ve been wanting to check out the new art exhibit. Want to come with me this weekend?\"", "\"Do you believe in love at first sight, or should I walk by again?\"") {
                                 @Override
                                 public void doAfter(Game game) {
+                                    Clip cafe = engine.MediaPlayer.createClip("./audio/HangoutPostBrzway.wav", true);
+
                                     condScene(new Scene(
                                             MiscAssets.backgrounds.get("cafebg"),
                                             new engine.Character[] {
@@ -119,8 +121,22 @@ public class YortStory extends engine.Story {
                                             }
                                         ));
                                     if(choice1Picked){
-                                        condPart(new Dialogue("He lights up and shares that he enjoys playing guitar. As you talk, he mentions he’s performing at the school talent show next week. You decide to support him and plan to attend the show together. Oswaldo feels appreciated and has a good impression of you.", MainCharacter.class));
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    cafe.stop();
+                                                }
+                                            });
 
+                                        condPart(new Dialogue("He lights up and shares that he enjoys playing guitar. As you talk, he mentions he’s performing at the school talent show next week. You decide to support him and plan to attend the show together. Oswaldo feels appreciated and has a good impression of you."));
+
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    goodResponse1.stop();
+                                                    cafe.start();
+                                                }
+                                            });
                                         if(difficulty == Difficulty.Easy){
                                             affectionMeter += 5;
                                         } else if(difficulty == Difficulty.Normal){
@@ -131,14 +147,27 @@ public class YortStory extends engine.Story {
                                         }
                                     }
                                     else if(choice2Picked){
-                                        condPart(new Dialogue("Oswaldo hasn’t had a good laugh in a while and has a good impression of you.", Oswaldo.class));
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    cafe.stop();
+                                                }
+                                            });
+                                        condPart(new Dialogue("Oswaldo hasn’t had a good laugh in a while and has a good impression of you."));
 
-                                        condPart(new Dialogue("He notices and says,\"Seems like we’ve caught some attention. Want to give them something to talk about?\" You both laugh and decide to take a fun selfie together.", Oswaldo.class));  
+                                        condPart(new Dialogue("He notices and says,\"Seems like we’ve caught some attention. Want to give them something to talk about?\" You both laugh and decide to take a fun selfie together."));  
 
                                         condPart(new Dialogue("As you chat, you notice a few classmates whispering and pointing."));
 
-                                        condPart(new Dialogue("\"That sounds amazing! I’ve heard great things about it. Let’s make it a plan!\"", Oswaldo.class));
+                                        condPart(new Dialogue("\"That sounds amazing! I’ve heard great things about it. Let’s make it a plan!\""));
 
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    goodResponse1.stop();
+                                                    cafe.start();
+                                                }
+                                            });
                                         if(difficulty == Difficulty.Easy){
                                             affectionMeter += 5;
                                         } else if(difficulty == Difficulty.Normal){
@@ -148,10 +177,23 @@ public class YortStory extends engine.Story {
                                             affectionMeter +=1;
                                         }
                                     }else{
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    cafe.stop();
+                                                }
+                                            });
                                         condPart(new Dialogue("You both head back to school, where you sit together in the cafeteria. The playful banter continues, and you challenge each other to a game of “Two Truths and a Lie,” revealing surprising truths about yourselves. You leave a humorous and fun impression on Oswaldo."));
 
-                                        condPart(new Dialogue("He laughs, clearly amused. \"Well, you’ve definitely caught my attention. Let’s see if you can keep it.\"", Oswaldo.class));
+                                        condPart(new Dialogue("He laughs, clearly amused. \"Well, you’ve definitely caught my attention. Let’s see if you can keep it.\""));
 
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    goodResponse1.stop();
+                                                    cafe.start();
+                                                }
+                                            });
                                         if(difficulty == Difficulty.Easy){
                                             affectionMeter += 5;
                                         } else if(difficulty == Difficulty.Normal){
@@ -169,11 +211,20 @@ public class YortStory extends engine.Story {
                                     new Oswaldo(0,0)
                                 }
                             ));
-                        condPart(new Dialogue("After school, you both head to the nearby cafe. As you sit down, you notice a group of your classmates walk in and glance over.", MainCharacter.class));
+                        condPart(new Dialogue("After school, you both head to the nearby cafe. As you sit down, you notice a group of your classmates walk in and glance over."));
 
-                        condPart(new Dialogue("The two stood in silence, but you hope he didn't hear your thumping heart. After a few seconds, he suggests grabbing coffee.", Oswaldo.class));
+                        condPart(new Dialogue("The two stood in silence, but you hope he didn't hear your thumping heart. After a few seconds, he suggests grabbing coffee."));
 
-                        condPart(new Dialogue("\"Hey, no worries at all! It was an accident. I’m sure you didn’t mean to. My name is Oswaldo,\" he smiles warmly.", Oswaldo.class));
+                        condPart(new Dialogue("\"Hey, no worries at all! It was an accident. I’m sure you didn’t mean to. My name is Oswaldo,\" he smiles warmly."));
+
+                        condPart(new EmptyPart(){
+                                @Override
+                                public void doAfter(Game game){
+                                    breezeway.stop();
+                                    goodResponse1.start();
+                                }
+                            });
+
                         if(difficulty == Difficulty.Easy){
                             affectionMeter += 15;
                         } else if(difficulty == Difficulty.Normal){
@@ -184,6 +235,8 @@ public class YortStory extends engine.Story {
                         }
                     } else if(choice2Picked){
                         rightChoice = false;
+                        Clip BadResponse1 = engine.MediaPlayer.createClip("./audio/BadResponse1.wav", true);
+
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")
 
@@ -204,6 +257,13 @@ public class YortStory extends engine.Story {
 
                                     }
                                     else if(choice2Picked){
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    BadResponse1.stop();
+                                                }
+                                            });
+
                                         condPart(new Dialogue("He raises an eyebrow, clearly unimpressed. \"Alright then. Good luck with your busy schedule.\""));
                                         condPart(new Dialogue("He walks away, and as you sit in class, you can’t help but feel a bit guilty. Later, during lunch, you overhear him talking to friends about how he prefers people who are genuine."));
                                         condPart(new Dialogue("You left a bad impression on him."));
@@ -234,8 +294,19 @@ public class YortStory extends engine.Story {
                             affectionMeter -= 20;
                         }
 
-                        condPart(new Dialogue("Oswaldo, the guy you bumped into, looks at you confused, but as he is polite, he doesn’t want to cause a big scene. “Hey, no need to be rude. It was an accident.”", Oswaldo.class));
+                        condPart(new Dialogue("Oswaldo, the guy you bumped into, looks at you confused, but as he is polite, he doesn’t want to cause a big scene. “Hey, no need to be rude. It was an accident.”"));
+
+                        condPart(new EmptyPart(){
+                                @Override
+                                public void doAfter(Game game){
+                                    breezeway.stop();
+                                    BadResponse1.start();
+                                }
+                            });
                     } else{
+
+                        Clip goodResponse2 = engine.MediaPlayer.createClip("./audio/GooderReponse2.wav", true);
+
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg"),
                                 new engine.Character[] {
@@ -252,8 +323,14 @@ public class YortStory extends engine.Story {
                                             }
                                         ));
                                     if(choice1Picked){
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    goodResponse2.stop();
+                                                }
+                                            });
                                         condPart(new Dialogue("As you toss your hair back dramatically, you feel the eyes of the hallway on you. The movement is fluid, confident, and you can’t help but feel a rush of empowerment. You stride away, but you can’t shake the feeling that he’s still watching you."));
-                                        condPart(new Dialogue("\"Wow,\" he says softly, almost to himself, as you walk past. You glance back just in time to see him shake his head. You’ve piqued his intrest, but Oswaldo is a bit hurt with you not apologizing.", Oswaldo.class));
+                                        condPart(new Dialogue("\"Wow,\" he says softly, almost to himself, as you walk past. You glance back just in time to see him shake his head. You’ve piqued his intrest, but Oswaldo is a bit hurt with you not apologizing."));
                                         if(difficulty == Difficulty.Easy){
                                             affectionMeter += 5;
                                         } else if(difficulty == Difficulty.Normal){
@@ -264,6 +341,12 @@ public class YortStory extends engine.Story {
                                         }
                                     }
                                     else{
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    goodResponse2.stop();
+                                                }
+                                            });
                                         condPart(new Dialogue("Intrigued by your boldness, Oswaldo stays to chat. You both end up sitting together at lunch, where he challenges you to a debate about school rules, and surprisingly, you find you have similar views. However, he is still suspicious of your behavior."));
 
                                         condPart(new Dialogue("He smirks. \"Well, if that was a test, I’d say I passed. What’s your real story?\""));
@@ -284,7 +367,16 @@ public class YortStory extends engine.Story {
                                     new Oswaldo(0,0)
                                 }
                             ));
-                        condPart(new Dialogue("The guy you bumped into was Oswaldo. He looks at you as if waiting for you to say something, but you don’t.", Oswaldo.class));
+
+                        condPart(new Dialogue("The guy you bumped into was Oswaldo. He looks at you as if waiting for you to say something, but you don’t."));
+
+                        condPart(new EmptyPart(){
+                                @Override
+                                public void doAfter(Game game){
+                                    breezeway.stop();
+                                    goodResponse2.start();
+                                }
+                            });
 
                         if(difficulty == Difficulty.Normal){
                             condPart(new Dialogue("He now has an interest of neither dislike nor like of you."));
@@ -295,11 +387,19 @@ public class YortStory extends engine.Story {
                 }
             });
 
+        Clip ticTacToe= engine.MediaPlayer.createClip("./audio/ticTacToe.wav", true);
+
         addScene(new 
             Scene(
                 MiscAssets.backgrounds.get("ticTacToe")));
 
-        addPart(new Dialogue(""));
+        addPart(new EmptyPart(){
+                @Override
+                public void doAfter(Game game){
+                    breezeway.stop();
+                    ticTacToe.start();
+                }
+            });
 
         addScene(new 
             Scene(
@@ -318,7 +418,7 @@ public class YortStory extends engine.Story {
                         });*/
 
                         condScene(new Scene(
-                                MiscAssets.backgrounds.get("coJogClass")));
+                                MiscAssets.backgrounds.get("tttbg")));
 
                         if(true)
                         {
@@ -330,46 +430,61 @@ public class YortStory extends engine.Story {
                                 affectionMeter +=1;
                             }
 
-                            condPart(new Dialogue("You beat him in tic-tac-toe, revealing your captivating smile and laughter when you keep desYORTing him. Oswaldo gets to know you more as a fun person.", Oswaldo.class) );
+                            condPart(new Dialogue("You beat him in tic-tac-toe, revealing your captivating smile and laughter when you keep desYORTing him. Oswaldo gets to know you more as a fun person.") );
                         }
                         else{
                             if(difficulty == Difficulty.Easy){
                                 affectionMeter += 10;
-                                condPart(new Dialogue("Oswaldo wins the game and loved playing with you. He takes great pride in his win against you, implementing this happy memory with you forever.", Oswaldo.class));
+                                condPart(new Dialogue("Oswaldo wins the game and loved playing with you. He takes great pride in his win against you, implementing this happy memory with you forever."));
                             }
                             else if (difficulty == Difficulty.Normal){
                                 affectionMeter+= 5;
-                                condPart(new Dialogue("Oswaldo wins the game, but a little too easily. He has a feeling that you intentionally lost, but wonders why you would do this. You've piqued his interest more.", Oswaldo.class) );
+                                condPart(new Dialogue("Oswaldo wins the game, but a little too easily. He has a feeling that you intentionally lost, but wonders why you would do this. You've piqued his interest more.") );
                             }
                             else{
                                 affectionMeter -= 5;
-                                condPart(new Dialogue("Oswaldo wins the game, desYorting you completely. He doesn't like people who lose to him, having his interest in you depleted.", Oswaldo.class));
+                                condPart(new Dialogue("Oswaldo wins the game, desYorting you completely. He doesn't like people who lose to him, having his interest in you depleted."));
                             }
                         }
                     }
                     else{
                         if (difficulty == Difficulty.Impossible){ // this comes from a property in Choice
+                            Clip badResponse2 = engine.MediaPlayer.createClip("./audio/BadResponse2.wav", true);
+
                             rightChoice = false;
 
                             affectionMeter -= 15;
 
                             condScene(new Scene(
-                                    MiscAssets.backgrounds.get("coJogClass"),
+                                    MiscAssets.backgrounds.get("tttbg"),
                                     new engine.Character[] {
                                         new Oswaldo(0,0)
                                     }
                                 ));
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        badResponse2.stop();
+                                    }
+                                });
+                            condPart(new Dialogue("\"What lack of sincerity,\" he murmurs under his breath. He frowns in displeasure and walks away."));
 
-                            condPart(new Dialogue("\"What lack of sincerity,\" he murmurs under his breath. He frowns in displeasure and walks away.", CoJoglianese.class));
+                            condPart(new Dialogue("Not feeling up to talking to you, he leaves the room annoyed."));
 
-                            condPart(new Dialogue("Not feeling up to talking to you, he leaves the room annoyed.", CoJoglianese.class));
+                            condPart(new Dialogue("Oswaldo feels offended and a little insulted for you declining to play his favorite game."));
 
-                            condPart(new Dialogue("Oswaldo feels offended and a little insulted for you declining to play his favorite game.", Oswaldo.class));
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        ticTacToe.stop();
+                                        badResponse2.start();
+                                    }
+                                });
                         }
                         else {
 
                             condScene(new Scene(
-                                    MiscAssets.backgrounds.get("coJogClass"),
+                                    MiscAssets.backgrounds.get("tttbg"),
                                     new engine.Character[] {
                                         new Oswaldo(0,0)
                                     }
@@ -385,60 +500,68 @@ public class YortStory extends engine.Story {
                                         }
                                     ));
 
-                                condPart(new Dialogue("As the two exit the door, they look at each other and burst into a fit of giggles.", Oswaldo.class));
+                                condPart(new Dialogue("As the two exit the door, they look at each other and burst into a fit of giggles."));
 
                                 condScene(new Scene(
-                                        MiscAssets.backgrounds.get("coJogClass"),
+                                        MiscAssets.backgrounds.get("tttbg"),
                                         new engine.Character[] {
                                             new Oswaldo(0,0)
                                         }
                                     ));
 
-                                condPart(new Dialogue("\"Sorry, Professor Jog!\" the two yelp. They scramble for their things and scurry out of the class.", Oswaldo.class));
+                                condPart(new Dialogue("\"Sorry, Professor Jog!\" the two yelp. They scramble for their things and scurry out of the class."));
 
                                 condScene(new Scene(
-                                        MiscAssets.backgrounds.get("coJogClass"),
+                                        MiscAssets.backgrounds.get("tttbg"),
                                         new engine.Character[] {
                                             new CoJoglianese(0,0)
                                         }
                                     ));
 
-                                condPart(new Dialogue("What are you two doing here so late? Go back home and sleep!", CoJoglianese.class));
+                                condPart(new Dialogue("What are you two doing here so late? Go back home and sleep!"));
 
                                 condScene(new Scene(
-                                        MiscAssets.backgrounds.get("coJogClass")
+                                        MiscAssets.backgrounds.get("tttbg")
                                     ));
 
                                 condPart(new Dialogue("Suddenly the door burst open."));
-                                condPart(new Dialogue("He glances at you working very studiously, and a smile arises on his lips. \n He quickly catches himself and turns back to his own work, scribbling furiously.", Oswaldo.class));
+                                condPart(new Dialogue("He glances at you working very studiously, and a smile arises on his lips. \n He quickly catches himself and turns back to his own work, scribbling furiously."));
                             } else {
                                 affectionMeter += 10;
 
-                                condPart(new Dialogue("\"I'm glad to help.\"", Oswaldo.class));
+                                condPart(new Dialogue("\"I'm glad to help.\""));
 
-                                condPart(new Dialogue("Once you finished all your work, you thank Oswaldo for his help.", MainCharacter.class));
+                                condPart(new Dialogue("Once you finished all your work, you thank Oswaldo for his help."));
 
-                                condPart(new Dialogue("Oswaldo nods at your dedication, and continues his own studying.", Oswaldo.class));
+                                condPart(new Dialogue("Oswaldo nods at your dedication, and continues his own studying."));
                             }
 
-                            condPart(new Dialogue("\"I get it!\" you exclaim happily. Now motivated, you work vigorously on the homework problems.", MainCharacter.class));
+                            condPart(new Dialogue("\"I get it!\" you exclaim happily. Now motivated, you work vigorously on the homework problems."));
 
-                            condPart(new Dialogue("\"Do you know how to solve this problem now?\" he asks after explaining some algebra.", Oswaldo.class));
+                            condPart(new Dialogue("\"Do you know how to solve this problem now?\" he asks after explaining some algebra."));
 
                             condPart(new Dialogue("Before you know it, the two of you end up studying together Professor Co Jog's classroom."));
 
-                            condPart(new Dialogue("He offers to help with your homework and you gladly take up his offer.", Oswaldo.class));
+                            condPart(new Dialogue("He offers to help with your homework and you gladly take up his offer."));
 
                         }
                     }
                 }
             });
 
+        Clip awkward= engine.MediaPlayer.createClip("./audio/AwkwardEncounter.wav", true);
+
         addScene(new Scene(
                 MiscAssets.backgrounds.get("awkward")
             ));
 
-        addPart(new Dialogue(""));
+        addPart(new EmptyPart(){
+                @Override
+                public void doAfter(Game game){
+                    ticTacToe.stop();
+                    awkward.start();
+                }
+            });
 
         addScene(new Scene(MiscAssets.backgrounds.get("awkwardSit")
             ));
@@ -458,6 +581,7 @@ public class YortStory extends engine.Story {
                 @Override
                 public void doAfter(Game game) {
                     if(choice1Picked){
+
                         if(difficulty == Difficulty.Easy){
                             affectionMeter += 15;
                         }else if(difficulty == Difficulty.Normal){
@@ -465,37 +589,103 @@ public class YortStory extends engine.Story {
                         }else{
                             affectionMeter +=5;
                         }
+                        Clip goodResponse3= engine.MediaPlayer.createClip("./audio/GooderResponse3.wav", true);
+
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("schoolbg")
                             ));
-                        condPart(new Dialogue("\"I don't mind,\" you say very quietly.", Oswaldo.class));
+                        condPart(new EmptyPart(){
+                                @Override
+                                public void doAfter(Game game){
+                                    goodResponse3.stop();
 
-                        condPart(new Dialogue("Oswaldo looks hopefully at you. Once your friend is out of sight he stands closer to you and apologizes for his previous behavior.", Oswaldo.class));
+                                }
+                            });
+                        condPart(new Dialogue("\"I don't mind,\" you say very quietly."));
+
+                        condPart(new Dialogue("Oswaldo looks hopefully at you. Once your friend is out of sight he stands closer to you and apologizes for his previous behavior."));
+
+                        condPart(new EmptyPart(){
+                                @Override
+                                public void doAfter(Game game){
+                                    awkward.stop();
+                                    goodResponse3.start();
+                                }
+                            });
                     } else if(choice2Picked){
+                        Clip badResponse2= engine.MediaPlayer.createClip("./audio/BadResponse2.wav", true);
+
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("schoolbg")
                             ));
 
                         if(difficulty == Difficulty.Normal){    
                             affectionMeter -= 5;
-
-                            condPart(new Dialogue("You thought that Oswaldo would have pretended that nothing happened, but it's been a whole month since you've seen him.", MainCharacter.class));
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        awkward.stop();
+                                        badResponse2.start();
+                                    }
+                                });
+                            condPart(new Dialogue("You thought that Oswaldo would have pretended that nothing happened, but it's been a whole month since you've seen him."));
 
                             condPart(new Dialogue("Oswaldo looks after you in despair. Any hope he had of fixing the relationship has just been diminished into dust. Head down low, he walks away from the shame of your rejection."));
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        awkward.stop();
+                                        badResponse2.start();
+                                    }
+                                });
                         }else if(difficulty == Difficulty.Impossible){
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        awkward.stop();
+                                        badResponse2.start();
+                                    }
+                                });
                             condPart(new Dialogue("Oswaldo is disappointed by your behavior. He makes a mental note to never speak to you again. He leaves, and you stare after him heartbroken."));
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        awkward.stop();
+                                        badResponse2.start();
+                                    }
+                                });
                             affectionMeter -=20;
                         }else{
-                            condPart(new Dialogue("After you left, Oswalso chased after you. \n \"Are you okay. I'm sorry about those guys making jokes like that.\"", Oswaldo.class));
+                            condPart(new Dialogue("After you left, Oswalso chased after you. \n \"Are you okay. I'm sorry about those guys making jokes like that.\""));
                         }
+
                     }else{
+                        Clip goodResponse1 = engine.MediaPlayer.createClip("./audio/GooderResponse1.wav", true);
+                        Clip badResponse3= engine.MediaPlayer.createClip("./audio/BadResponse3.wav", true);
+
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("schoolbg")
                             ));
                         if(difficulty == Difficulty.Easy || (difficulty == Difficulty.Impossible && rightChoice == true)){
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        goodResponse1.stop();
+
+                                    }
+                                });
                             condPart(new Dialogue("\"Nothing.\" he says covering his face with his other hand. His friends whisper between each other snickering at Oswaldo's flushed faced."));
-                            condPart(new Dialogue("\"What's wrong?\" you ask.", MainCharacter.class));
-                            condPart(new Dialogue("Oswaldo turned a bright shade of pink at the touch of your hand.", Oswaldo.class));
+                            condPart(new Dialogue("\"What's wrong?\" you ask."));
+                            condPart(new Dialogue("Oswaldo turned a bright shade of pink at the touch of your hand."));
+
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        awkward.stop();
+                                        goodResponse1.start();
+                                    }
+                                });
+
                             if(difficulty == Difficulty.Easy){
                                 affectionMeter += 15;
                             }else if(difficulty == Difficulty.Impossible){
@@ -503,25 +693,71 @@ public class YortStory extends engine.Story {
                             }
                         }else if(difficulty == Difficulty.Normal && affectionMeter >= 70){
                             affectionMeter += 5;
-                            condPart(new Dialogue("Oswaldo looks at your interlocked hands, and a pink hue rises to his face.", Oswaldo.class));
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        goodResponse1.stop();
+                                    }
+                                });
+                            condPart(new Dialogue("Oswaldo looks at your interlocked hands, and a pink hue rises to his face."));
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        awkward.stop();
+                                        goodResponse1.start();
+                                    }
+                                });
                         }else if(difficulty == Difficulty.Normal){
                             affectionMeter -= 5;
-                            condPart(new Dialogue("Oswaldo looks at your interlocked hands with a weird expression and slowly pulls away. He doesn't think that you're close enough to do that", Oswaldo.class));
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        badResponse3.stop();
+                                    }
+                                });
+                            condPart(new Dialogue("Oswaldo looks at your interlocked hands with a weird expression and slowly pulls away. He doesn't think that you're close enough to do that"));
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        awkward.stop();
+                                        badResponse3.start();
+                                    }
+                                });
+
                         }else{
                             affectionMeter -= 20;
-                            condPart(new Dialogue("Oswaldo snatches his hands away and looks at you in disgust. \n \"I didn't give you permission to touch me\"", Oswaldo.class));
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        badResponse3.stop();
+                                    }
+                                });
+                            condPart(new Dialogue("Oswaldo snatches his hands away and looks at you in disgust. \n \"I didn't give you permission to touch me\""));
+                            condPart(new EmptyPart(){
+                                    @Override
+                                    public void doAfter(Game game){
+                                        awkward.stop();
+                                        badResponse3.start();
+                                    }
+                                });
                         }
+
                     }
                 }
             });
 
+        Clip dance = engine.MediaPlayer.createClip("./audio/ballroomDance.wav", true);
+
         addScene(new Scene(
                 MiscAssets.backgrounds.get("dance")));
 
-        addPart(
-            new EmptyPart()
-        );
-
+        addPart(new EmptyPart(){
+                @Override
+                public void doAfter(Game game){
+                    awkward.stop();
+                    dance.start();
+                }
+            });
         //change to nullPart or something else
         addPart(
             new EmptyPart(){
@@ -529,13 +765,11 @@ public class YortStory extends engine.Story {
                 public void doAfter(Game game) {
                     if((difficulty != Difficulty.Impossible) && affectionMeter >= 70 
                     || (difficulty == Difficulty.Impossible && rightChoice)){
+                        Clip crush = engine.MediaPlayer.createClip("./audio/5thGradeCrush.wav", true);
+                        Clip goodResponse1 = engine.MediaPlayer.createClip("./audio/GooderResponse1.wav", true);
+                        Clip badResponse1 = engine.MediaPlayer.createClip("./audio/BadResponse1.wav", true);
+                        Clip eating = engine.MediaPlayer.createClip("./audio/eatingScene.wav", true);
 
-                        condScene(new Scene(
-                                MiscAssets.backgrounds.get("danceSit")));
-
-                        condPart(
-                            new EmptyPart()
-                        );
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
@@ -576,19 +810,57 @@ public class YortStory extends engine.Story {
                                                                                     new Oswaldo(0,0)
                                                                                 }));
                                                                         if(difficulty == Difficulty.Normal){        
+                                                                            addPart(new EmptyPart(){
+                                                                                    @Override
+                                                                                    public void doAfter(Game game){
+                                                                                        badResponse1.stop();
+                                                                                    }
+                                                                                });
                                                                             condPart(new Dialogue("Disheartened by your actions, he turns away."));
+                                                                            addPart(new EmptyPart(){
+                                                                                    @Override
+                                                                                    public void doAfter(Game game){
+                                                                                        dance.stop();
+                                                                                        badResponse1.start();
+                                                                                    }
+                                                                                });
                                                                         }else if(difficulty == Difficulty.Impossible){
+                                                                            addPart(new EmptyPart(){
+                                                                                    @Override
+                                                                                    public void doAfter(Game game){
+                                                                                        badResponse1.stop();
+                                                                                    }
+                                                                                });
                                                                             condPart(new Dialogue("He looks at you with a face of betrayal and swiftly leaves. Whatever magic happened at the balconey had disappeared after midnight."));
-                                                                            condPart(new Dialogue("Oswaldo comes storming towards you and your 5th grade crush. Out of anger, he thrusts the cup of juice at the guy next to you."));
+                                                                            condPart(new Dialogue("Oswaldo comes storming towards you and your 5th grade crush. Out of anger, he thrusts the cup of juice at you and your crush."));
+                                                                            addPart(new EmptyPart(){
+                                                                                    @Override
+                                                                                    public void doAfter(Game game){
+                                                                                        dance.stop();
+                                                                                        badResponse1.start();
+                                                                                    }
+                                                                                });
                                                                         }else{
 
-                                                                            condPart(new Dialogue("\"She's mine.\" Not yours.", Oswaldo.class));
-                                                                            condPart(new Dialogue("\"Get of of here, before I have my father ban you from ever stepping foot here again.\"", Oswaldo.class));
+                                                                            condPart(new Dialogue("\"She's mine.\" Not yours."));
+                                                                            condPart(new Dialogue("\"Get of of here, before I have my father ban you from ever stepping foot here again.\""));
                                                                         }
                                                                         condScene(new Scene(
                                                                                 MiscAssets.backgrounds.get("dancebg")));
 
                                                                         condPart(new Dialogue("Little did you know, Oswaldo had seen the guy approach you as he was coming back to get the drinks."));
+                                                                    }else{
+                                                                        addPart(new EmptyPart(){
+                                                                                @Override
+                                                                                public void doAfter(Game game){
+                                                                                    dance.stop();
+
+                                                                                }
+                                                                            });
+                                                                        condScene(new Scene(
+                                                                                MiscAssets.backgrounds.get("dancebg")));
+                                                                        condPart(new Dialogue("\"For you,\" he said. You take the glass and the two of you sip the glass together in peace."));
+                                                                        condPart(new Dialogue("You said goodbye to your old crush, and wait patiently for Oswaldo. After a few minutes of watching the other couples dance, Oswaldo comes back with two drinks in his hand."));
                                                                     }
                                                                 }
                                                             });
@@ -604,7 +876,7 @@ public class YortStory extends engine.Story {
 
                                                         condPart(new Dialogue("It was a magical moment that you two will never forget."));
 
-                                                        condPart(new Dialogue("You and Oswaldo dance outside on the balcony all night, watching the sun rise the next morning while holding on to each other.", Oswaldo.class));
+                                                        condPart(new Dialogue("You and Oswaldo dance outside on the balcony all night, watching the sun rise the next morning while holding on to each other."));
                                                     }
                                                     else{
                                                         if(difficulty==Difficulty.Easy)
@@ -615,8 +887,20 @@ public class YortStory extends engine.Story {
                                                                         new Oswaldo(0,0)
                                                                     }
                                                                 ));
-
+                                                            addPart(new EmptyPart(){
+                                                                    @Override
+                                                                    public void doAfter(Game game){
+                                                                        eating.stop();
+                                                                    }
+                                                                });
                                                             condPart(new Dialogue("Oswaldo and you eat snacks at the buffet, laughing through conversations. However, you guys are one of the few who aren’t dancing, raising public interest in the relationship you have with Oswaldo."));
+                                                            addPart(new EmptyPart(){
+                                                                    @Override
+                                                                    public void doAfter(Game game){
+                                                                        dance.stop();
+                                                                        eating.start();
+                                                                    }
+                                                                });
                                                         }
                                                         else if(difficulty==Difficulty.Normal)
                                                         {
@@ -632,8 +916,20 @@ public class YortStory extends engine.Story {
                                                                         new Oswaldo(0,0)
                                                                     }
                                                                 ));
-
-                                                            condPart(new Dialogue("Oswaldo is hurt by your rejection, feeling it is necessary to dance at such a party. He is ashamed and embarrassed asking you to dance in front of the crowd, leaving the dance with his head low.", MainCharacter.class));
+                                                            condPart(new EmptyPart(){
+                                                                    @Override
+                                                                    public void doAfter(Game game){
+                                                                        badResponse1.stop();
+                                                                    }
+                                                                });
+                                                            condPart(new Dialogue("Oswaldo is hurt by your rejection, feeling it is necessary to dance at such a party. He is ashamed and embarrassed asking you to dance in front of the crowd, and ends up leaving the dance with his head low."));
+                                                            condPart(new EmptyPart(){
+                                                                    @Override
+                                                                    public void doAfter(Game game){
+                                                                        dance.stop();
+                                                                        badResponse1.start();
+                                                                    }
+                                                                });
                                                         }
                                                     }
                                                 }
@@ -656,7 +952,7 @@ public class YortStory extends engine.Story {
                                                         condScene(new Scene(
                                                                 MiscAssets.backgrounds.get("greendressbg")));
 
-                                                        condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him.", MainCharacter.class));
+                                                        condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him."));
                                                     }   
                                                     else if(choice2Picked){
                                                         if(difficulty == Difficulty.Easy){
@@ -669,7 +965,7 @@ public class YortStory extends engine.Story {
                                                         condScene(new Scene(
                                                                 MiscAssets.backgrounds.get("suitbg")));
 
-                                                        condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him.", MainCharacter.class));
+                                                        condPart(new Dialogue("He feels allured by your sophistication, thus leaving him with more confirmation that you are the right person for him."));
                                                     }
                                                     else{
                                                         if(difficulty == Difficulty.Normal){
@@ -682,7 +978,7 @@ public class YortStory extends engine.Story {
                                                         condScene(new Scene(
                                                                 MiscAssets.backgrounds.get("schooluniformbg")));
 
-                                                        condPart(new Dialogue("Oswaldo feels slightly awkward and embarassed about taking you out to the dance.", MainCharacter.class));
+                                                        condPart(new Dialogue("Oswaldo feels slightly awkward and embarassed about taking you out to the dance."));
                                                     }  
                                                 }
                                             });
@@ -708,65 +1004,42 @@ public class YortStory extends engine.Story {
                                                     new Oswaldo(0,0)
                                                 }
                                             ));
-
-                                        condPart(new Dialogue("Oswaldo's heart tore a little at the rejection and he slowly turned away once the classroom door shut closed.", Oswaldo.class) );
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    badResponse1.stop();
+                                                }
+                                            });
+                                        condPart(new Dialogue("Oswaldo's heart tore a little at the rejection and he slowly turned away once the classroom door shut closed.") );
                                         condScene(new Scene(
-                                                MiscAssets.backgrounds.get("coJogClass")));
+                                                MiscAssets.backgrounds.get("tttbg")));
 
-                                        condPart(new Dialogue("Although it pained you to reject Oswaldo, you left him to watch your figure gradually disappear back into Professor CoJoglianese's classroom to study the night.", MainCharacter.class));
-
+                                        condPart(new Dialogue("Although it pained you to reject Oswaldo, you left him to watch your figure gradually disappear back into Professor CoJoglianese's classroom to study the night."));
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    dance.stop();
+                                                    badResponse1.start();
+                                                }
+                                            });
                                     }  
                                 }
                             });
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("danceSit")));
 
+                        condPart(
+                            new EmptyPart()
+                        );
                     }else{
+                        Clip badResponse1 = engine.MediaPlayer.createClip("./audio/BadResponse1.wav", true);
+
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
 
                         condPart(new Choice("what will you wear?", "green dress", "guy suit", "school uniform") {
                                 @Override
                                 public void doAfter(Game game) {
-                                    if(choice1Picked){
-                                        if(difficulty == Difficulty.Easy){
-                                            affectionMeter += 10;
-                                        } else if(difficulty == Difficulty.Normal){
-                                            affectionMeter += 5;
-                                        }else{
-                                            affectionMeter +=1;
-                                        }
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("greendressbg")));
-
-                                        condPart(new Dialogue("You smile brightly at your clothing of choice. Surely, this will woo Oswaldo!", MainCharacter.class));
-                                    }   
-                                    else if(choice2Picked){
-                                        if(difficulty == Difficulty.Easy){
-                                            affectionMeter += 10;
-                                        } else if(difficulty == Difficulty.Normal){
-                                            affectionMeter += 5;
-                                        }else{
-                                            affectionMeter += 1;
-                                        }
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("suitbg")));
-
-                                        condPart(new Dialogue("You smile brightly at your clothing of choice. Surely, this will woo Oswaldo!", MainCharacter.class));
-                                    }
-                                    else{
-                                        if(difficulty == Difficulty.Normal){
-                                            affectionMeter -= 10;
-                                        }else{
-                                            affectionMeter -=20;
-                                            rightChoice = false;
-                                        }
-
-                                        condScene(new Scene(
-                                                MiscAssets.backgrounds.get("schooluniformbg")));
-
-                                        condPart(new Dialogue("There was no way Oswaldo would want to be with you in these clothes!"));
-
-                                        condPart(new Dialogue("You cringe at your outfit, but it was the only thing you were able to afford.", MainCharacter.class));
-                                    }
                                     if(choice1Picked || choice2Picked){
                                         condScene(new Scene(
                                                 MiscAssets.backgrounds.get("dancebg"),
@@ -790,11 +1063,24 @@ public class YortStory extends engine.Story {
                                             ));
                                         condPart(new Dialogue("Oswaldo was minding his own business with his friends at the dance. As his friends were talking, an image of your face appeared in his mind. He quickly shook his head. There was no way you were going to show up to his face."));
                                     }else{
+
                                         condScene(new Scene(
                                                 MiscAssets.backgrounds.get("dancebg")));
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    badResponse1.stop();
+                                                }
+                                            });
                                         condPart(new Dialogue("The dance was the moment for all students to express themselves to the highest glamor that they could achieve, and here you were, dressed in your normal school uniform. Compared to the other attendees of the dance, you looked like you had mistakenly entered the ballroom instead of the library."));
                                         condPart(new Dialogue("Just in that moment, the doors opened and Oswaldo's eyes dropped at the sight of you."));
-
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    dance.stop();
+                                                    badResponse1.start();
+                                                }
+                                            });
                                         condScene(new Scene(
                                                 MiscAssets.backgrounds.get("dancebg"),
                                                 new engine.Character[] {
@@ -803,18 +1089,66 @@ public class YortStory extends engine.Story {
                                             ));
                                         condPart(new Dialogue("Oswaldo was minding his own business with his friends at the dance. As his friends were talking, an image of your face appeared in his mind. He quickly shook his head. There was no way you were going to show up to his face."));
                                     }
+
+                                    if(choice1Picked){
+                                        if(difficulty == Difficulty.Easy){
+                                            affectionMeter += 10;
+                                        } else if(difficulty == Difficulty.Normal){
+                                            affectionMeter += 5;
+                                        }else{
+                                            affectionMeter +=1;
+                                        }
+                                        condScene(new Scene(
+                                                MiscAssets.backgrounds.get("greendressbg")));
+
+                                        condPart(new Dialogue("You smile brightly at your clothing of choice. Surely, this will woo Oswaldo!"));
+                                    }   
+                                    else if(choice2Picked){
+                                        if(difficulty == Difficulty.Easy){
+                                            affectionMeter += 10;
+                                        } else if(difficulty == Difficulty.Normal){
+                                            affectionMeter += 5;
+                                        }else{
+                                            affectionMeter += 1;
+                                        }
+                                        condScene(new Scene(
+                                                MiscAssets.backgrounds.get("suitbg")));
+
+                                        condPart(new Dialogue("You smile brightly at your clothing of choice. Surely, this will woo Oswaldo!"));
+                                    }
+                                    else{
+                                        if(difficulty == Difficulty.Normal){
+                                            affectionMeter -= 10;
+                                        }else{
+                                            affectionMeter -=20;
+                                            rightChoice = false;
+                                        }
+
+                                        condScene(new Scene(
+                                                MiscAssets.backgrounds.get("schooluniformbg")));
+
+                                        condPart(new Dialogue("There was no way Oswaldo would want to be with you in these clothes!"));
+
+                                        condPart(new Dialogue("You cringe at your outfit, but it was the only thing you were able to afford."));
+                                    }
+
                                 }
                             });
                     }
                 }
             }
         );
+        Clip graduation = engine.MediaPlayer.createClip("./audio/graduation.wav", true);
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("graduation")));
-
-        addPart(new Dialogue(""));
-
+        addPart(new EmptyPart(){
+                @Override
+                public void doAfter(Game game){
+                    dance.stop();
+                    graduation.start();
+                }
+            });
         addPart(
             new EmptyPart(){
                 @Override
@@ -845,7 +1179,7 @@ public class YortStory extends engine.Story {
                                                 }
                                             ));
 
-                                        condPart(new Dialogue("Oswaldo glances at you, but doesn’t take the initiative to talk to you. He feels a barrier between him and you, not having enough interest to cross the distance towards you.", MainCharacter.class));
+                                        condPart(new Dialogue("Oswaldo glances at you, but doesn’t take the initiative to talk to you. He feels a barrier between him and you, not having enough interest to cross the distance towards you."));
                                     }
                                     else{
                                         dating = true;
@@ -880,9 +1214,9 @@ public class YortStory extends engine.Story {
                                 }
                             ));
 
-                        condPart(new Dialogue("\"Thank you father.\" He smiles. As you were approaching him, his smile fell of his face. He looked at his father. \"Let's go now, shall we?\" He quickly urged his father out of school and snapped a sharp frown at your direction.", Oswaldo.class));
+                        condPart(new Dialogue("\"Thank you father.\" He smiles. As you were approaching him, his smile fell of his face. He looked at his father. \"Let's go now, shall we?\" He quickly urged his father out of school and snapped a sharp frown at your direction."));
 
-                        condPart(new Dialogue("\"I'm proud of you, son.\" Duke Bo Jiden tells his son.", BoJiden.class));
+                        condPart(new Dialogue("\"I'm proud of you, son.\" Duke Bo Jiden tells his son."));
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("graduationbg"),
@@ -897,7 +1231,13 @@ public class YortStory extends engine.Story {
                 }
             }
         );
-
+        addPart(new EmptyPart(){
+                @Override
+                public void doAfter(Game game){
+                    graduation.stop();
+                    mainTheme.start();
+                }
+            });
         addScene(new 
 
             Scene(
@@ -909,7 +1249,11 @@ public class YortStory extends engine.Story {
             EmptyPart() {
                 @Override
                 public void doAfter(Game game) {
-                    if(dating == true && (affectionMeter >= 100 || (difficulty == Difficulty.Impossible && rightChoice == true))){
+                    Clip proposal = engine.MediaPlayer.createClip("./audio/proposal.wav", true);
+                    Clip badResponse3 = engine.MediaPlayer.createClip("./audio/BadResponse3.wav", true);
+                    Clip goodResponse2 = engine.MediaPlayer.createClip("./audio/GooderResponse2.wav", true);
+
+                    if(dating == true ){
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
@@ -917,6 +1261,7 @@ public class YortStory extends engine.Story {
                         condPart(new Choice("say yes?", "yes", "no") {
                                 @Override
                                 public void doAfter(Game game) {
+
                                     if(choice1Picked){
                                         condScene(new Scene(
                                                 MiscAssets.backgrounds.get("endbg")));
@@ -930,7 +1275,7 @@ public class YortStory extends engine.Story {
                                                 }
                                             ));
 
-                                        condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class));
+                                        condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. "));
 
                                     }
                                     else{
@@ -954,18 +1299,32 @@ public class YortStory extends engine.Story {
                                                                     }
                                                                 ));
 
-                                                            condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ", MainCharacter.class)); 
+                                                            condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ")); 
                                                         }
                                                         else{
                                                             condScene(new Scene(
                                                                     MiscAssets.backgrounds.get("badOver")));
 
-                                                            condPart(new EmptyPart());
+                                                            condPart(new EmptyPart(){
+                                                                    @Override
+                                                                    public void doAfter(Game game){
+                                                                        goodResponse2.stop();
+                                                                        badResponse3.start();
+                                                                        badResponse3.stop();
+                                                                    }
+                                                                });
 
                                                             condScene(new Scene(
                                                                     MiscAssets.backgrounds.get("freedombg")));
 
-                                                            condPart(new Dialogue("You chose to be free and live solo", MainCharacter.class));
+                                                            condPart(new Dialogue("You chose to be free and live solo"));
+                                                            condPart(new EmptyPart(){
+                                                                    @Override
+                                                                    public void doAfter(Game game){
+                                                                        proposal.stop();
+                                                                        goodResponse2.start();
+                                                                    }
+                                                                });
                                                         }
                                                     }
                                                 });   
@@ -977,8 +1336,14 @@ public class YortStory extends engine.Story {
                                                     }
                                                 ));
 
-                                            condPart(new Dialogue("He puts the ring back in his pocket and gets up from the floor dejectedly. Oswaldo, not looking at you at all, turns away heartbroken. Before he leaves the door, you have final decision to make...", Oswaldo.class));
+                                            condPart(new Dialogue("He puts the ring back in his pocket and gets up from the floor dejectedly. Oswaldo, not looking at you at all, turns away heartbroken. Before he leaves the door, you have final decision to make..."));
                                         }else{
+                                            condPart(new EmptyPart(){
+                                                    @Override
+                                                    public void doAfter(Game game){
+                                                        badResponse3.stop();
+                                                    }
+                                                });
                                             condScene(new Scene(
                                                     MiscAssets.backgrounds.get("ripbg")));
 
@@ -987,6 +1352,13 @@ public class YortStory extends engine.Story {
                                                     MiscAssets.generateBackgroundInfo(MainCharacter.name)
                                                 )
                                             );
+                                            condPart(new EmptyPart(){
+                                                    @Override
+                                                    public void doAfter(Game game){
+                                                        proposal.stop();
+                                                        badResponse3.start();
+                                                    }
+                                                });
                                         }
 
                                     }
@@ -995,17 +1367,25 @@ public class YortStory extends engine.Story {
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("marriageSit")));
 
-                        condPart(
-                            new EmptyPart()
-                        );
+                        condPart(new EmptyPart(){
+                                @Override
+                                public void doAfter(Game game){
+                                    graduation.stop();
+                                    proposal.start();
+                                }
+                            });
                     }else if(rightChoice == false){
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("BADover")));
 
-                        condPart(
-                            new EmptyPart(
-                            ));
-
+                        condPart(new EmptyPart(){
+                                @Override
+                                public void doAfter(Game game){
+                                    goodResponse2.stop();
+                                    badResponse3.start();
+                                    badResponse3.stop();
+                                }
+                            });
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("ripbg")));
 
@@ -1014,6 +1394,13 @@ public class YortStory extends engine.Story {
                                 MiscAssets.generateBackgroundInfo(MainCharacter.name)
                             )
                         );
+                        condPart(new EmptyPart(){
+                                @Override
+                                public void doAfter(Game game){
+                                    proposal.stop();
+                                    goodResponse2.start();
+                                }
+                            });
                     }else{
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("endbg")));
@@ -1039,9 +1426,13 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("credits")));
 
-        addPart(
-            new EmptyPart()
-        );
+        addPart(new EmptyPart(){
+                @Override
+                public void doAfter(Game game){
+                    mainTheme.stop();
+                    mainTheme.start();
+                }
+            });
         // example scene for y'all to see how to do
 
         // adds scene with bg of "bedroom"
@@ -1063,7 +1454,7 @@ public class YortStory extends engine.Story {
         addPart(new Dialogue("Fun fact: Monads are cool"));
         }
 
-        addPart(new Dialogue("Skibidi dom dom what?", MainCharacter.class) {
+        addPart(new Dialogue("Skibidi dom dom what?") {
         @Override
         public void doAfter(Game game) {
         // could change emotion of characters or something
