@@ -103,7 +103,7 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("choicebg")));
 
-        addPart(new Choice("What do you do?", "Be nice and introduce yourself \"Oh, I’m so sorry! I didn’t see you there.\"", "be rude and lash out: \"Hey watch where you're going! Some of us are trying to go to class.\"", "be mysterious and whip those luscious locks!!" ) {
+        addPart(new Choice("What do you do?", "Be nice and introduce yourself: \"Oh, I’m so sorry! I didn’t see you there.\"", "Be rude and lash out: \"Hey, watch where you're going! Some of us are trying to go to class.\"", "Be mysterious and whip those luscious locks!!" ) {
                 @Override
                 public void doAfter(Game game) {
                     if (choice1Picked){ // this comes from a property in Choice
