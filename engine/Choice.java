@@ -1,6 +1,6 @@
 package engine;
 import javax.swing.*;
-import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
 import java.awt.event.*;
 
 public abstract class Choice extends ScenePart {
@@ -33,10 +33,13 @@ public abstract class Choice extends ScenePart {
         this.choice3 = c3;
     }
     public void changeUI(Game game) {
-        JPanel panel = new utils.TransparentPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
-        if (getCharacterName(game) != null)
-            panel.add(new JLabel(getCharacterName(game)+":"));
-        panel.add(new JLabel(prompt));
+        JPanel panel = new utils.TransparentPanel(new GridBagLayout());
+        //if (getCharacterName(game) != null)
+        //    panel.add(new JLabel(getCharacterName(game)+":"));
+        JLabel promptLabel = new JLabel(prompt);
+        promptLabel.setFont(game.getUISettings().getFont().deriveFont(50f));
+        promptLabel.setForeground(game.getUISettings().getTextColor());
+        panel.add(promptLabel);
         JButton choice1Btn = new JButton(choice1);
         choice1Btn.addActionListener(new ActionListener() {
             @Override
@@ -67,7 +70,6 @@ public abstract class Choice extends ScenePart {
         });
         panel.add(choice3Btn);
     }
-
-        game.setBottomPanel(panel);
+        game.setCenterPanel(panel);
     }
 }

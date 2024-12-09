@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import javax.sound.sampled.Clip;
+import java.io.File;
 
 public class EntryPoint extends JFrame {
     private JPanel content;
@@ -79,8 +80,27 @@ public class EntryPoint extends JFrame {
             ),
             0.2
         );
-        // Main bg
         
+        Font textFont = null;
+        try {
+            textFont = Font.createFont(Font.TRUETYPE_FONT, new File("assets/text-reg.ttf"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        engine.UISettings uiSettings = new engine.UISettings(
+            textFont, // text font used
+            Color.decode("#543938"), // main fg text color
+            ImageIO.read(
+                EntryPoint.class.getResource("assets/start_button.png") // button bg
+            ),
+            ImageIO.read(
+                EntryPoint.class.getResource("assets/textboxbg.png") // dialogue textbox
+            ),
+            0.2, // button size
+            true, // scene fading enabled
+            true // typewriter effect enabled
+        );
         
         playBtn.addActionListener(new ActionListener() {
             @Override
@@ -91,7 +111,9 @@ public class EntryPoint extends JFrame {
                     new engine.Game<YortData>(
                         MiscAssets.backgrounds.get("base"),
                         new YortStory(Difficulty.Easy),
-                        new YortData(0)
+                        new YortData(0),
+                        uiSettings,
+                        EntryPoint.this
                     )
                 );
             }

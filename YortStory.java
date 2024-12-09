@@ -29,10 +29,16 @@ public class YortStory extends engine.Story {
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
+        addPart(new Input("Please enter your name: ") {
+            @Override
+            public void doAfter(Game game) {
+                System.out.println("chosen name: " + inputtedText);
+                MainCharacter.name = inputtedText;
+            }
+        });
 
         addPart(
-            new FullScreenMessage(
-                MiscAssets.generateBackgroundInfo(MainCharacter.name)
+            new FullScreenMessage(() -> MiscAssets.generateBackgroundInfo(MainCharacter.name)
             ){
                 @Override
                 public void onLoad(Game game){
@@ -45,7 +51,7 @@ public class YortStory extends engine.Story {
                 MiscAssets.backgrounds.get("bgPt2")));
 
         addPart(
-            new FullScreenMessage(
+            new FullScreenMessage(() ->
                 MiscAssets.generateBackgroundInfo2(MainCharacter.name)
             )
         );
@@ -60,7 +66,7 @@ public class YortStory extends engine.Story {
                 MiscAssets.backgrounds.get("welcome")));
 
         addPart(
-            new FullScreenMessage(
+            new FullScreenMessage(() ->
                 MiscAssets.generateWelcomeText(MainCharacter.name)
             )
         );
@@ -389,7 +395,7 @@ public class YortStory extends engine.Story {
 
         Clip ticTacToe= engine.MediaPlayer.createClip("./audio/ticTacToe.wav", true);
 
-        addScene(new 
+        addScene(new
             Scene(
                 MiscAssets.backgrounds.get("ticTacToe")));
 
@@ -405,8 +411,7 @@ public class YortStory extends engine.Story {
             Scene(
                 MiscAssets.backgrounds.get("tttSit")));
 
-        addPart(new 
-
+        addPart(new            
             Choice("Will you play Tic Tac Toe", "yes", "no") {
                 @Override
                 public void doAfter(Game game) {

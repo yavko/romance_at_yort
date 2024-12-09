@@ -10,6 +10,7 @@ public class TransparentPanel extends JPanel {
     }
     public TransparentPanel() {
         super();
+        setBackground(new Color(0,0,0,0));
         setOpaque(false);
     }
     @Override

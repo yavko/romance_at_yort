@@ -13,7 +13,7 @@ public class EmptyPart extends ScenePart {
     
     public void changeUI(Game game) {
         JPanel panel = new utils.TransparentPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
-        panel.addMouseListener(new MouseListener() {
+        MouseListener listener = new MouseListener() {
             public void mousePressed(MouseEvent e) {}
             public void mouseReleased(MouseEvent e) {
                call(game);
@@ -21,7 +21,9 @@ public class EmptyPart extends ScenePart {
             public void mouseEntered(MouseEvent e) {}
             public void mouseExited(MouseEvent e) {}
             public void mouseClicked(MouseEvent e) {}
-        });
+        };
+        
+        panel.addMouseListener(listener);
         
 
         game.setCenterPanel(panel);
