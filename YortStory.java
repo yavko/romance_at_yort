@@ -389,7 +389,7 @@ public class YortStory extends engine.Story {
                             });
 
                         if(difficulty == Difficulty.Normal){
-                            condPart(new Dialogue("He now has an interest of neither dislike nor like of you."));
+                            affectionMeter -=5;
                         }else if(difficulty == Difficulty.Impossible){
                             affectionMeter -= 10;
                         }
