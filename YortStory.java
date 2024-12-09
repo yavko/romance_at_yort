@@ -26,7 +26,7 @@ public class YortStory extends engine.Story {
         // story logic
 
         Clip mainTheme = engine.MediaPlayer.createClip("./audio/Main theme.wav", true);
-
+        // User enters their name and will be inputted in the background context.
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
         addPart(new Input("Please enter your name: ") {
@@ -36,7 +36,7 @@ public class YortStory extends engine.Story {
                     MainCharacter.name = inputtedText;
                 }
             });
-
+        // Start screen
         addPart(
             new FullScreenMessage(() -> MiscAssets.generateBackgroundInfo(MainCharacter.name)
             ){
@@ -74,7 +74,7 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("introDiff"))
         );
-
+        // Brrrway meeting: First meeting between Oswaldo and the user in which the user has up to 3 choices to choose from.
         addPart(
             new EmptyPart());
 
@@ -106,7 +106,7 @@ public class YortStory extends engine.Story {
         addPart(new Choice("What do you do?", "Be nice and introduce yourself: \"Oh, I’m so sorry! I didn’t see you there.\"", "Be rude and lash out: \"Hey, watch where you're going! Some of us are trying to go to class.\"", "Be mysterious and whip those luscious locks!!" ) {
                 @Override
                 public void doAfter(Game game) {
-                    if (choice1Picked){ // this comes from a property in Choice
+                    if (choice1Picked){ // User chooses the good option
                         Clip goodResponse1 = engine.MediaPlayer.createClip("./audio/GooderResponse1.wav", true);
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg"),
@@ -118,6 +118,7 @@ public class YortStory extends engine.Story {
                         condPart(new Choice("How do you start the conversation?", "\"So, what do you like to do for fun? I’m really into photography. I love capturing moments.\"", "\"I’ve been wanting to check out the new art exhibit. Want to come with me this weekend?\"", "\"Do you believe in love at first sight, or should I walk by again?\"") {
                                 @Override
                                 public void doAfter(Game game) {
+                                    // Secret scene if they chose option 1 from the brrrway scene
                                     Clip cafe = engine.MediaPlayer.createClip("./audio/HangoutPostBrzway.wav", true);
 
                                     condScene(new Scene(
