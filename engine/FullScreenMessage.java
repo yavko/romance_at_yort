@@ -41,17 +41,7 @@ public class FullScreenMessage extends ScenePart {
             dialogue != null ?
                 dialogue : // if not null
                 dialogueSupplier.get(); // if null
-        WrappedText textLabel = new WrappedText(text) {
-        @Override
-        public FontMetrics getFontMetrics(Font font) {
-        return new FontMetricsWrapper(super.getFontMetrics(font)) {
-            @Override
-            public int getHeight() {
-                return 10;  // Gives line height in pixels
-            }
-        };
-    }
-        };
+        WrappedText textLabel = new WrappedText(text);
         panel.add(new TransparentPanel(), BorderLayout.PAGE_START);
         panel.add(new TransparentPanel(), BorderLayout.LINE_START);
         panel.add(new TransparentPanel(), BorderLayout.LINE_END);
@@ -59,16 +49,22 @@ public class FullScreenMessage extends ScenePart {
         textLabel.setFont(game.getUISettings().getFont().deriveFont(15f));
         textLabel.setForeground(game.getUISettings().getTextColor());
         textLabel.setPreferredSize(new Dimension((int)(game.size().width*0.7), (int)(game.size().height*0.7)));
-        panel.addMouseListener(new MouseListener() {
-            public void mousePressed(MouseEvent e) {}
-            public void mouseReleased(MouseEvent e) {
-               call(game);
-            }
-            public void mouseEntered(MouseEvent e) {}
-            public void mouseExited(MouseEvent e) {}
-            public void mouseClicked(MouseEvent e) {}
-        });
+        MouseListener clickListener = new MouseListener() {
+                public void mousePressed(MouseEvent e) {}
+
+                public void mouseReleased(MouseEvent e) {
+                    call(game);
+                }
+
+                public void mouseEntered(MouseEvent e) {}
+
+                public void mouseExited(MouseEvent e) {}
+
+                public void mouseClicked(MouseEvent e) {}
+            };
         
+        panel.addMouseListener(clickListener);
+        textLabel.addMouseListener(clickListener);
 
         game.setCenterPanel(panel);
     }
