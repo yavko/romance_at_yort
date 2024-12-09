@@ -26,7 +26,7 @@ public class YortStory extends engine.Story {
         // story logic
 
         Clip mainTheme = engine.MediaPlayer.createClip("./audio/Main theme.wav", true);
-
+        // User enters their name and will be inputted in the background context.
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
         addPart(new Input("Please enter your name: ") {
@@ -36,7 +36,7 @@ public class YortStory extends engine.Story {
                     MainCharacter.name = inputtedText;
                 }
             });
-
+        // Start screen
         addPart(
             new FullScreenMessage(() -> MiscAssets.generateBackgroundInfo(MainCharacter.name)
             ){
@@ -74,7 +74,7 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("introDiff"))
         );
-
+        // Brrrway meeting: First meeting between Oswaldo and the user in which the user has up to 3 choices to choose from.
         addPart(
             new EmptyPart());
 
@@ -103,10 +103,10 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("choicebg")));
 
-        addPart(new Choice("What do you do?", "Be nice and introduce yourself \"Oh, I’m so sorry! I didn’t see you there.\"", "be rude and lash out: \"Hey watch where you're going! Some of us are trying to go to class.\"", "be mysterious and whip those luscious locks!!" ) {
+        addPart(new Choice("What do you do?", "Be nice and introduce yourself: \"Oh, I’m so sorry! I didn’t see you there.\"", "Be rude and lash out: \"Hey, watch where you're going! Some of us are trying to go to class.\"", "Be mysterious and whip those luscious locks!!" ) {
                 @Override
                 public void doAfter(Game game) {
-                    if (choice1Picked){ // this comes from a property in Choice
+                    if (choice1Picked){ // User chooses the good option
                         Clip goodResponse1 = engine.MediaPlayer.createClip("./audio/GooderResponse1.wav", true);
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg"),
@@ -118,6 +118,7 @@ public class YortStory extends engine.Story {
                         condPart(new Choice("How do you start the conversation?", "\"So, what do you like to do for fun? I’m really into photography. I love capturing moments.\"", "\"I’ve been wanting to check out the new art exhibit. Want to come with me this weekend?\"", "\"Do you believe in love at first sight, or should I walk by again?\"") {
                                 @Override
                                 public void doAfter(Game game) {
+                                    // Secret scene if they chose option 1 from the brrrway scene
                                     Clip cafe = engine.MediaPlayer.createClip("./audio/HangoutPostBrzway.wav", true);
 
                                     condScene(new Scene(
@@ -246,7 +247,7 @@ public class YortStory extends engine.Story {
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")
                             ));
-                        condPart(new Choice("How do you start the conversation?", "\"Wait, I didn’t mean it like that. Can we start over?\"", "\"Whatever, it’s not like I care. I have places to be.\"", "\"Whatever, it’s not like I care. I have places to be.\"") {
+                        condPart(new Choice("What should you say?", "\"Wait, I didn’t mean it like that. Can we start over?\"", "\"Whatever, it’s not like I care. I have places to be.\"", "\"Maybe I was just testing your reaction. What's your next move?\"") {
                                 @Override
                                 public void doAfter(Game game){
                                     condScene(new Scene(
@@ -269,9 +270,9 @@ public class YortStory extends engine.Story {
                                                 }
                                             });
 
-                                        condPart(new Dialogue("He raises an eyebrow, clearly unimpressed. \"Alright then. Good luck with your busy schedule.\""));
-                                        condPart(new Dialogue("He walks away, and as you sit in class, you can’t help but feel a bit guilty. Later, during lunch, you overhear him talking to friends about how he prefers people who are genuine."));
                                         condPart(new Dialogue("You left a bad impression on him."));
+                                        condPart(new Dialogue("He walks away, and as you sit in class, you can’t help but feel a bit guilty. Later, during lunch, you overhear him talking to friends about how he prefers people who are genuine."));
+                                        condPart(new Dialogue("He raises an eyebrow, clearly unimpressed. \"Alright then. Good luck with your busy schedule.\""));
 
                                         if(difficulty == Difficulty.Normal){
                                             affectionMeter -= 5;
@@ -280,8 +281,8 @@ public class YortStory extends engine.Story {
                                             affectionMeter -= 10;
                                         }
                                     }else{
-                                        condPart(new Dialogue("He smirks. \"Well, if that was a test, I’d say I passed. What’s your real story?\""));
                                         condPart(new Dialogue("Intrigued by your boldness, Oswaldo stays to chat. You both end up sitting together at lunch, where he challenges you to a debate about school rules, and surprisingly, you find you have similar views. However, he is still suspicious of your behavior."));
+                                        condPart(new Dialogue("He smirks. \"Well, if that was a test, I’d say I passed. What’s your real story?\""));
                                         if(difficulty == Difficulty.Easy){
                                             affectionMeter += 5;
                                         } else if(difficulty == Difficulty.Normal){
@@ -304,7 +305,7 @@ public class YortStory extends engine.Story {
                                     new Oswaldo(0,0)
                                 }
                             ));
-                        condPart(new Dialogue("Oswaldo, the guy you bumped into, looks at you confused, but as he is polite, he doesn’t want to cause a big scene. “Hey, no need to be rude. It was an accident.”"));
+                        condPart(new Dialogue("Oswaldo, the guy you bumped into, looks taken aback and shakes his head slightly. \"That’s a bit harsh, don’t you think? It was just an accident.\" He turns to walk away, but you notice he hesitates."));
 
                         condPart(new EmptyPart(){
                                 @Override
@@ -339,8 +340,8 @@ public class YortStory extends engine.Story {
                                                     goodResponse2.stop();
                                                 }
                                             });
-                                        condPart(new Dialogue("As you toss your hair back dramatically, you feel the eyes of the hallway on you. The movement is fluid, confident, and you can’t help but feel a rush of empowerment. You stride away, but you can’t shake the feeling that he’s still watching you."));
                                         condPart(new Dialogue("\"Wow,\" he says softly, almost to himself, as you walk past. You glance back just in time to see him shake his head. You’ve piqued his intrest, but Oswaldo is a bit hurt with you not apologizing."));
+                                        condPart(new Dialogue("As you toss your hair back dramatically, you feel the eyes of the hallway on you. The movement is fluid, confident, and you can’t help but feel a rush of empowerment. You stride away, but you can’t shake the feeling that he’s still watching you."));
                                         if(difficulty == Difficulty.Easy){
                                             affectionMeter += 5;
                                         } else if(difficulty == Difficulty.Normal){
@@ -357,9 +358,9 @@ public class YortStory extends engine.Story {
                                                     goodResponse2.stop();
                                                 }
                                             });
-                                        condPart(new Dialogue("Intrigued by your boldness, Oswaldo stays to chat. You both end up sitting together at lunch, where he challenges you to a debate about school rules, and surprisingly, you find you have similar views. However, he is still suspicious of your behavior."));
-
-                                        condPart(new Dialogue("He smirks. \"Well, if that was a test, I’d say I passed. What’s your real story?\""));
+                                        condPart(new Dialogue("\"Wow, a woman of few words, huh? I like that,\" he mutters as you walk past him to your next class. Oswaldo becomes a bit interested in you, but his interest is still similar to as if you were a normal person passing him by."));
+                                        
+                                        condPart(new Dialogue("He raises an eyebrow, clearly intrigued by your silent confidence."));
                                         if(difficulty == Difficulty.Easy){
                                             affectionMeter += 5;
                                         } else if(difficulty == Difficulty.Normal){
@@ -389,7 +390,7 @@ public class YortStory extends engine.Story {
                             });
 
                         if(difficulty == Difficulty.Normal){
-                            condPart(new Dialogue("He now has an interest of neither dislike nor like of you."));
+                            affectionMeter -=5;
                         }else if(difficulty == Difficulty.Impossible){
                             affectionMeter -= 10;
                         }

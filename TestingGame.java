@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.event.*;
 import java.util.Random;
 import java.util.Arrays;
+import engine.*;
 
 public class TestingGame extends JFrame implements KeyListener {
     final static String[] keys = new String[] {
@@ -11,6 +12,7 @@ public class TestingGame extends JFrame implements KeyListener {
             "left",
             "right"
         };
+    //generates random pattern of left/right/up/down for the game
     private String[] moves;
     private String[] generateKeys(int numMoves){
         moves = new String[numMoves];
@@ -29,10 +31,12 @@ public class TestingGame extends JFrame implements KeyListener {
     private void setKey() {
         label.setText(moves[currentKey]);
     }
-
+    //background set up and text to be displayed
     public TestingGame() {
         super("testing game window");
         setMinimumSize(new Dimension(854, 480));
+        
+        System.out.println(MiscAssets.balconybg);
         //
         int seconds;
         Difficulty difficulty = Difficulty.Impossible;
@@ -72,13 +76,13 @@ public class TestingGame extends JFrame implements KeyListener {
         pack();
         setVisible(true);
     }
-
+    //test game
     public static void main(String[] args) {
         SwingUtilities.invokeLater(TestingGame::new);
     }
 
     public void keyTyped(KeyEvent e) {}
-
+    //checks which key user clicked and plays button clicking audio
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
         engine.MediaPlayer.createClip("./audio/buttonClick.wav", false).start();
