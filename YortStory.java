@@ -30,12 +30,12 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
         addPart(new Input("Please enter your name: ") {
-            @Override
-            public void doAfter(Game game) {
-                System.out.println("chosen name: " + inputtedText);
-                MainCharacter.name = inputtedText;
-            }
-        });
+                @Override
+                public void doAfter(Game game) {
+                    System.out.println("chosen name: " + inputtedText);
+                    MainCharacter.name = inputtedText;
+                }
+            });
 
         addPart(
             new FullScreenMessage(() -> MiscAssets.generateBackgroundInfo(MainCharacter.name)
@@ -52,7 +52,7 @@ public class YortStory extends engine.Story {
 
         addPart(
             new FullScreenMessage(() ->
-                MiscAssets.generateBackgroundInfo2(MainCharacter.name)
+                    MiscAssets.generateBackgroundInfo2(MainCharacter.name)
             )
         );
 
@@ -67,7 +67,7 @@ public class YortStory extends engine.Story {
 
         addPart(
             new FullScreenMessage(() ->
-                MiscAssets.generateWelcomeText(MainCharacter.name)
+                    MiscAssets.generateWelcomeText(MainCharacter.name)
             )
         );
 
@@ -414,6 +414,13 @@ public class YortStory extends engine.Story {
         addScene(new 
             Scene(
                 MiscAssets.backgrounds.get("tttSit")));
+        addPart(
+            new EmptyPart()
+        );
+
+        addScene(new 
+            Scene(
+                MiscAssets.backgrounds.get("choicebg")));
 
         addPart(new            
             Choice("Will you play Tic Tac Toe", "yes", "no") {
@@ -598,7 +605,7 @@ public class YortStory extends engine.Story {
                         }else{
                             affectionMeter +=5;
                         }
-                        Clip goodResponse3= engine.MediaPlayer.createClip("./audio/GooderResponse3.wav", true);
+                        Clip goodResponse2= engine.MediaPlayer.createClip("./audio/GooderResponse2.wav", true);
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("schoolbg")
@@ -606,7 +613,7 @@ public class YortStory extends engine.Story {
                         condPart(new EmptyPart(){
                                 @Override
                                 public void doAfter(Game game){
-                                    goodResponse3.stop();
+                                    goodResponse2.stop();
 
                                 }
                             });
@@ -618,7 +625,7 @@ public class YortStory extends engine.Story {
                                 @Override
                                 public void doAfter(Game game){
                                     awkward.stop();
-                                    goodResponse3.start();
+                                    goodResponse2.start();
                                 }
                             });
                     } else if(choice2Picked){
@@ -769,7 +776,7 @@ public class YortStory extends engine.Story {
             });
         //change to nullPart or something else
         addPart(
-            new EmptyPart(){
+            new NullPart(){
                 @Override
                 public void doAfter(Game game) {
                     if((difficulty != Difficulty.Impossible) && affectionMeter >= 70 
@@ -778,7 +785,6 @@ public class YortStory extends engine.Story {
                         Clip goodResponse1 = engine.MediaPlayer.createClip("./audio/GooderResponse1.wav", true);
                         Clip badResponse1 = engine.MediaPlayer.createClip("./audio/BadResponse1.wav", true);
                         Clip eating = engine.MediaPlayer.createClip("./audio/eatingScene.wav", true);
-
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
@@ -795,8 +801,13 @@ public class YortStory extends engine.Story {
                                             affectionMeter +=5;
                                         }
 
-                                        condScene(new Scene(
+                                        condScene(new 
+                                            Scene(
                                                 MiscAssets.backgrounds.get("dancePartner")));
+
+                                        condScene(new 
+                                            Scene(
+                                                MiscAssets.backgrounds.get("tttSit")));
 
                                         condPart(new Choice("dance with oswaldo?", "yes", "no") {
                                                 @Override
@@ -807,6 +818,10 @@ public class YortStory extends engine.Story {
 
                                                         condScene(new Scene(
                                                                 MiscAssets.backgrounds.get("crushSit")));
+
+                                                        addScene(new 
+                                                            Scene(
+                                                                MiscAssets.backgrounds.get("choicebg")));
 
                                                         condPart(
                                                             new Choice("what do you do?", "What's the harm? You accept and you dance togther, chatting and catching up on the past few years.", "You decline politely, deciding to wait for Oswaldo to come back."){
@@ -883,7 +898,7 @@ public class YortStory extends engine.Story {
                                                         condScene(new Scene(
                                                                 MiscAssets.backgrounds.get("balconybg")));
 
-                                                        condPart(new Dialogue("It was a magical moment that you two will never forget."));
+                                                        condPart(new Dialogue("It was a magical moment that you two will never forget..."));
 
                                                         condPart(new Dialogue("You and Oswaldo dance outside on the balcony all night, watching the sun rise the next morning while holding on to each other."));
                                                     }
@@ -1159,12 +1174,16 @@ public class YortStory extends engine.Story {
                 }
             });
         addPart(
-            new EmptyPart(){
+            new NullPart(){
                 @Override
                 public void doAfter(Game game) {
                     if(affectionMeter >= 70 || (difficulty == Difficulty.Impossible && rightChoice)){
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("gradSit")));
+
+                        condScene(new 
+                            Scene(
+                                MiscAssets.backgrounds.get("choicebg")));
 
                         condPart(new Choice("what do you do?", "friendzone", "confession", "nothing") {
                                 @Override
@@ -1255,7 +1274,7 @@ public class YortStory extends engine.Story {
         addPart(
             new 
 
-            EmptyPart() {
+            NullPart() {
                 @Override
                 public void doAfter(Game game) {
                     Clip proposal = engine.MediaPlayer.createClip("./audio/proposal.wav", true);
