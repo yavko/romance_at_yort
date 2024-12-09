@@ -2,6 +2,10 @@ package engine;
 import javax.swing.*;
 import java.awt.GridBagLayout;
 import java.awt.event.*;
+import java.awt.FlowLayout;
+import utils.WrappedTextBg;
+import utils.TransparentPanel;
+import java.awt.Image;
 
 public abstract class Choice extends ScenePart {
     private final String prompt;
@@ -32,44 +36,49 @@ public abstract class Choice extends ScenePart {
         this.choice2 = c2;
         this.choice3 = c3;
     }
+    enum C {
+        Choice1, Choice2, Choice3
+    }
+    private WrappedText createChoiceBtn(Game game, String text, C choice) {
+        Image bg;
+        if (choice3 == null)
+            bg = game.getUISettings().getButton2Bg();
+        else bg = game.getUISettings().getButton3Bg();
+        WrappedTextBg choiceBtn = new WrappedTextBg(text, bg);
+        choiceBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (choice == C.Choice1)
+                    choice1Picked = true;
+                else if (choice == C.Choice2)
+                    choice2Picked = true;
+                else
+                    choice3Picked = true;
+                call(game);
+            }
+        });
+        return choiceBtn;
+    }
     public void changeUI(Game game) {
-        JPanel panel = new utils.TransparentPanel(new GridBagLayout());
+        JPanel mainPanel = new TransparentPanel(new GridBagLayout());
+        JPanel contentPanel = new TransparentPanel();
+        JPanel buttonPanel = new TransparentPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        mainPanel.add(contentPanel);
         //if (getCharacterName(game) != null)
         //    panel.add(new JLabel(getCharacterName(game)+":"));
         JLabel promptLabel = new JLabel(prompt);
         promptLabel.setFont(game.getUISettings().getFont().deriveFont(50f));
         promptLabel.setForeground(game.getUISettings().getTextColor());
-        panel.add(promptLabel);
-        JButton choice1Btn = new JButton(choice1);
-        choice1Btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                choice1Picked = true;
-                call(game);
-            }
-        });
-        panel.add(choice1Btn);
+        contentPanel.add(promptLabel);
+        contentPanel.add(buttonPanel);
         
-        JButton choice2Btn = new JButton(choice2);
-        choice2Btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                choice2Picked = true;
-                call(game);
-            }
-        });
-        panel.add(choice2Btn);
-        if (choice3 != null) {
-        JButton choice3Btn = new JButton(choice3);
-        choice3Btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                choice3Picked = true;
-                call(game);
-            }
-        });
-        panel.add(choice3Btn);
-    }
-        game.setCenterPanel(panel);
+        buttonPanel.add(createChoiceBtn(game, choice1, C.Choice1));
+        buttonPanel.add(createChoiceBtn(game, choice2, C.Choice2));
+        if (choice3 != null)
+            buttonPanel.add(createChoiceBtn(game, choice3, C.Choice3));
+            
+        game.setCenterPanel(mainPanel);
     }
 }

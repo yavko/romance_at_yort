@@ -92,7 +92,10 @@ public class EntryPoint extends JFrame {
             textFont, // text font used
             Color.decode("#543938"), // main fg text color
             ImageIO.read(
-                EntryPoint.class.getResource("assets/start_button.png") // button bg
+                EntryPoint.class.getResource("assets/choice2.png") // button bg
+            ),
+            ImageIO.read(
+                EntryPoint.class.getResource("assets/choice3.png") // button bg
             ),
             ImageIO.read(
                 EntryPoint.class.getResource("assets/textboxbg.png") // dialogue textbox

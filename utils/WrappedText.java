@@ -19,12 +19,6 @@ public class WrappedText extends JTextArea {
         super(text);
         setStyles();
     }
-    private int lineSpacing = 10;
-    public WrappedText(String text, int lineSpacing) {
-        super(text);
-        setStyles();
-        this.lineSpacing = lineSpacing;
-    }
     private void setStyles() {
         setEditable(false);
         setLineWrap(true);

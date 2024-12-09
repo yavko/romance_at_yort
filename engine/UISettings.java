@@ -10,7 +10,8 @@ import java.awt.*;
 public class UISettings {
     private Font textFont;
     private Color textColor;
-    private Image buttonBg;
+    private Image button2Bg;
+    private Image button3Bg;
     private Image dialogueBg;
     private double buttonSize;
     private boolean fadeScenes;
@@ -22,8 +23,11 @@ public class UISettings {
     public Color getTextColor() {
         return textColor;
     }
-    public Image getButtonBg() {
-        return buttonBg;
+    public Image getButton2Bg() {
+        return button2Bg;
+    }
+    public Image getButton3Bg() {
+        return button3Bg;
     }
     public Image getDialogueBg() {
         return dialogueBg;
@@ -44,7 +48,8 @@ public class UISettings {
     public UISettings(
         Font textFont,
         Color textColor,
-        Image buttonBg,
+        Image button2Bg,
+        Image button3Bg,
         Image dialogueBg,
         double buttonSize,
         boolean fadeScenes,
@@ -52,7 +57,8 @@ public class UISettings {
     ) {
         this.textFont = textFont;
         this.textColor = textColor;
-        this.buttonBg = buttonBg;
+        this.button2Bg = button2Bg;
+        this.button3Bg = button3Bg;
         this.dialogueBg = dialogueBg;
         this.buttonSize = buttonSize;
         this.fadeScenes = fadeScenes;
