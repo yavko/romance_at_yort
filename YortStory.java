@@ -244,8 +244,7 @@ public class YortStory extends engine.Story {
                         Clip BadResponse1 = engine.MediaPlayer.createClip("./audio/BadResponse1.wav", true);
 
                         condScene(new Scene(
-                                MiscAssets.backgrounds.get("hallwaybg")
-
+                                MiscAssets.backgrounds.get("choicebg")
                             ));
                         condPart(new Choice("How do you start the conversation?", "\"Wait, I didn’t mean it like that. Can we start over?\"", "\"Whatever, it’s not like I care. I have places to be.\"", "\"Whatever, it’s not like I care. I have places to be.\"") {
                                 @Override
@@ -299,7 +298,12 @@ public class YortStory extends engine.Story {
                         }else if(difficulty == Difficulty.Impossible){
                             affectionMeter -= 20;
                         }
-
+                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("hallwaybg"),
+                                new engine.Character[] {
+                                    new Oswaldo(0,0)
+                                }
+                            ));
                         condPart(new Dialogue("Oswaldo, the guy you bumped into, looks at you confused, but as he is polite, he doesn’t want to cause a big scene. “Hey, no need to be rude. It was an accident.”"));
 
                         condPart(new EmptyPart(){
