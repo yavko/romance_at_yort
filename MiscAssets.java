@@ -119,6 +119,10 @@ public class MiscAssets {
         addImage(backgrounds, "assets/up.png", "up");
         
         addImage(backgrounds, "assets/down.png", "down");
+        
+        addImage(backgrounds, "assets/choice2.png", "c2");
+        
+        addImage(backgrounds, "assets/choice3.png", "c3");
 
     }
 
