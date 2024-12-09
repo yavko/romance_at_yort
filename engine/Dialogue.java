@@ -60,6 +60,8 @@ public class Dialogue extends ScenePart {
         } else typing = false;
         bottomPanel.add(new TransparentPanel(), BorderLayout.PAGE_START);
         bottomPanel.add(new TransparentPanel(), BorderLayout.LINE_START);
+        bottomPanel.add(new TransparentPanel(), BorderLayout.LINE_END);
+
         bottomPanel.add(textLabel, BorderLayout.CENTER);
         MouseListener clickListener = new MouseListener() {
                 public void mousePressed(MouseEvent e) {}
