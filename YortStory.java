@@ -244,7 +244,7 @@ public class YortStory extends engine.Story {
                         Clip BadResponse1 = engine.MediaPlayer.createClip("./audio/BadResponse1.wav", true);
 
                         condScene(new Scene(
-                                MiscAssets.backgrounds.get("choicebg")
+                                MiscAssets.backgrounds.get("hallwaybg")
 
                             ));
                         condPart(new Choice("How do you start the conversation?", "\"Wait, I didn’t mean it like that. Can we start over?\"", "\"Whatever, it’s not like I care. I have places to be.\"", "\"Whatever, it’s not like I care. I have places to be.\"") {
