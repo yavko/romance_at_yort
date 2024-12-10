@@ -27,7 +27,7 @@ public class YortStory extends engine.Story {
 
         Clip mainTheme = engine.MediaPlayer.createClip("./audio/Main theme.wav", true);
         // User enters their name and will be inputted in the background context.
-        addScene(new Scene(
+        addScene(new Scene(        
                 MiscAssets.backgrounds.get("base")));   
 
         addPart(new NullPart(){

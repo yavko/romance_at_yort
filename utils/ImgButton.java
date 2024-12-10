@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ImgButton extends JButton {
+    private Image img;
+    private Double scaleFactor;
     
     /**
      * ImgButton Constructor
@@ -13,7 +15,18 @@ public class ImgButton extends JButton {
      */
     public ImgButton(Image img, Double scaleFactor) {
         super();
-        if (scaleFactor != null)
+        this.img = img;
+        this.scaleFactor = scaleFactor;
+        setImg(img);
+        setBorder(BorderFactory.createEmptyBorder());
+        setContentAreaFilled(false);
+        setBorderPainted(false);
+        setFocusPainted(false);
+    }
+    public void setImg(Image newImg) {
+        this.img = newImg;
+        if (scaleFactor != null) {
+            if (scaleFactor != null)
             setIcon(new ImageIcon(
                 img.getScaledInstance(
                     (int)(img.getWidth(this)*scaleFactor),
@@ -23,11 +36,9 @@ public class ImgButton extends JButton {
             ));
         else
             setIcon(new ImageIcon(img));
-        setBorder(BorderFactory.createEmptyBorder());
-        setContentAreaFilled(false);
-        setBorderPainted(false);
-        setFocusPainted(false);
+        }
     }
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
