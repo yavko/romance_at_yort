@@ -39,7 +39,7 @@ public abstract class Choice extends ScenePart {
     enum C {
         Choice1, Choice2, Choice3
     }
-    private WrappedText createChoiceBtn(Game game, String text, C choice) {
+    private WrappedTextBg createChoiceBtn(Game game, String text, C choice) {
         Image bg;
         if (choice3 == null)
             bg = game.getUISettings().getButton2Bg();

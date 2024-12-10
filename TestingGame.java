@@ -36,7 +36,7 @@ public class TestingGame extends JFrame implements KeyListener {
         super("testing game window");
         setMinimumSize(new Dimension(854, 480));
         
-        System.out.println(MiscAssets.balconybg);
+        //System.out.println(MiscAssets.balconybg);
         //
         int seconds;
         Difficulty difficulty = Difficulty.Impossible;

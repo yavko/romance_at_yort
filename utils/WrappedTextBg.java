@@ -25,5 +25,6 @@ public class WrappedTextBg extends WrappedText {
         ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         ((Graphics2D)g).setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g.drawImage(bgImg, 0, 0, getWidth(), getHeight(), this);
+        super.paintComponent(g);
     }
 }
