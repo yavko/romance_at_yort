@@ -16,9 +16,9 @@ public class YortStory extends engine.Story {
     public int affectionMeter = 50;
     public boolean rightChoice = true;
     public boolean dating = false;
-    public YortStory(Difficulty difficulty) {
+    public YortStory(Difficulty defaultDifficulty) {
         super();
-
+        this.difficulty = defaultDifficulty;
         // PLACEGHOLDER PLZ FIX LATER YES
 
         MainCharacter.name = "placeholder";
@@ -30,7 +30,7 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
 
-        addPart(new EmptyPart(){
+        addPart(new NullPart(){
                 @Override
                 public void doAfter(Game game){
                     mainTheme.start();
@@ -78,9 +78,18 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("introDiff"))
         );
+        addPart(new Choice(" ", "Easy", "Normal", "Impossible") {
+            @Override
+            public void doAfter(Game game) {
+                if (choice1Picked)
+                    difficulty = Difficulty.Easy;
+                else if (choice2Picked)
+                    difficulty = Difficulty.Normal;
+                else
+                    difficulty = Difficulty.Impossible;
+            }
+        });
         // Brrrway meeting: First meeting between Oswaldo and the user in which the user has up to 3 choices to choose from.
-        addPart(
-            new EmptyPart());
 
         Clip breezeway= engine.MediaPlayer.createClip("./audio/breezeway.wav", true);
 
