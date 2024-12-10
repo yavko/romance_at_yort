@@ -13,6 +13,14 @@ public class BgPanel extends TransparentPanel {
         super();
         this.img = i;
     }
+    public void setBgImg(Image img) {
+        this.img = img;
+        revalidate();
+        repaint(); // not sure if needed
+    }
+    public Image getBgImg() {
+        return img;
+    }
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

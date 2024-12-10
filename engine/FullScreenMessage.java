@@ -34,7 +34,7 @@ public class FullScreenMessage extends ScenePart {
     public void doAfter(Game game) {}
     
     public void changeUI(Game game) {
-        JPanel panel = new utils.TransparentPanel(new BorderLayout(120,70));
+        JPanel panel = new utils.TransparentPanel(new BorderLayout(150,70));
         if (getCharacterName(game) != null)
             panel.add(new JLabel(getCharacterName(game) + ":"));
         String text =
@@ -46,7 +46,7 @@ public class FullScreenMessage extends ScenePart {
         panel.add(new TransparentPanel(), BorderLayout.LINE_START);
         panel.add(new TransparentPanel(), BorderLayout.LINE_END);
         panel.add(textLabel, BorderLayout.CENTER);
-        textLabel.setFont(game.getUISettings().getFont().deriveFont(15f));
+        textLabel.setFont(game.getUISettings().getFont().deriveFont(20f));
         textLabel.setForeground(game.getUISettings().getTextColor());
         textLabel.setPreferredSize(new Dimension((int)(game.size().width*0.7), (int)(game.size().height*0.7)));
         MouseListener clickListener = new MouseListener() {

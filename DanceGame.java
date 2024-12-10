@@ -22,7 +22,6 @@ public abstract class DanceGame extends engine.MiniGame{
     boolean firstRun = true;
     int currentKey = 0;
     int points = 0;
-    JLabel label = new JLabel("");
     Timer timer = null;
 
     private String[] moves;
@@ -36,62 +35,32 @@ public abstract class DanceGame extends engine.MiniGame{
     }
 
     private void setKey() {
-        label.setText(moves[currentKey]);
+        if (panel != null)
+            panel.setBgImg(MiscAssets.backgrounds.get(moves[currentKey]));
+        System.out.println(moves[currentKey]);
     }
 
     public DanceGame(MinigameDifficulty difficulty) {
         super(difficulty);
     }
 
-    public void keyPressed(KeyEvent e) {
-        int keyCode = e.getKeyCode();
-        engine.MediaPlayer.createClip("./audio/buttonClick.wav", false).start();
-        if(!wasPressed) {
-            switch(keyCode) {
-
-                case KeyEvent.VK_UP:
-                    // handle up
-                    BgPanel bg = new BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("up"));
-
-                    if(moves[currentKey-1] == "up"){
+    private BgPanel panel = null;
+    private void addKeyBind(int keyCode, String keyName) {
+        panel.getInputMap().put(KeyStroke.getKeyStroke(keyCode, 0), keyName);
+        panel.getActionMap().put(keyName, new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!wasPressed) {
+                    if(moves[currentKey-1] == keyName)
                         points += 100;
-
-                    }
-                    break;
-                case KeyEvent.VK_DOWN:
-                    // handle down
-                    bg = new BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("down"));
-
-                    if(moves[currentKey-1] == "down"){
-                        points += 100;
-
-                    }
-                    break;
-                case KeyEvent.VK_LEFT:
-                    // handle left
-                    bg = new BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("left"));
-
-                    if(moves[currentKey-1] == "left"){
-                        points += 100;
-
-                    }
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    // handle right
-                    bg = new BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("right"));
-
-                    if(moves[currentKey-1] == "right"){
-                        points += 100;
-
-                    }
-                    break;
+                    panel.setBgImg(MiscAssets.backgrounds.get("balconybg"));
+                }
+                
             }
-            label.setText("!");
-        }
+        });
     }
-
     public void changeUI(engine.Game game) {
-        BgPanel panel = new BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("balconybg"));
+        panel = new BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("balconybg"));
         int seconds;
 
         if(difficulty == MinigameDifficulty.Basic){
@@ -110,7 +79,7 @@ public abstract class DanceGame extends engine.MiniGame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (currentKey == moves.length-1){
-                        label.setText("game finished. You have: " + points + " points");
+                        System.out.println("game finished. You have: " + points + " points");
                         timer.stop();
                         call(game);
                     } else {
@@ -124,16 +93,13 @@ public abstract class DanceGame extends engine.MiniGame{
                 }
             });
         timer.start();
-
-        panel.add(label);
-
+        
+        addKeyBind(KeyEvent.VK_RIGHT, "right");
+        addKeyBind(KeyEvent.VK_LEFT, "left");
+        addKeyBind(KeyEvent.VK_UP, "up");
+        addKeyBind(KeyEvent.VK_DOWN, "down");
+        
         game.setCenterPanel(panel);
     }
-    public void keyReleased(KeyEvent e) {
 
-    }
-    
-    public int score(int points){
-        return points;
-    }
 }
