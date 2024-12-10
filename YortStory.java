@@ -240,7 +240,7 @@ public class YortStory extends engine.Story {
                         else{
                             affectionMeter +=5;
                         }
-                    } else if(choice2Picked){
+                    } else if(choice2Picked){ // User chooses the bad option out of the bunch
                         rightChoice = false;
                         Clip BadResponse1 = engine.MediaPlayer.createClip("./audio/BadResponse1.wav", true);
 
@@ -256,6 +256,7 @@ public class YortStory extends engine.Story {
                                                 new Oswaldo(0,0)
                                             }
                                         ));
+                                    // User gets to choose another 3 choices based on their rude response
                                     if(choice1Picked){
                                         condPart( new Dialogue("You both head to class together, and during a group project, you find yourselves paired up. As you work, you realize he’s actually pretty cool, and you start to enjoy his company. However, you notice that he is still cautious of you."));
 
@@ -333,6 +334,7 @@ public class YortStory extends engine.Story {
                                                 new Oswaldo(0,0)
                                             }
                                         ));
+                                    // User gets to choose between 2 options based on their mysterious choice
                                     if(choice1Picked){
                                         condPart(new EmptyPart(){
                                                 @Override
@@ -596,7 +598,7 @@ public class YortStory extends engine.Story {
             ));
 
         addPart(new 
-
+        // Secret Scene with school incident and deciding if you see Oswaldo as your potential partner
             Choice("What do you do?", "Blush and say nothing.", "Tell your friend that you guys are not together and leave Oswaldo.", "Pretend like you guys are together and reach for Oswaldo’s hand.") {
                 @Override
                 public void doAfter(Game game) {
@@ -792,7 +794,7 @@ public class YortStory extends engine.Story {
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
-
+                        // User will decide with going to the dance or studying. 
                         condPart(new Choice("Go to the dance or study for finals?", "go to the dance!", "study") {
                                 @Override
                                 public void doAfter(Game game) {
@@ -811,13 +813,14 @@ public class YortStory extends engine.Story {
 
                                         condScene(new 
                                             Scene(
-                                                MiscAssets.backgrounds.get("tttSit")));
+                                                MiscAssets.backgrounds.get("danceSit")));
 
                                         condPart(new Choice("dance with oswaldo?", "yes", "no") {
                                                 @Override
                                                 public void doAfter(Game game) {
 
                                                     if(choice1Picked){
+                                                        // Secret scene with the user's past crush at the dance
                                                         //call game here
 
                                                         condScene(new Scene(
@@ -965,6 +968,7 @@ public class YortStory extends engine.Story {
 
                                         condScene(new Scene(
                                                 MiscAssets.backgrounds.get("choicebg")));
+                                        // This will occur only if the user does not have enough favorability with Oswaldo.
 
                                         condPart(new Choice("what will you wear?", "green dress", "guy suit", "school uniform") {
                                                 @Override
@@ -1064,7 +1068,7 @@ public class YortStory extends engine.Story {
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
-
+                        // Based on the favorability of Oswaldo, Oswaldo will come in and be outstanded by your formal wear.
                         condPart(new Choice("what will you wear?", "green dress", "guy suit", "school uniform") {
                                 @Override
                                 public void doAfter(Game game) {
@@ -1177,6 +1181,7 @@ public class YortStory extends engine.Story {
                     graduation.start();
                 }
             });
+        // The user has finished their year of Yort and is now at graduation where they have one last situation to raise their favorability with Oswaldo.
         addPart(
             new NullPart(){
                 @Override
@@ -1189,7 +1194,7 @@ public class YortStory extends engine.Story {
                             Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
 
-                        condPart(new Choice("what do you do?", "friendzone", "confession", "nothing") {
+                        condPart(new Choice("What should you say?", "\"I’m always grateful for you looking after me all these years. I couldn’t have asked for a better person to be with!\"", "You go up to Oswaldo and tell him that he's been such a great friend!", "You smile at him and decide to just say goodbye as you just want to get out of school as fast as possible.") {
                                 @Override
                                 public void doAfter(Game game) {
 
@@ -1286,11 +1291,11 @@ public class YortStory extends engine.Story {
                     Clip goodResponse2 = engine.MediaPlayer.createClip("./audio/GooderResponse2.wav", true);
 
                     if(dating == true ){
-
+                        // Based on your affection with Oswaldo, the game will see if you gained the favorable outcome or not.
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
 
-                        condPart(new Choice("say yes?", "yes", "no") {
+                        condPart(new Choice("Do you say yes?", "Yes!", "No!") {
                                 @Override
                                 public void doAfter(Game game) {
 
@@ -1315,7 +1320,7 @@ public class YortStory extends engine.Story {
                                             condScene(new Scene(
                                                     MiscAssets.backgrounds.get("choicebg")));
 
-                                            condPart(new Choice("change your mind?", "yes", "no") {
+                                            condPart(new Choice("Are you sure with your answer?", "Yes!", "No!") {
                                                     @Override
                                                     public void doAfter(Game game) {
                                                         if(choice1Picked){
@@ -1454,7 +1459,7 @@ public class YortStory extends engine.Story {
                 }
             }
         );
-
+        // Credits are shown 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("credits")));
 
