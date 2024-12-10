@@ -1,70 +1,127 @@
 
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
-
+import java.util.Random;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.*;
 import utils.BgPanel;
 import utils.TransparentPanel;
+import utils.ImgButton;
+import engine.Game;
+import javax.imageio.ImageIO;
+import java.awt.Image;
+
 
 public abstract class TicTacToe extends engine.MiniGame {
     /**
      * Constructor for objects of class MiniGame
      */
     private engine.MinigameDifficulty difficulty;
-    protected Class winner;
-    private boolean isPlayer;
+    protected boolean playerWon;
+    protected boolean draw = false;
+    private static Image xImg = null;
+    private static Image oImg = null;
+    private static Image emptyImg = null;
+    static {
+        try {
+            emptyImg = ImageIO.read(
+                EntryPoint.class.getResource("assets/ticEmpty.png")
+            );
+            xImg = ImageIO.read(
+                EntryPoint.class.getResource("assets/ticX.png")
+            );
+            oImg = ImageIO.read(
+                EntryPoint.class.getResource("assets/ticO.png")
+            );
+        } catch (Exception e) {
+            System.err.println("failed to read tic tac toe assets");
+        }
+    }
+    
+    //private boolean isPlayer;
     public TicTacToe(engine.MinigameDifficulty difficulty) {
         super(difficulty);
     }
     enum Placed {
         Empty, X, O
     }
-    class TicBtn extends JButton {
+    class TicBtn extends ImgButton {
         public boolean clicked;
         public Placed placed;
         private void set(Placed placed) {
             this.placed = placed;
             if (placed == Placed.X)
-                super.setText("x");
-            else super.setText("o");
+                setImg(xImg);
+            else setImg(oImg);
         }
 
-        public TicBtn(TicTacToe currentGame) {
-            super("-");
+        public TicBtn(TicTacToe currentGame, Game game) {
+            super(emptyImg, 0.05);
             this.placed = Placed.Empty;
-            super.addActionListener(new ActionListener() {
+            addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (isPlayer)
-                            set(Placed.X);
-                        else
-                            set(Placed.O);
-                        currentGame.update();
+                        set(Placed.X);
+                        currentGame.update(game);
                     }
                 });
+            //this.setBorder(new EmptyBorder(10, 10, 10, 10));
+
         }
     }
-    public void update() {
+    public TicBtn getEnemyMove() {
+        Random rand = new Random();
+        TicBtn btn = null;
+        do {
+            btn = grid[rand.nextInt(3)][rand.nextInt(3)];
+        } while (btn.placed != Placed.Empty);
+        return btn;
     }
-
+    public void update(Game game) {
+        if (hasVictor()) {
+            playerWon = true;
+            call(game);
+        } else {
+            TicBtn move = getEnemyMove();
+            if (move == null) {
+                draw = true;
+                playerWon = false;
+                call(game);
+            } else  {
+                getEnemyMove().set(Placed.O);
+                if (hasVictor()) {
+                    playerWon = false;
+                    call(game);
+                }
+            }
+        }
+    }
+    private TicBtn[][] grid = new TicBtn[3][3];
     public void changeUI(engine.Game game) {
         BgPanel pane = new BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("desk"));
-
-        JPanel panel = new TransparentPanel(new BorderLayout());
+        pane.setBorder(new EmptyBorder(110, 110, 110, 110));
+        //JPanel panel = new TransparentPanel(new BorderLayout());
         JPanel gridPanel = new TransparentPanel(new GridLayout(3, 3));
-        panel.add(gridPanel, BorderLayout.CENTER);
-        TicBtn[][] grid = new TicBtn[3][3];
+        pane.add(gridPanel, BorderLayout.CENTER);
         for (int row = 0; row < 3; row++)
             for (int col = 0; col < 3; col++) {
-                grid[row][col] = new TicBtn(this);
+                grid[row][col] = new TicBtn(this, game);
+                gridPanel.add(grid[row][col]);
             }
 
         game.setCenterPanel(pane);
     }
-
-    public void finish(Class winner) {
-        this.winner = winner;
+    private boolean hasVictor() {
+        boolean winner = false;
+        Placed[] winningTypes = new Placed[] {Placed.X, Placed.O};
+        for (Placed place : winningTypes) {
+            for (int i = 0; i < 3; i++)
+                winner |= grid[0][i].placed == place && grid[1][i].placed == place && grid[2][i].placed == place;
+            winner |= grid[0][0].placed == place && grid[1][1].placed == place && grid[2][2].placed == place;
+            winner |= grid[2][0].placed == place && grid[1][1].placed == place && grid[0][2].placed == place;
+        }
+        return winner;
     }
 
 }

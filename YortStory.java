@@ -29,7 +29,7 @@ public class YortStory extends engine.Story {
         // User enters their name and will be inputted in the background context.
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
-
+        
         addPart(new NullPart(){
                 @Override
                 public void doAfter(Game game){
