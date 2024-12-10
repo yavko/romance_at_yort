@@ -124,7 +124,7 @@ public class MiscAssets {
         
         addImage(backgrounds, "assets/choice3.png", "c3");
         
-        addImage(backgrounds, "assets/Replay.png", "replay");
+        addImage(backgrounds, "assets/replay.png", "replay");
     }
 
     public static String generateBackgroundInfo(String name){
