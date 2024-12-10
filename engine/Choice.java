@@ -1,11 +1,15 @@
 package engine;
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.GridBagLayout;
 import java.awt.event.*;
 import java.awt.FlowLayout;
 import utils.WrappedTextBg;
 import utils.TransparentPanel;
 import java.awt.Image;
+import java.awt.Dimension;
+import java.awt.BorderLayout;
+import java.awt.Font;
 
 public abstract class Choice extends ScenePart {
     private final String prompt;
@@ -41,10 +45,28 @@ public abstract class Choice extends ScenePart {
     }
     private WrappedTextBg createChoiceBtn(Game game, String text, C choice) {
         Image bg;
-        if (choice3 == null)
+        double aspectRatio;
+        double percentOfScreen;
+        Font font = null;
+        if (choice3 == null) {
             bg = game.getUISettings().getButton2Bg();
-        else bg = game.getUISettings().getButton3Bg();
+            aspectRatio = 741.0/572.0;
+            percentOfScreen = 0.4;
+            font = game.getUISettings().getFont().deriveFont(30f);
+        }
+        else {
+            bg = game.getUISettings().getButton3Bg();
+            aspectRatio = 516.0/685.0;
+            percentOfScreen = 7.0/12.0;
+            font = game.getUISettings().getFont().deriveFont(20f);
+        }
+        int fullH = game.size().height;
+        int newH = (int)(fullH*percentOfScreen);
+        int newW = (int)(newH*aspectRatio);
         WrappedTextBg choiceBtn = new WrappedTextBg(text, bg);
+        choiceBtn.setFont(font);
+        choiceBtn.setForeground(game.getUISettings().getTextColor());
+        choiceBtn.setPreferredSize(new Dimension(newW, newH));
         choiceBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -57,21 +79,23 @@ public abstract class Choice extends ScenePart {
                 call(game);
             }
         });
+        choiceBtn.setBorder(new EmptyBorder(100, 30, 10, 30));
         return choiceBtn;
     }
     public void changeUI(Game game) {
-        JPanel mainPanel = new TransparentPanel(new GridBagLayout());
+        JPanel mainPanel = new TransparentPanel(new BorderLayout());
         JPanel contentPanel = new TransparentPanel();
+        JPanel textPanel = new TransparentPanel(new GridBagLayout());
         JPanel buttonPanel = new TransparentPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(contentPanel);
-        //if (getCharacterName(game) != null)
-        //    panel.add(new JLabel(getCharacterName(game)+":"));
+        mainPanel.add(contentPanel, BorderLayout.PAGE_END);
+        
         JLabel promptLabel = new JLabel(prompt);
         promptLabel.setFont(game.getUISettings().getFont().deriveFont(50f));
         promptLabel.setForeground(game.getUISettings().getTextColor());
-        contentPanel.add(promptLabel);
+        textPanel.add(promptLabel);
+        contentPanel.add(textPanel);
         contentPanel.add(buttonPanel);
         
         buttonPanel.add(createChoiceBtn(game, choice1, C.Choice1));

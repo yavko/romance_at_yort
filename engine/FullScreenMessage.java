@@ -34,7 +34,7 @@ public class FullScreenMessage extends ScenePart {
     public void doAfter(Game game) {}
     
     public void changeUI(Game game) {
-        JPanel panel = new utils.TransparentPanel(new BorderLayout(100,70));
+        JPanel panel = new utils.TransparentPanel(new BorderLayout(120,70));
         if (getCharacterName(game) != null)
             panel.add(new JLabel(getCharacterName(game) + ":"));
         String text =

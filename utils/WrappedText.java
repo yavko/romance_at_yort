@@ -21,8 +21,10 @@ public class WrappedText extends JTextArea {
     }
     private void setStyles() {
         setEditable(false);
+        setFocusable(false);
         setLineWrap(true);
         setWrapStyleWord(true);
+        getCaret().deinstall(this);
         setHighlighter(null);
         JLabel lb = new JLabel();
         Font f = lb.getFont();

@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 
 
-
 /**
  * Sort of a mix between a JLabel and a JTextArea
  *
