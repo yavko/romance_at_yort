@@ -148,7 +148,7 @@ public class YortStory extends engine.Story {
 
                                         condPart(new Dialogue("He lights up and shares that he enjoys playing guitar. As you talk, he mentions he’s performing at the school talent show next week. You decide to support him and plan to attend the show together. Oswaldo feels appreciated and has a good impression of you."));
 
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     goodResponse1.stop();
@@ -179,7 +179,7 @@ public class YortStory extends engine.Story {
 
                                         condPart(new Dialogue("\"That sounds amazing! I’ve heard great things about it. Let’s make it a plan!\""));
 
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     goodResponse1.stop();
@@ -205,7 +205,7 @@ public class YortStory extends engine.Story {
 
                                         condPart(new Dialogue("He laughs, clearly amused. \"Well, you’ve definitely caught my attention. Let’s see if you can keep it.\""));
 
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     goodResponse1.stop();
@@ -236,7 +236,7 @@ public class YortStory extends engine.Story {
 
                         condPart(new Dialogue("\"Hey, no worries at all! It was an accident. I’m sure you didn’t mean to. My name is Oswaldo,\" he smiles warmly."));
 
-                        condPart(new NullPart(){
+                        condPart(new EmptyPart(){
                                 @Override
                                 public void doAfter(Game game){
                                     breezeway.stop();
@@ -281,7 +281,7 @@ public class YortStory extends engine.Story {
                                             });
                                     }
                                     else if(choice2Picked){
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     BadResponse1.stop();
@@ -309,7 +309,7 @@ public class YortStory extends engine.Story {
                                         else{
                                             affectionMeter +=1;
                                         }
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     BadResponse1.stop();
@@ -331,7 +331,7 @@ public class YortStory extends engine.Story {
                             ));
                         condPart(new Dialogue("Oswaldo, the guy you bumped into, looks taken aback and shakes his head slightly. \"That’s a bit harsh, don’t you think? It was just an accident.\" He turns to walk away, but you notice he hesitates."));
 
-                        condPart(new NullPart(){
+                        condPart(new EmptyPart(){
                                 @Override
                                 public void doAfter(Game game){
                                     breezeway.stop();
@@ -374,7 +374,7 @@ public class YortStory extends engine.Story {
                                         }
                                     }
                                     else{
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     goodResponse2.stop();
@@ -404,7 +404,7 @@ public class YortStory extends engine.Story {
 
                         condPart(new Dialogue("The guy you bumped into was Oswaldo. He looks at you as if waiting for you to say something, but you don’t."));
 
-                        condPart(new NullPart(){
+                        condPart(new EmptyPart(){
                                 @Override
                                 public void doAfter(Game game){
                                     breezeway.stop();
@@ -516,7 +516,7 @@ public class YortStory extends engine.Story {
 
                             condPart(new Dialogue("Oswaldo feels offended and a little insulted for you declining to play his favorite game."));
 
-                            condPart(new NullPart(){
+                            condPart(new EmptyPart(){
                                     @Override
                                     public void doAfter(Game game){
                                         ticTacToe.stop();
@@ -648,7 +648,7 @@ public class YortStory extends engine.Story {
 
                         condPart(new Dialogue("Oswaldo looks hopefully at you. Once your friend is out of sight he stands closer to you and apologizes for his previous behavior."));
 
-                        condPart(new NullPart(){
+                        condPart(new EmptyPart(){
                                 @Override
                                 public void doAfter(Game game){
                                     awkward.stop();
@@ -674,7 +674,7 @@ public class YortStory extends engine.Story {
                             condPart(new Dialogue("You thought that Oswaldo would have pretended that nothing happened, but it's been a whole month since you've seen him."));
 
                             condPart(new Dialogue("Oswaldo looks after you in despair. Any hope he had of fixing the relationship has just been diminished into dust. Head down low, he walks away from the shame of your rejection."));
-                            condPart(new NullPart(){
+                            condPart(new EmptyPart(){
                                     @Override
                                     public void doAfter(Game game){
                                         awkward.stop();
@@ -690,7 +690,7 @@ public class YortStory extends engine.Story {
                                     }
                                 });
                             condPart(new Dialogue("Oswaldo is disappointed by your behavior. He makes a mental note to never speak to you again. He leaves, and you stare after him heartbroken."));
-                            condPart(new NullPart(){
+                            condPart(new EmptyPart(){
                                     @Override
                                     public void doAfter(Game game){
                                         awkward.stop();
@@ -794,16 +794,16 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("dance")));
 
-        addPart(new NullPart(){
+        addPart(new EmptyPart(){
                 @Override
                 public void doAfter(Game game){
                     awkward.stop();
                     dance.start();
                 }
             });
-        //change to nullPart or something else
+        //change to EmptyPart or something else
         addPart(
-            new NullPart(){
+            new EmptyPart(){
                 @Override
                 public void doAfter(Game game) {
                     if((difficulty != Difficulty.Impossible) && affectionMeter >= 70 
@@ -865,7 +865,7 @@ public class YortStory extends engine.Story {
                                                                                     new Oswaldo(0,0)
                                                                                 }));
                                                                         if(difficulty == Difficulty.Normal){        
-                                                                            condPart(new NullPart(){
+                                                                            condPart(new EmptyPart(){
                                                                                     @Override
                                                                                     public void doAfter(Game game){
                                                                                         badResponse1.stop();
@@ -888,7 +888,7 @@ public class YortStory extends engine.Story {
                                                                                 });
                                                                             condPart(new Dialogue("He looks at you with a face of betrayal and swiftly leaves. Whatever magic happened at the balconey had disappeared after midnight."));
                                                                             condPart(new Dialogue("Oswaldo comes storming towards you and your 5th grade crush. Out of anger, he thrusts the cup of juice at you and your crush."));
-                                                                            condPart(new NullPart(){
+                                                                            condPart(new EmptyPart(){
                                                                                     @Override
                                                                                     public void doAfter(Game game){
                                                                                         crush.stop();
@@ -919,6 +919,14 @@ public class YortStory extends engine.Story {
                                                                     }
                                                                 }
                                                             });
+                                                        condScene(new Scene(
+                                                                MiscAssets.backgrounds.get("crushSit")));
+
+                                                        condPart(
+                                                            new 
+                                                            EmptyPart()
+                                                        );
+
                                                         condScene(new Scene(
                                                                 MiscAssets.backgrounds.get("crush")));
 
@@ -960,7 +968,7 @@ public class YortStory extends engine.Story {
                                                                     }
                                                                 });
                                                             condPart(new Dialogue("Oswaldo and you eat snacks at the buffet, laughing through conversations. However, you guys are one of the few who aren’t dancing, raising public interest in the relationship you have with Oswaldo."));
-                                                            condPart(new NullPart(){
+                                                            condPart(new EmptyPart(){
                                                                     @Override
                                                                     public void doAfter(Game game){
                                                                         dance.stop();
@@ -989,7 +997,7 @@ public class YortStory extends engine.Story {
                                                                     }
                                                                 });
                                                             condPart(new Dialogue("Oswaldo is hurt by your rejection, feeling it is necessary to dance at such a party. He is ashamed and embarrassed asking you to dance in front of the crowd, and ends up leaving the dance with his head low."));
-                                                            condPart(new NullPart(){
+                                                            condPart(new EmptyPart(){
                                                                     @Override
                                                                     public void doAfter(Game game){
                                                                         dance.stop();
@@ -1082,7 +1090,7 @@ public class YortStory extends engine.Story {
                                                 MiscAssets.backgrounds.get("tttbg")));
 
                                         condPart(new Dialogue("Although it pained you to reject Oswaldo, you left him to watch your figure gradually disappear back into Professor CoJoglianese's classroom to study the night."));
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     dance.stop();
@@ -1219,7 +1227,7 @@ public class YortStory extends engine.Story {
             });
         // The user has finished their year of Yort and is now at graduation where they have one last situation to raise their favorability with Oswaldo.
         addPart(
-            new NullPart(){
+            new EmptyPart(){
                 @Override
                 public void doAfter(Game game) {
                     if(affectionMeter >= 70 || (difficulty == Difficulty.Impossible && rightChoice)){
@@ -1309,7 +1317,7 @@ public class YortStory extends engine.Story {
 
             Scene(
                 MiscAssets.backgrounds.get("endScene")));
-        addPart(new EmptyPart(){
+        addPart(new NullPart(){
                 @Override
                 public void doAfter(Game game){
                     graduation.stop();
@@ -1320,7 +1328,7 @@ public class YortStory extends engine.Story {
         addPart(
             new 
 
-            NullPart() {
+            EmptyPart() {
                 @Override
                 public void doAfter(Game game) {
                     Clip proposal = engine.MediaPlayer.createClip("./audio/proposal.wav", true);
@@ -1392,7 +1400,7 @@ public class YortStory extends engine.Story {
                                                                     MiscAssets.backgrounds.get("freedombg")));
 
                                                             condPart(new Dialogue("You chose to be free and live solo"));
-                                                            condPart(new NullPart(){
+                                                            condPart(new EmptyPart(){
                                                                     @Override
                                                                     public void doAfter(Game game){
                                                                         proposal.stop();
@@ -1426,7 +1434,7 @@ public class YortStory extends engine.Story {
                                                     MiscAssets.generateBackgroundInfo(MainCharacter.name)
                                                 )
                                             );
-                                            condPart(new NullPart(){
+                                            condPart(new EmptyPart(){
                                                     @Override
                                                     public void doAfter(Game game){
                                                         proposal.stop();
@@ -1441,7 +1449,7 @@ public class YortStory extends engine.Story {
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("marriageSit")));
 
-                        condPart(new NullPart(){
+                        condPart(new EmptyPart(){
                                 @Override
                                 public void doAfter(Game game){
                                     graduation.stop();
@@ -1468,7 +1476,7 @@ public class YortStory extends engine.Story {
                                 MiscAssets.generateName(MainCharacter.name)
                             )
                         );
-                        condPart(new NullPart(){
+                        condPart(new EmptyPart(){
                                 @Override
                                 public void doAfter(Game game){
                                     proposal.stop();
@@ -1500,7 +1508,7 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("credits")));
 
-        addPart(new NullPart(){
+        addPart(new EmptyPart(){
                 @Override
                 public void doAfter(Game game){
                     mainTheme.stop();
