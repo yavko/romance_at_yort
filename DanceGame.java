@@ -50,12 +50,11 @@ public abstract class DanceGame extends engine.MiniGame{
         panel.getActionMap().put(keyName, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                panel.setBgImg(MiscAssets.backgrounds.get("balconybg"));
                 if (!wasPressed) {
                     if(moves[currentKey-1] == keyName)
                         points += 100;
-                    panel.setBgImg(MiscAssets.backgrounds.get("balconybg"));
                 }
-                
             }
         });
     }

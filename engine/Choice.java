@@ -79,7 +79,10 @@ public abstract class Choice extends ScenePart {
                 call(game);
             }
         });
-        choiceBtn.setBorder(new EmptyBorder(100, 30, 10, 30));
+        if (choice3 != null)
+            choiceBtn.setBorder(new EmptyBorder(100, 30, 10, 30));
+        else 
+            choiceBtn.setBorder(new EmptyBorder(10, 30, 10, 30));
         return choiceBtn;
     }
     public void changeUI(Game game) {
