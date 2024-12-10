@@ -109,10 +109,7 @@ public class YortStory extends engine.Story {
                     if (choice1Picked){ // User chooses the good option
                         Clip goodResponse1 = engine.MediaPlayer.createClip("./audio/GooderResponse1.wav", true);
                         condScene(new Scene(
-                                MiscAssets.backgrounds.get("choicebg"),
-                                new engine.Character[] {
-                                    new Oswaldo(0,0)
-                                }
+                                MiscAssets.backgrounds.get("choicebg")
                             ));
 
                         condPart(new Choice("How do you start the conversation?", "\"So, what do you like to do for fun? I’m really into photography. I love capturing moments.\"", "\"I’ve been wanting to check out the new art exhibit. Want to come with me this weekend?\"", "\"Do you believe in love at first sight, or should I walk by again?\"") {
@@ -320,10 +317,7 @@ public class YortStory extends engine.Story {
                         Clip goodResponse2 = engine.MediaPlayer.createClip("./audio/GooderReponse2.wav", true);
 
                         condScene(new Scene(
-                                MiscAssets.backgrounds.get("choicebg"),
-                                new engine.Character[] {
-                                    new Oswaldo(0,0)
-                                }
+                                MiscAssets.backgrounds.get("choicebg")
                             ));
                         condPart(new Choice("Now's the chance. What do you do?", "Whip your luscious locks once again and walk past him with flair.", "You flash a smile and stay coy while also saying nothing once again.") {
                                 @Override
@@ -361,7 +355,7 @@ public class YortStory extends engine.Story {
                                                 }
                                             });
                                         condPart(new Dialogue("\"Wow, a woman of few words, huh? I like that,\" he mutters as you walk past him to your next class. Oswaldo becomes a bit interested in you, but his interest is still similar to as if you were a normal person passing him by."));
-                                        
+
                                         condPart(new Dialogue("He raises an eyebrow, clearly intrigued by your silent confidence."));
                                         if(difficulty == Difficulty.Easy){
                                             affectionMeter += 5;
@@ -430,7 +424,6 @@ public class YortStory extends engine.Story {
                 @Override
                 public void doAfter(Game game) {
                     if (choice1Picked){ // this comes from a property in Choice
-                        
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("tttbg")));
@@ -461,13 +454,13 @@ public class YortStory extends engine.Story {
                                 condPart(new Dialogue("Oswaldo wins the game, desYorting you completely. He doesn't like people who lose to him, having his interest in you depleted."));
                             }
                         }
-                        
-                        /*condPart(new TicTacToe(difficulty) {
+
+                        condPart(new TicTacToe(difficulty.asMinigameDifficulty()) {
                         @Override
                         public void doAfter(Game game) {
-                            
+
                         }
-                        });*/
+                        });
                     }
                     else{
                         if (difficulty == Difficulty.Impossible){ // this comes from a property in Choice
@@ -598,7 +591,7 @@ public class YortStory extends engine.Story {
             ));
 
         addPart(new 
-        // Secret Scene with school incident and deciding if you see Oswaldo as your potential partner
+                // Secret Scene with school incident and deciding if you see Oswaldo as your potential partner
             Choice("What do you do?", "Blush and say nothing.", "Tell your friend that you guys are not together and leave Oswaldo.", "Pretend like you guys are together and reach for Oswaldo’s hand.") {
                 @Override
                 public void doAfter(Game game) {
@@ -814,6 +807,9 @@ public class YortStory extends engine.Story {
                                         condScene(new 
                                             Scene(
                                                 MiscAssets.backgrounds.get("danceSit")));
+                                                
+                                        condScene(new Scene(
+                                MiscAssets.backgrounds.get("choicebg")));
 
                                         condPart(new Choice("dance with oswaldo?", "yes", "no") {
                                                 @Override
@@ -908,6 +904,13 @@ public class YortStory extends engine.Story {
                                                         condPart(new Dialogue("It was a magical moment that you two will never forget..."));
 
                                                         condPart(new Dialogue("You and Oswaldo dance outside on the balcony all night, watching the sun rise the next morning while holding on to each other."));
+
+                                                        condPart(new DanceGame(difficulty.asMinigameDifficulty()) {
+                                                                @Override
+                                                                public void doAfter(Game game) {
+                                                                    
+                                                                }
+                                                            });
                                                     }
                                                     else{
                                                         if(difficulty==Difficulty.Easy)
@@ -1428,7 +1431,7 @@ public class YortStory extends engine.Story {
 
                         condPart(
                             new FullScreenMessage(
-                                MiscAssets.generateBackgroundInfo(MainCharacter.name)
+                                MiscAssets.generateName(MainCharacter.name)
                             )
                         );
                         condPart(new EmptyPart(){

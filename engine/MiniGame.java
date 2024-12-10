@@ -6,7 +6,7 @@ public abstract class MiniGame extends ScenePart {
     /**
      * Constructor for objects of class MiniGame
      */
-    private MinigameDifficulty difficulty;
+    protected MinigameDifficulty difficulty;
     protected Class winner;
     public MiniGame(MinigameDifficulty difficulty) {
         super();

@@ -5,6 +5,8 @@ import java.util.Random;
 import java.util.Arrays;
 import engine.*;
 import java.awt.BorderLayout;
+import  utils.BgPanel;
+
 
 public class TestingGame extends JFrame implements KeyListener {
     final static String[] keys = new String[] {
@@ -38,7 +40,7 @@ public class TestingGame extends JFrame implements KeyListener {
         setMinimumSize(new Dimension(854, 480));
         
 
-        JPanel openingScreen = new utils.BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("balconeybg"));
+        BgPanel openingScreen = new utils.BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("balconybg"));
         //
         int seconds;
         Difficulty difficulty = Difficulty.Impossible;
