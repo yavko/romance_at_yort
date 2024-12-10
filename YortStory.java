@@ -637,7 +637,7 @@ public class YortStory extends engine.Story {
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("schoolbg")
                             ));
-                        condPart(new NullPart(){
+                        condPart(new EmptyPart(){
                                 @Override
                                 public void doAfter(Game game){
                                     goodResponse2.stop();
@@ -664,7 +664,7 @@ public class YortStory extends engine.Story {
 
                         if(difficulty == Difficulty.Normal){    
                             affectionMeter -= 5;
-                            condPart(new NullPart(){
+                            condPart(new EmptyPart(){
                                     @Override
                                     public void doAfter(Game game){
                                         awkward.stop();
@@ -682,7 +682,7 @@ public class YortStory extends engine.Story {
                                     }
                                 });
                         }else if(difficulty == Difficulty.Impossible){
-                            condPart(new NullPart(){
+                            condPart(new EmptyPart(){
                                     @Override
                                     public void doAfter(Game game){
                                         awkward.stop();
@@ -872,7 +872,7 @@ public class YortStory extends engine.Story {
                                                                                     }
                                                                                 });
                                                                             condPart(new Dialogue("Disheartened by your actions, he turns away."));
-                                                                            condPart(new NullPart(){
+                                                                            condPart(new EmptyPart(){
                                                                                     @Override
                                                                                     public void doAfter(Game game){
                                                                                         crush.stop();
@@ -880,7 +880,7 @@ public class YortStory extends engine.Story {
                                                                                     }
                                                                                 });
                                                                         }else if(difficulty == Difficulty.Impossible){
-                                                                            condPart(new NullPart(){
+                                                                            condPart(new EmptyPart(){
                                                                                     @Override
                                                                                     public void doAfter(Game game){
                                                                                         badResponse1.stop();
@@ -905,7 +905,7 @@ public class YortStory extends engine.Story {
 
                                                                         condPart(new Dialogue("Little did you know, Oswaldo had seen the guy approach you as he was coming back to get the drinks."));
                                                                     }else{
-                                                                        condPart(new NullPart(){
+                                                                        condPart(new EmptyPart(){
                                                                                 @Override
                                                                                 public void doAfter(Game game){
                                                                                     crush.stop();
@@ -922,7 +922,7 @@ public class YortStory extends engine.Story {
                                                         condScene(new Scene(
                                                                 MiscAssets.backgrounds.get("crush")));
 
-                                                        condPart(new NullPart(){
+                                                        condPart(new EmptyPart(){
                                                                 @Override
                                                                 public void doAfter(Game game){
                                                                     dance.stop();
@@ -953,7 +953,7 @@ public class YortStory extends engine.Story {
                                                                         new Oswaldo(0,0)
                                                                     }
                                                                 ));
-                                                            condPart(new NullPart(){
+                                                            condPart(new EmptyPart(){
                                                                     @Override
                                                                     public void doAfter(Game game){
                                                                         eating.stop();
@@ -982,7 +982,7 @@ public class YortStory extends engine.Story {
                                                                         new Oswaldo(0,0)
                                                                     }
                                                                 ));
-                                                            condPart(new NullPart(){
+                                                            condPart(new EmptyPart(){
                                                                     @Override
                                                                     public void doAfter(Game game){
                                                                         badResponse1.stop();
@@ -1071,7 +1071,7 @@ public class YortStory extends engine.Story {
                                                     new Oswaldo(0,0)
                                                 }
                                             ));
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     badResponse1.stop();
@@ -1133,7 +1133,7 @@ public class YortStory extends engine.Story {
 
                                         condScene(new Scene(
                                                 MiscAssets.backgrounds.get("dancebg")));
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     badResponse1.stop();
@@ -1141,7 +1141,7 @@ public class YortStory extends engine.Story {
                                             });
                                         condPart(new Dialogue("The dance was the moment for all students to express themselves to the highest glamor that they could achieve, and here you were, dressed in your normal school uniform. Compared to the other attendees of the dance, you looked like you had mistakenly entered the ballroom instead of the library."));
                                         condPart(new Dialogue("Just in that moment, the doors opened and Oswaldo's eyes dropped at the sight of you."));
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     dance.stop();
@@ -1210,7 +1210,7 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("graduation")));
 
-        addPart(new NullPart(){
+        addPart(new EmptyPart(){
                 @Override
                 public void doAfter(Game game){
                     dance.stop();
@@ -1309,7 +1309,7 @@ public class YortStory extends engine.Story {
 
             Scene(
                 MiscAssets.backgrounds.get("endScene")));
-        addPart(new NullPart(){
+        addPart(new EmptyPart(){
                 @Override
                 public void doAfter(Game game){
                     graduation.stop();
@@ -1379,7 +1379,7 @@ public class YortStory extends engine.Story {
                                                             condScene(new Scene(
                                                                     MiscAssets.backgrounds.get("badOver")));
 
-                                                            condPart(new NullPart(){
+                                                            condPart(new EmptyPart(){
                                                                     @Override
                                                                     public void doAfter(Game game){
                                                                         goodResponse2.stop();
@@ -1412,7 +1412,7 @@ public class YortStory extends engine.Story {
 
                                             condPart(new Dialogue("He puts the ring back in his pocket and gets up from the floor dejectedly. Oswaldo, not looking at you at all, turns away heartbroken. Before he leaves the door, you have final decision to make..."));
                                         }else{
-                                            condPart(new NullPart(){
+                                            condPart(new EmptyPart(){
                                                     @Override
                                                     public void doAfter(Game game){
                                                         badResponse3.stop();
