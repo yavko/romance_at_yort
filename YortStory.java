@@ -97,7 +97,7 @@ public class YortStory extends engine.Story {
                 MiscAssets.backgrounds.get("brrrwayMeeting")));
 
         addPart(
-            new NullPart(){
+            new EmptyPart(){
                 @Override
                 public void doAfter(Game game){
                     mainTheme.stop();
@@ -139,7 +139,7 @@ public class YortStory extends engine.Story {
                                             }
                                         ));
                                     if(choice1Picked){
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     cafe.stop();
@@ -165,7 +165,7 @@ public class YortStory extends engine.Story {
                                         }
                                     }
                                     else if(choice2Picked){
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     cafe.stop();
@@ -195,7 +195,7 @@ public class YortStory extends engine.Story {
                                             affectionMeter +=1;
                                         }
                                     }else{
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     cafe.stop();
@@ -273,7 +273,7 @@ public class YortStory extends engine.Story {
                                         condPart( new Dialogue("You both head to class together, and during a group project, you find yourselves paired up. As you work, you realize he’s actually pretty cool, and you start to enjoy his company. However, you notice that he is still cautious of you."));
 
                                         condPart(new Dialogue("He turns back, a cautious smile on his face. \"Sure, I’m Oswaldo. Let’s pretend I didn’t just get insulted.\""));
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     BadResponse1.stop();
@@ -356,7 +356,7 @@ public class YortStory extends engine.Story {
                                         ));
                                     // User gets to choose between 2 options based on their mysterious choice
                                     if(choice1Picked){
-                                        condPart(new NullPart(){
+                                        condPart(new EmptyPart(){
                                                 @Override
                                                 public void doAfter(Game game){
                                                     goodResponse2.stop();
@@ -428,7 +428,7 @@ public class YortStory extends engine.Story {
             Scene(
                 MiscAssets.backgrounds.get("ticTacToe")));
 
-        addPart(new NullPart(){
+        addPart(new EmptyPart(){
                 @Override
                 public void doAfter(Game game){
                     breezeway.stop();
@@ -504,7 +504,7 @@ public class YortStory extends engine.Story {
                                         new Oswaldo(0,0)
                                     }
                                 ));
-                            condPart(new NullPart(){
+                            condPart(new EmptyPart(){
                                     @Override
                                     public void doAfter(Game game){
                                         badResponse2.stop();
@@ -1452,7 +1452,7 @@ public class YortStory extends engine.Story {
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("BADover")));
 
-                        condPart(new NullPart(){
+                        condPart(new EmptyPart(){
                                 @Override
                                 public void doAfter(Game game){
                                     goodResponse2.stop();
