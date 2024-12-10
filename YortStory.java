@@ -29,18 +29,18 @@ public class YortStory extends engine.Story {
         // User enters their name and will be inputted in the background context.
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
-
+                
         addPart(new EmptyPart(){
-                @Override
-                public void doAfter(Game game){
-                    mainTheme.start();
-                }
-            });
-
+            @Override
+            public void doAfter(Game game){
+                mainTheme.start();
+            }
+        });
+                
         addPart(new Input("Please enter your name: ") {
                 @Override
                 public void doAfter(Game game) {
-
+                    
                     System.out.println("chosen name: " + inputtedText);
                     MainCharacter.name = inputtedText;
                 }
@@ -1196,8 +1196,8 @@ public class YortStory extends engine.Story {
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("graduation")));
-
-        addPart(new EmptyPart(){
+        
+                addPart(new EmptyPart(){
                 @Override
                 public void doAfter(Game game){
                     dance.stop();
