@@ -29,6 +29,7 @@ public class YortStory extends engine.Story {
         // User enters their name and will be inputted in the background context.
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
+                
         addPart(new EmptyPart(){
             @Override
             public void doAfter(Game game){
@@ -91,7 +92,7 @@ public class YortStory extends engine.Story {
                 @Override
                 public void doAfter(Game game){
                     mainTheme.stop();
-                    mainTheme.close();
+
                     breezeway.start();
                 }
             }
@@ -263,7 +264,12 @@ public class YortStory extends engine.Story {
                                         condPart( new Dialogue("You both head to class together, and during a group project, you find yourselves paired up. As you work, you realize he’s actually pretty cool, and you start to enjoy his company. However, you notice that he is still cautious of you."));
 
                                         condPart(new Dialogue("He turns back, a cautious smile on his face. \"Sure, I’m Oswaldo. Let’s pretend I didn’t just get insulted.\""));
-
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    BadResponse1.stop();
+                                                }
+                                            });
                                     }
                                     else if(choice2Picked){
                                         condPart(new EmptyPart(){
@@ -294,6 +300,12 @@ public class YortStory extends engine.Story {
                                         else{
                                             affectionMeter +=1;
                                         }
+                                        condPart(new EmptyPart(){
+                                                @Override
+                                                public void doAfter(Game game){
+                                                    BadResponse1.stop();
+                                                }
+                                            });
                                     }
                                 }
                             });
@@ -1290,6 +1302,7 @@ public class YortStory extends engine.Story {
 
             Scene(
                 MiscAssets.backgrounds.get("endScene")));
+        addPart( new EmptyPart());
 
         addPart(
             new 
