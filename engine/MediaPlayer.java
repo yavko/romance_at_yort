@@ -24,8 +24,8 @@ public final class MediaPlayer {
         }
         if (repeat) {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
-            clip.stop();
         }
+        clip.stop();
         return clip;
     }
 }

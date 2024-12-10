@@ -29,9 +29,17 @@ public class YortStory extends engine.Story {
         // User enters their name and will be inputted in the background context.
         addScene(new Scene(
                 MiscAssets.backgrounds.get("base")));
+        addPart(new EmptyPart(){
+            @Override
+            public void doAfter(Game game){
+                mainTheme.start();
+            }
+        });
+                
         addPart(new Input("Please enter your name: ") {
                 @Override
                 public void doAfter(Game game) {
+                    
                     System.out.println("chosen name: " + inputtedText);
                     MainCharacter.name = inputtedText;
                 }
@@ -39,12 +47,7 @@ public class YortStory extends engine.Story {
         // Start screen
         addPart(
             new FullScreenMessage(() -> MiscAssets.generateBackgroundInfo(MainCharacter.name)
-            ){
-                @Override
-                public void onLoad(Game game){
-                    mainTheme.start();
-                }
-            }
+            )
         );
 
         addScene(new Scene(
@@ -88,6 +91,7 @@ public class YortStory extends engine.Story {
                 @Override
                 public void doAfter(Game game){
                     mainTheme.stop();
+                    mainTheme.close();
                     breezeway.start();
                 }
             }
@@ -195,6 +199,7 @@ public class YortStory extends engine.Story {
                                                 @Override
                                                 public void doAfter(Game game){
                                                     goodResponse1.stop();
+                                                    goodResponse1.close();
                                                     cafe.start();
                                                 }
                                             });
@@ -314,7 +319,7 @@ public class YortStory extends engine.Story {
                             });
                     } else{
 
-                        Clip goodResponse2 = engine.MediaPlayer.createClip("./audio/GooderReponse2.wav", true);
+                        Clip goodResponse2 = engine.MediaPlayer.createClip("./audio/GooderResponse2.wav", true);
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")
@@ -352,6 +357,7 @@ public class YortStory extends engine.Story {
                                                 @Override
                                                 public void doAfter(Game game){
                                                     goodResponse2.stop();
+                                                    goodResponse2.close();
                                                 }
                                             });
                                         condPart(new Dialogue("\"Wow, a woman of few words, huh? I like that,\" he mutters as you walk past him to your next class. Oswaldo becomes a bit interested in you, but his interest is still similar to as if you were a normal person passing him by."));
@@ -381,6 +387,7 @@ public class YortStory extends engine.Story {
                                 @Override
                                 public void doAfter(Game game){
                                     breezeway.stop();
+                                    breezeway.close();
                                     goodResponse2.start();
                                 }
                             });
@@ -456,11 +463,11 @@ public class YortStory extends engine.Story {
                         }
 
                         condPart(new TicTacToe(difficulty.asMinigameDifficulty()) {
-                        @Override
-                        public void doAfter(Game game) {
+                                @Override
+                                public void doAfter(Game game) {
 
-                        }
-                        });
+                                }
+                            });
                     }
                     else{
                         if (difficulty == Difficulty.Impossible){ // this comes from a property in Choice
@@ -807,9 +814,9 @@ public class YortStory extends engine.Story {
                                         condScene(new 
                                             Scene(
                                                 MiscAssets.backgrounds.get("danceSit")));
-                                                
+
                                         condScene(new Scene(
-                                MiscAssets.backgrounds.get("choicebg")));
+                                                MiscAssets.backgrounds.get("choicebg")));
 
                                         condPart(new Choice("dance with oswaldo?", "yes", "no") {
                                                 @Override
@@ -822,7 +829,7 @@ public class YortStory extends engine.Story {
                                                         condScene(new Scene(
                                                                 MiscAssets.backgrounds.get("crushSit")));
 
-                                                        addScene(new 
+                                                        condScene(new 
                                                             Scene(
                                                                 MiscAssets.backgrounds.get("choicebg")));
 
@@ -908,7 +915,7 @@ public class YortStory extends engine.Story {
                                                         condPart(new DanceGame(difficulty.asMinigameDifficulty()) {
                                                                 @Override
                                                                 public void doAfter(Game game) {
-                                                                    
+
                                                                 }
                                                             });
                                                     }
@@ -1177,7 +1184,8 @@ public class YortStory extends engine.Story {
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("graduation")));
-        addPart(new EmptyPart(){
+        
+                addPart(new EmptyPart(){
                 @Override
                 public void doAfter(Game game){
                     dance.stop();
