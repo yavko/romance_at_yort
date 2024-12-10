@@ -598,7 +598,7 @@ public class YortStory extends engine.Story {
                 MiscAssets.backgrounds.get("awkward")
             ));
 
-        addPart(new NullPart(){
+        addPart(new EmptyPart(){
                 @Override
                 public void doAfter(Game game){
                     ticTacToe.stop();
