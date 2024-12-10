@@ -116,7 +116,7 @@ public class TestingGame extends JFrame implements KeyListener {
                     }
                     break;
             }
-            label.setText("-");
+            label.setText("!");
         }
     }
 

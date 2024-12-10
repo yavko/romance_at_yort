@@ -428,11 +428,7 @@ public class YortStory extends engine.Story {
                 @Override
                 public void doAfter(Game game) {
                     if (choice1Picked){ // this comes from a property in Choice
-                        /*condPart(new TicTacToe(engine.MinigameDifficulty.Random) {
-                        @Override
-                        public void doAfter(Game game) {
-                        }
-                        });*/
+                        
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("tttbg")));
@@ -463,6 +459,13 @@ public class YortStory extends engine.Story {
                                 condPart(new Dialogue("Oswaldo wins the game, desYorting you completely. He doesn't like people who lose to him, having his interest in you depleted."));
                             }
                         }
+                        
+                        /*condPart(new TicTacToe(difficulty) {
+                        @Override
+                        public void doAfter(Game game) {
+                            
+                        }
+                        });*/
                     }
                     else{
                         if (difficulty == Difficulty.Impossible){ // this comes from a property in Choice

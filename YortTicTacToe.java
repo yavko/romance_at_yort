@@ -1,4 +1,3 @@
-
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
 
@@ -6,19 +5,14 @@ import java.awt.event.*;
 import javax.swing.*;
 import utils.TransparentPanel;
 
-public abstract class TicTacToe extends engine.MiniGame {
+public class YortTicTacToe extends TicTacToe{
     /**
      * Constructor for objects of class MiniGame
      */
     private engine.MinigameDifficulty difficulty;
     protected Class winner;
     private boolean isPlayer;
-    public TicTacToe(engine.MinigameDifficulty difficulty) {
-        super(difficulty);
-    }
-    enum Placed {
-        Empty, X, O
-    }
+    
     class TicBtn extends JButton {
         public boolean clicked;
         public Placed placed;
@@ -46,8 +40,8 @@ public abstract class TicTacToe extends engine.MiniGame {
     public void update() {
     }
     public void changeUI(engine.Game game) {
-        JPanel panel = new JPanel(new BorderLayout());
-        JPanel gridPanel = new JPanel(new GridLayout(3, 3));
+        BackgroundPanel panel = new BackgroundPanel(new BorderLayout());
+        BackgroundPanel gridPanel = new BackgroundPanel(new GridLayout(3, 3));
         panel.add(gridPanel, BorderLayout.CENTER);
         TicBtn[][] grid = new TicBtn[3][3];
         for (int row = 0; row < 3; row++)
@@ -60,4 +54,5 @@ public abstract class TicTacToe extends engine.MiniGame {
     public void finish(Class winner) {
         this.winner = winner;
     }
+    public finish
 }
