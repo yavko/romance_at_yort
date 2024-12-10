@@ -16,9 +16,9 @@ public class YortStory extends engine.Story {
     public int affectionMeter = 50;
     public boolean rightChoice = true;
     public boolean dating = false;
-    public YortStory(Difficulty difficulty) {
+    public YortStory(Difficulty defaultDifficulty) {
         super();
-
+        this.difficulty = defaultDifficulty;
         // PLACEGHOLDER PLZ FIX LATER YES
 
         MainCharacter.name = "placeholder";
@@ -28,15 +28,15 @@ public class YortStory extends engine.Story {
         Clip mainTheme = engine.MediaPlayer.createClip("./audio/Main theme.wav", true);
         // User enters their name and will be inputted in the background context.
         addScene(new Scene(
-                MiscAssets.backgrounds.get("base")));
-                
-        addPart(new EmptyPart(){
-            @Override
-            public void doAfter(Game game){
-                mainTheme.start();
-            }
-        });
-                
+                MiscAssets.backgrounds.get("base")));   
+
+        addPart(new NullPart(){
+                @Override
+                public void doAfter(Game game){
+                    mainTheme.start();
+                }
+            });
+
         addPart(new Input("Please enter your name: ") {
                 @Override
                 public void doAfter(Game game) {
@@ -78,9 +78,18 @@ public class YortStory extends engine.Story {
         addScene(new Scene(
                 MiscAssets.backgrounds.get("introDiff"))
         );
+        addPart(new Choice(" ", "Easy", "Normal", "Impossible") {
+            @Override
+            public void doAfter(Game game) {
+                if (choice1Picked)
+                    difficulty = Difficulty.Easy;
+                else if (choice2Picked)
+                    difficulty = Difficulty.Normal;
+                else
+                    difficulty = Difficulty.Impossible;
+            }
+        });
         // Brrrway meeting: First meeting between Oswaldo and the user in which the user has up to 3 choices to choose from.
-        addPart(
-            new EmptyPart());
 
         Clip breezeway= engine.MediaPlayer.createClip("./audio/breezeway.wav", true);
 
