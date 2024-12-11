@@ -7,20 +7,22 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.io.File;
+import java.io.InputStream;
 
 public class MiscAssets {
     public static HashMap<String, BufferedImage> backgrounds = new HashMap<>();
     private static ImageReader reader = ImageIO.getImageReadersByFormatName("png").next();
     private static void addImage(HashMap<String, BufferedImage> map, String fileName, String name) {
-        URL imgUrl = MiscAssets.class.getResource(fileName);
+        InputStream imgIs = MiscAssets.class.getResourceAsStream(fileName);
         try {
-            reader.setInput(ImageIO.createImageInputStream(new File(fileName)), true);
+            reader.setInput(ImageIO.createImageInputStream(imgIs), true);
             BufferedImage img = reader.read(0, reader.getDefaultReadParam());
             map.put(name, img);
         } catch (IOException _ex) {
             System.out.println("failed to load asset " + name + " which should be located at: " + fileName);   
         }
     }
+    static public void init() {}
     static {
         ImageIO.setUseCache(false);
 

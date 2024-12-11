@@ -62,8 +62,10 @@ public abstract class TicTacToe extends engine.MiniGame {
             addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        set(Placed.X);
-                        currentGame.update(game);
+                        if (placed == Placed.Empty) {
+                            set(Placed.X);
+                            currentGame.update(game);
+                        }
                     }
                 });
             //this.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -79,6 +81,7 @@ public abstract class TicTacToe extends engine.MiniGame {
         return btn;
     }
     public void update(Game game) {
+        System.out.println(hasVictor());
         if (hasVictor()) {
             playerWon = true;
             call(game);
@@ -116,8 +119,10 @@ public abstract class TicTacToe extends engine.MiniGame {
         boolean winner = false;
         Placed[] winningTypes = new Placed[] {Placed.X, Placed.O};
         for (Placed place : winningTypes) {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++) {
                 winner |= grid[0][i].placed == place && grid[1][i].placed == place && grid[2][i].placed == place;
+                winner |= grid[i][0].placed == place && grid[i][1].placed == place && grid[i][2].placed == place;
+            }
             winner |= grid[0][0].placed == place && grid[1][1].placed == place && grid[2][2].placed == place;
             winner |= grid[2][0].placed == place && grid[1][1].placed == place && grid[0][2].placed == place;
         }

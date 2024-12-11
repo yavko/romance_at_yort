@@ -22,22 +22,20 @@ public class YortStory extends engine.Story {
         // PLACEGHOLDER PLZ FIX LATER YES
 
         MainCharacter.name = "placeholder";
-
+        
         // story logic
 
-        Clip mainTheme = engine.MediaPlayer.createClip("./audio/Main theme.wav", true);
+        Clip mainTheme = engine.MediaPlayer.createClip("audio/Main theme.wav", true);
         // User enters their name and will be inputted in the background context.
         addScene(new Scene(        
-                MiscAssets.backgrounds.get("base")));   
-
-        addPart(new NullPart(){
-                @Override
-                public void doAfter(Game game){
-                    mainTheme.start();
-                }
-            });
+                MiscAssets.backgrounds.get("base")));
+                
 
         addPart(new Input("Please enter your name: ") {
+                @Override
+                public void onLoad(Game game) {
+                    mainTheme.start();
+                }
                 @Override
                 public void doAfter(Game game) {
 
@@ -91,7 +89,7 @@ public class YortStory extends engine.Story {
             });
         // Brrrway meeting: First meeting between Oswaldo and the user in which the user has up to 3 choices to choose from.
 
-        Clip breezeway= engine.MediaPlayer.createClip("./audio/breezeway.wav", true);
+        Clip breezeway= engine.MediaPlayer.createClip("audio/breezeway.wav", true);
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("brrrwayMeeting")));
@@ -121,7 +119,7 @@ public class YortStory extends engine.Story {
                 @Override
                 public void doAfter(Game game) {
                     if (choice1Picked){ // User chooses the good option
-                        Clip goodResponse1 = engine.MediaPlayer.createClip("./audio/GooderResponse1.wav", true);
+                        Clip goodResponse1 = engine.MediaPlayer.createClip("audio/GooderResponse1.wav", true);
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")
                             ));
@@ -130,7 +128,7 @@ public class YortStory extends engine.Story {
                                 @Override
                                 public void doAfter(Game game) {
                                     // Secret scene if they chose option 1 from the brrrway scene
-                                    Clip cafe = engine.MediaPlayer.createClip("./audio/HangoutPostBrzway.wav", true);
+                                    Clip cafe = engine.MediaPlayer.createClip("audio/HangoutPostBrzway.wav", true);
 
                                     condScene(new Scene(
                                             MiscAssets.backgrounds.get("cafebg"),
@@ -254,7 +252,7 @@ public class YortStory extends engine.Story {
                         }
                     } else if(choice2Picked){ // User chooses the bad option out of the bunch
                         rightChoice = false;
-                        Clip BadResponse1 = engine.MediaPlayer.createClip("./audio/BadResponse1.wav", true);
+                        Clip BadResponse1 = engine.MediaPlayer.createClip("audio/BadResponse1.wav", true);
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")
@@ -340,7 +338,7 @@ public class YortStory extends engine.Story {
                             });
                     } else{
 
-                        Clip goodResponse2 = engine.MediaPlayer.createClip("./audio/GooderResponse2.wav", true);
+                        Clip goodResponse2 = engine.MediaPlayer.createClip("audio/GooderResponse2.wav", true);
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")
@@ -422,7 +420,7 @@ public class YortStory extends engine.Story {
                 }
             });
 
-        Clip ticTacToe= engine.MediaPlayer.createClip("./audio/ticTacToe.wav", true);
+        Clip ticTacToe= engine.MediaPlayer.createClip("audio/ticTacToe.wav", true);
 
         addScene(new
             Scene(
@@ -456,43 +454,38 @@ public class YortStory extends engine.Story {
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("tttbg")));
 
-                        if(true)
-                        {
-                            if(difficulty == Difficulty.Easy){
-                                affectionMeter += 15;
-                            } else if(difficulty == Difficulty.Normal){
-                                affectionMeter += 10;
-                            }else{
-                                affectionMeter +=1;
-                            }
-
-                            condPart(new Dialogue("You beat him in tic-tac-toe, revealing your captivating smile and laughter when you keep desYORTing him. Oswaldo gets to know you more as a fun person.") );
-                        }
-                        else{
-                            if(difficulty == Difficulty.Easy){
-                                affectionMeter += 10;
-                                condPart(new Dialogue("Oswaldo wins the game and loved playing with you. He takes great pride in his win against you, implementing this happy memory with you forever."));
-                            }
-                            else if (difficulty == Difficulty.Normal){
-                                affectionMeter+= 5;
-                                condPart(new Dialogue("Oswaldo wins the game, but a little too easily. He has a feeling that you intentionally lost, but wonders why you would do this. You've piqued his interest more.") );
-                            }
-                            else{
-                                affectionMeter -= 5;
-                                condPart(new Dialogue("Oswaldo wins the game, desYorting you completely. He doesn't like people who lose to him, having his interest in you depleted."));
-                            }
-                        }
-
                         condPart(new TicTacToe(difficulty.asMinigameDifficulty()) {
                                 @Override
                                 public void doAfter(Game game) {
-
+                                    if(playerWon) {
+                                        if(difficulty == Difficulty.Easy){
+                                            affectionMeter += 15;
+                                        } else if(difficulty == Difficulty.Normal){
+                                            affectionMeter += 10;
+                                        } else{
+                                            affectionMeter +=1;
+                                        }
+                                        condPart(new Dialogue("You beat him in tic-tac-toe, revealing your captivating smile and laughter when you keep desYORTing him. Oswaldo gets to know you more as a fun person.") );
+                                    } else if (draw) {
+                                        condPart(new Dialogue("You end the game in a draw, you are both surprised by your equally paralleled amount of skill."));
+                                    } else {
+                                        if(difficulty == Difficulty.Easy){
+                                            affectionMeter += 10;
+                                            condPart(new Dialogue("Oswaldo wins the game and loved playing with you. He takes great pride in his win against you, implementing this happy memory with you forever."));
+                                        } else if (difficulty == Difficulty.Normal){
+                                            affectionMeter+= 5;
+                                            condPart(new Dialogue("Oswaldo wins the game, but a little too easily. He has a feeling that you intentionally lost, but wonders why you would do this. You've piqued his interest more.") );
+                                        } else{
+                                            affectionMeter -= 5;
+                                            condPart(new Dialogue("Oswaldo wins the game, desYorting you completely. He doesn't like people who lose to him, having his interest in you depleted."));
+                                        }
+                                    }
                                 }
                             });
                     }
                     else{
                         if (difficulty == Difficulty.Impossible){ // this comes from a property in Choice
-                            Clip badResponse2 = engine.MediaPlayer.createClip("./audio/BadResponse2.wav", true);
+                            Clip badResponse2 = engine.MediaPlayer.createClip("audio/BadResponse2.wav", true);
 
                             rightChoice = false;
 
@@ -592,7 +585,7 @@ public class YortStory extends engine.Story {
                 }
             });
 
-        Clip awkward= engine.MediaPlayer.createClip("./audio/AwkwardEncounter.wav", true);
+        Clip awkward= engine.MediaPlayer.createClip("audio/AwkwardEncounter.wav", true);
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("awkward")
@@ -632,7 +625,7 @@ public class YortStory extends engine.Story {
                         }else{
                             affectionMeter +=5;
                         }
-                        Clip goodResponse2= engine.MediaPlayer.createClip("./audio/GooderResponse2.wav", true);
+                        Clip goodResponse2= engine.MediaPlayer.createClip("audio/GooderResponse2.wav", true);
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("schoolbg")
@@ -656,7 +649,7 @@ public class YortStory extends engine.Story {
                                 }
                             });
                     } else if(choice2Picked){
-                        Clip badResponse2= engine.MediaPlayer.createClip("./audio/BadResponse2.wav", true);
+                        Clip badResponse2= engine.MediaPlayer.createClip("audio/BadResponse2.wav", true);
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("schoolbg")
@@ -703,8 +696,8 @@ public class YortStory extends engine.Story {
                         }
 
                     }else{
-                        Clip goodResponse1 = engine.MediaPlayer.createClip("./audio/GooderResponse1.wav", true);
-                        Clip badResponse3= engine.MediaPlayer.createClip("./audio/BadResponse3.wav", true);
+                        Clip goodResponse1 = engine.MediaPlayer.createClip("audio/GooderResponse1.wav", true);
+                        Clip badResponse3= engine.MediaPlayer.createClip("audio/BadResponse3.wav", true);
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("schoolbg")
@@ -789,7 +782,7 @@ public class YortStory extends engine.Story {
                 }
             });
 
-        Clip dance = engine.MediaPlayer.createClip("./audio/ballroomDance.wav", true);
+        Clip dance = engine.MediaPlayer.createClip("audio/ballroomDance.wav", true);
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("dance")));
@@ -808,10 +801,10 @@ public class YortStory extends engine.Story {
                 public void doAfter(Game game) {
                     if((difficulty != Difficulty.Impossible) && affectionMeter >= 70 
                     || (difficulty == Difficulty.Impossible && rightChoice)){
-                        Clip crush = engine.MediaPlayer.createClip("./audio/5thGradeCrush.wav", true);
-                        Clip goodResponse1 = engine.MediaPlayer.createClip("./audio/GooderResponse1.wav", true);
-                        Clip badResponse1 = engine.MediaPlayer.createClip("./audio/BadResponse1.wav", true);
-                        Clip eating = engine.MediaPlayer.createClip("./audio/eatingScene.wav", true);
+                        Clip crush = engine.MediaPlayer.createClip("audio/5thGradeCrush.wav", true);
+                        Clip goodResponse1 = engine.MediaPlayer.createClip("audio/GooderResponse1.wav", true);
+                        Clip badResponse1 = engine.MediaPlayer.createClip("audio/BadResponse1.wav", true);
+                        Clip eating = engine.MediaPlayer.createClip("audio/eatingScene.wav", true);
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
@@ -948,7 +941,7 @@ public class YortStory extends engine.Story {
                                                         condPart(new DanceGame(difficulty.asMinigameDifficulty()) {
                                                                 @Override
                                                                 public void doAfter(Game game) {
-
+                                                                    condPart(new Dialogue("You end the game with " + points + " points out of " + totalPoints));
                                                                 }
                                                             });
                                                     }
@@ -1107,7 +1100,7 @@ public class YortStory extends engine.Story {
                             new EmptyPart()
                         );
                     }else{
-                        Clip badResponse1 = engine.MediaPlayer.createClip("./audio/BadResponse1.wav", true);
+                        Clip badResponse1 = engine.MediaPlayer.createClip("audio/BadResponse1.wav", true);
 
                         condScene(new Scene(
                                 MiscAssets.backgrounds.get("choicebg")));
@@ -1213,7 +1206,7 @@ public class YortStory extends engine.Story {
                 }
             }
         );
-        Clip graduation = engine.MediaPlayer.createClip("./audio/graduation.wav", true);
+        Clip graduation = engine.MediaPlayer.createClip("audio/graduation.wav", true);
 
         addScene(new Scene(
                 MiscAssets.backgrounds.get("graduation")));
@@ -1317,23 +1310,28 @@ public class YortStory extends engine.Story {
 
             Scene(
                 MiscAssets.backgrounds.get("endScene")));
-        addPart(new NullPart(){
+        /*addPart(new NPart(){
                 @Override
                 public void doAfter(Game game){
                     graduation.stop();
                     mainTheme.start();
                 }
-            });
+            });*/
 
         addPart(
             new 
 
             EmptyPart() {
                 @Override
+                public void onLoad(Game game) {
+                    graduation.stop();
+                    mainTheme.start();
+                }
+                @Override
                 public void doAfter(Game game) {
-                    Clip proposal = engine.MediaPlayer.createClip("./audio/proposal.wav", true);
-                    Clip badResponse3 = engine.MediaPlayer.createClip("./audio/BadResponse3.wav", true);
-                    Clip goodResponse2 = engine.MediaPlayer.createClip("./audio/GooderResponse2.wav", true);
+                    Clip proposal = engine.MediaPlayer.createClip("audio/proposal.wav", true);
+                    Clip badResponse3 = engine.MediaPlayer.createClip("audio/BadResponse3.wav", true);
+                    Clip goodResponse2 = engine.MediaPlayer.createClip("audio/GooderResponse2.wav", true);
 
                     if(dating == true ){
                         // Based on your affection with Oswaldo, the game will see if you gained the favorable outcome or not.

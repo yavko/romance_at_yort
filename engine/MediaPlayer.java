@@ -1,6 +1,7 @@
 package engine;
 import java.io.File;
 import javax.sound.sampled.*;
+import java.io.*;
 
 /**
  * Audio files for the game.
@@ -9,10 +10,12 @@ import javax.sound.sampled.*;
  * @version 0.1
  */
 public final class MediaPlayer { 
+    static public Class rootRef = null; 
     public static Clip createClip(String path, boolean repeat) {
         Clip clip = null;
         try {
-            AudioInputStream audio = AudioSystem.getAudioInputStream(new File(path).getAbsoluteFile());
+            InputStream is = rootRef.getResourceAsStream(path);
+            AudioInputStream audio = AudioSystem.getAudioInputStream(new BufferedInputStream(is));
 
             clip = AudioSystem.getClip();
             clip.open(audio);

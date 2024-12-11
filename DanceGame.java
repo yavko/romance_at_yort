@@ -22,6 +22,8 @@ public abstract class DanceGame extends engine.MiniGame{
     boolean firstRun = true;
     int currentKey = 0;
     int points = 0;
+    int totalPoints = 0;
+    private boolean finished = false;
     Timer timer = null;
 
     private String[] moves;
@@ -45,18 +47,28 @@ public abstract class DanceGame extends engine.MiniGame{
     }
 
     private BgPanel panel = null;
-    private void addKeyBind(int keyCode, String keyName) {
-        panel.getInputMap().put(KeyStroke.getKeyStroke(keyCode, 0), keyName);
-        panel.getActionMap().put(keyName, new AbstractAction() {
+    private void addKeyBind(engine.Game game, int keyCode, String keyName) {
+        /*JComponent[] components = new JComponent[] {
+            game,
+            panel,
+            game.getCanvas()
+        };
+        for (JComponent comp : components) {*/
+        game.getCanvas().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(keyCode, 0), keyName);
+        game.getCanvas().getActionMap().put(keyName, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel.setBgImg(MiscAssets.backgrounds.get("balconybg"));
-                if (!wasPressed) {
-                    if(moves[currentKey-1] == keyName)
-                        points += 100;
+                if (!finished) {
+                    System.out.println(keyName);
+                    panel.setBgImg(MiscAssets.backgrounds.get("balconybg"));
+                    if (!wasPressed) {
+                        if(moves[currentKey-1] == keyName)
+                            points += 100;
+                    }
                 }
             }
         });
+        //}
     }
     public void changeUI(engine.Game game) {
         panel = new BgPanel(new BorderLayout(), MiscAssets.backgrounds.get("balconybg"));
@@ -65,12 +77,15 @@ public abstract class DanceGame extends engine.MiniGame{
         if(difficulty == MinigameDifficulty.Basic){
             seconds = 2000;
             generateKeys(10);
+            totalPoints = 10*100;
         } else if (difficulty == MinigameDifficulty.Medium){
             seconds = 1500;
             generateKeys(15);
+            totalPoints = 15*100;
         } else {
             seconds = 1000;
             generateKeys(25);
+            totalPoints =25*100;
         }
         System.out.println(Arrays.asList(moves));
 
@@ -79,6 +94,7 @@ public abstract class DanceGame extends engine.MiniGame{
                 public void actionPerformed(ActionEvent e) {
                     if (currentKey == moves.length-1){
                         System.out.println("game finished. You have: " + points + " points");
+                        finished = true;
                         timer.stop();
                         call(game);
                     } else {
@@ -93,10 +109,10 @@ public abstract class DanceGame extends engine.MiniGame{
             });
         timer.start();
         
-        addKeyBind(KeyEvent.VK_RIGHT, "right");
-        addKeyBind(KeyEvent.VK_LEFT, "left");
-        addKeyBind(KeyEvent.VK_UP, "up");
-        addKeyBind(KeyEvent.VK_DOWN, "down");
+        addKeyBind(game, KeyEvent.VK_RIGHT, "right");
+        addKeyBind(game, KeyEvent.VK_LEFT, "left");
+        addKeyBind(game, KeyEvent.VK_UP, "up");
+        addKeyBind(game, KeyEvent.VK_DOWN, "down");
         
         game.setCenterPanel(panel);
     }

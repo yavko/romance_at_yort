@@ -72,7 +72,9 @@ public class EntryPoint extends JFrame {
         // BufferedImage bgImg = ImageIO.read(bgImgUrl);
 
         // Play btn
-        Clip clip = engine.MediaPlayer.createClip("./audio/Main theme.wav", true);
+        
+        engine.MediaPlayer.rootRef = EntryPoint.class;
+        Clip clip = engine.MediaPlayer.createClip("audio/Main theme.wav", true);
         clip.start();
         JButton playBtn = new utils.ImgButton(
             ImageIO.read(
@@ -132,7 +134,7 @@ public class EntryPoint extends JFrame {
     }
 
     public static void main(String[] args) {
-        System.out.println(MiscAssets.backgrounds);
+        MiscAssets.init();
         SwingUtilities.invokeLater(EntryPoint::new);
     }
 

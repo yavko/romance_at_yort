@@ -12,5 +12,11 @@ Dependencies needed: a JDK, probably at least version 8
 
 Build with BlueJ :)
 
+### Jar
+```sh
+# required a working JDK
+jar cvfm RomanceAtYort.jar manifest.txt assets/ audio/ *.class engine/*.class utils/*.class
+```
+
 ## Usage
 The main class executable is `EntryPoint`, you can run it with whatever JRE/JDK
