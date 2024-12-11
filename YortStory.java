@@ -22,20 +22,20 @@ public class YortStory extends engine.Story {
         // PLACEGHOLDER PLZ FIX LATER YES
 
         MainCharacter.name = "placeholder";
-        
+
         // story logic
 
         Clip mainTheme = engine.MediaPlayer.createClip("audio/Main theme.wav", true);
         // User enters their name and will be inputted in the background context.
         addScene(new Scene(        
                 MiscAssets.backgrounds.get("base")));
-                
 
         addPart(new Input("Please enter your name: ") {
                 @Override
                 public void onLoad(Game game) {
                     mainTheme.start();
                 }
+
                 @Override
                 public void doAfter(Game game) {
 
@@ -465,18 +465,33 @@ public class YortStory extends engine.Story {
                                         } else{
                                             affectionMeter +=1;
                                         }
+                                        condScene(new 
+                                            Scene(
+                                                MiscAssets.backgrounds.get("coJogClass")));
                                         condPart(new Dialogue("You beat him in tic-tac-toe, revealing your captivating smile and laughter when you keep desYORTing him. Oswaldo gets to know you more as a fun person.") );
                                     } else if (draw) {
+                                        condScene(new 
+                                            Scene(
+                                                MiscAssets.backgrounds.get("coJogClass")));
                                         condPart(new Dialogue("You end the game in a draw, you are both surprised by your equally paralleled amount of skill."));
                                     } else {
                                         if(difficulty == Difficulty.Easy){
                                             affectionMeter += 10;
+                                            condScene(new 
+                                                Scene(
+                                                    MiscAssets.backgrounds.get("coJogClass")));
                                             condPart(new Dialogue("Oswaldo wins the game and loved playing with you. He takes great pride in his win against you, implementing this happy memory with you forever."));
                                         } else if (difficulty == Difficulty.Normal){
                                             affectionMeter+= 5;
+                                            condScene(new 
+                                                Scene(
+                                                    MiscAssets.backgrounds.get("coJogClass")));
                                             condPart(new Dialogue("Oswaldo wins the game, but a little too easily. He has a feeling that you intentionally lost, but wonders why you would do this. You've piqued his interest more.") );
                                         } else{
                                             affectionMeter -= 5;
+                                            condScene(new 
+                                                Scene(
+                                                    MiscAssets.backgrounds.get("coJogClass")));
                                             condPart(new Dialogue("Oswaldo wins the game, desYorting you completely. He doesn't like people who lose to him, having his interest in you depleted."));
                                         }
                                     }
@@ -840,8 +855,7 @@ public class YortStory extends engine.Story {
                                                         // Secret scene with the user's past crush at the dance
                                                         //call game here
 
-                                                        condScene(new Scene(
-                                                                MiscAssets.backgrounds.get("crushSit")));
+                                                        
 
                                                         condScene(new 
                                                             Scene(
@@ -898,6 +912,9 @@ public class YortStory extends engine.Story {
 
                                                                         condPart(new Dialogue("Little did you know, Oswaldo had seen the guy approach you as he was coming back to get the drinks."));
                                                                     }else{
+
+                                                                        condScene(new Scene(
+                                                                                MiscAssets.backgrounds.get("dancebg")));
                                                                         condPart(new EmptyPart(){
                                                                                 @Override
                                                                                 public void doAfter(Game game){
@@ -905,8 +922,6 @@ public class YortStory extends engine.Story {
 
                                                                                 }
                                                                             });
-                                                                        condScene(new Scene(
-                                                                                MiscAssets.backgrounds.get("dancebg")));
                                                                         condPart(new Dialogue("\"For you,\" he said. You take the glass and the two of you sip the glass together in peace."));
                                                                         condPart(new Dialogue("You said goodbye to your old crush, and wait patiently for Oswaldo. After a few minutes of watching the other couples dance, Oswaldo comes back with two drinks in his hand."));
                                                                     }
@@ -1119,6 +1134,7 @@ public class YortStory extends engine.Story {
 
                                         condScene(new Scene(
                                                 MiscAssets.backgrounds.get("dancebg")));
+
                                         condPart(new Dialogue("\"Hey, didn't you reject that person?\" One of his friends ask."));
 
                                         condPart(new Dialogue("Just in that moment, the doors opened and Oswaldo's eyes dropped at the sight of your confidence as you walked in. The outfit was perfectly made for your figure and it was beautifully made."));
@@ -1235,7 +1251,7 @@ public class YortStory extends engine.Story {
                                 @Override
                                 public void doAfter(Game game) {
 
-                                    if(choice1Picked){
+                                    if(choice2Picked){
                                         condScene(new Scene(
                                                 MiscAssets.backgrounds.get("graduationbg"),
                                                 new engine.Character[] {
@@ -1311,12 +1327,12 @@ public class YortStory extends engine.Story {
             Scene(
                 MiscAssets.backgrounds.get("endScene")));
         /*addPart(new NPart(){
-                @Override
-                public void doAfter(Game game){
-                    graduation.stop();
-                    mainTheme.start();
-                }
-            });*/
+        @Override
+        public void doAfter(Game game){
+        graduation.stop();
+        mainTheme.start();
+        }
+        });*/
 
         addPart(
             new 
@@ -1327,6 +1343,7 @@ public class YortStory extends engine.Story {
                     graduation.stop();
                     mainTheme.start();
                 }
+
                 @Override
                 public void doAfter(Game game) {
                     Clip proposal = engine.MediaPlayer.createClip("audio/proposal.wav", true);
