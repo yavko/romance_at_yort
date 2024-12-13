@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import javax.sound.sampled.Clip;
-import java.io.File;
+import java.io.InputStream;
 
 public class EntryPoint extends JFrame {
     private JPanel content;
@@ -85,7 +85,8 @@ public class EntryPoint extends JFrame {
         
         Font textFont = null;
         try {
-            textFont = Font.createFont(Font.TRUETYPE_FONT, new File("assets/text-reg.ttf"));
+            InputStream is = EntryPoint.class.getResourceAsStream("assets/text-reg.ttf");
+            textFont = Font.createFont(Font.TRUETYPE_FONT, is);
         } catch (Exception e) {
             e.printStackTrace();
         }

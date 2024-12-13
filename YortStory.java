@@ -199,7 +199,7 @@ public class YortStory extends engine.Story {
                                                     cafe.stop();
                                                 }
                                             });
-                                        condPart(new Dialogue("You both head back to school, where you sit together in the cafeteria. The playful banter continues, and you challenge each other to a game of “Two Truths and a Lie,” revealing surprising truths about yourselves. You leave a humorous and fun impression on Oswaldo."));
+                                        condPart(new Dialogue("You both head back to school, where you sit together in the cafeteria. The playful banter continues, and you challenge each other to a game of \"Two Truths and a Lie,\" revealing surprising truths about yourselves. You leave a humorous and fun impression on Oswaldo."));
 
                                         condPart(new Dialogue("He laughs, clearly amused. \"Well, you’ve definitely caught my attention. Let’s see if you can keep it.\""));
 
@@ -1259,7 +1259,7 @@ public class YortStory extends engine.Story {
                                                 }
                                             ));
 
-                                        condPart(new Dialogue("No problem, I’m always here to help! Thank you for all your hard work as well.” Oswaldo replies to your formal congratulation. He has a feeling that you have friendzoned him, hurting his pride, but having to hold up his reputation as the Duke of Yort, Oswaldo shows no emotion that would indicate that he was hurt by your words. "));
+                                        condPart(new Dialogue("\"No problem, I'm always here to help! Thank you for all your hard work as well.\" Oswaldo replies to your formal congratulation. He has a feeling that you have friendzoned him, hurting his pride, but having to hold up his reputation as the Duke of Yort, Oswaldo shows no emotion that would indicate that he was hurt by your words. "));
                                     }
                                     else if(choice3Picked){
                                         condScene(new Scene(
@@ -1372,7 +1372,7 @@ public class YortStory extends engine.Story {
                                                 }
                                             ));
 
-                                        condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. "));
+                                        condPart(new Dialogue("Church bells ring as the priest asks, \"Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?\" You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks."));
 
                                     }
                                     else{
@@ -1396,7 +1396,7 @@ public class YortStory extends engine.Story {
                                                                     }
                                                                 ));
 
-                                                            condPart(new Dialogue("Church bells ring as the priest asks, “Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?” You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ")); 
+                                                            condPart(new Dialogue("Church bells ring as the priest asks, \"Do you take the Duke of Yort, Oswaldo, to be your lawfully wedded husband?\" You happily say 'yes' and become married, living happily ever after with three cats and two dogs, as well as five ducks. ")); 
                                                         }
                                                         else{
                                                             condScene(new Scene(
