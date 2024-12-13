@@ -14,6 +14,11 @@ Build with BlueJ :)
 
 ### Jar
 ```sh
+# build everything
+javac EntryPoint.java
+javac utils/*
+javac engine/Game.java
+
 # required a working JDK
 jar cvfm RomanceAtYort.jar manifest.txt assets/ audio/ *.class engine/*.class utils/*.class
 ```
